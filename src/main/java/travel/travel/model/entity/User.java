@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import travel.travel.model.enums.Role;
 
 @Entity
 @Getter
@@ -23,14 +24,18 @@ public class User {
      String password;
      String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
+    Role role;
+
      @OneToOne(fetch = FetchType.LAZY)
      Travel travel;
 
-    public User(String name, String email, String password, String phoneNumber, Travel travel) {
+    public User(String name, String email, String password, String phoneNumber, Role role, Travel travel) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.role = role;
         this.travel = travel;
     }
 }
