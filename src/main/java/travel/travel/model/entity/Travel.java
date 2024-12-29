@@ -21,7 +21,7 @@ public class Travel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
     User user;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
@@ -30,7 +30,7 @@ public class Travel {
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
     List<Sight> sightList;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "travel", fetch = FetchType.LAZY)
     AboutUs aboutUs;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
