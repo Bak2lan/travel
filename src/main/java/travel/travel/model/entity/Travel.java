@@ -20,8 +20,12 @@ public class Travel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String aboutUs;
+    String documentation;
+    String sustainability;
+    String contact;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
     User user;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
@@ -30,9 +34,17 @@ public class Travel {
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
     List<Sight> sightList;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    AboutUs aboutUs;
-
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
     List<Category> category;
+
+    public Travel(String aboutUs, String documentation, String sustainability, String contact, User user, List<Tour> tourList, List<Sight> sightList, List<Category> category) {
+        this.aboutUs = aboutUs;
+        this.documentation = documentation;
+        this.sustainability = sustainability;
+        this.contact = contact;
+        this.user = user;
+        this.tourList = tourList;
+        this.sightList = sightList;
+        this.category = category;
+    }
 }
