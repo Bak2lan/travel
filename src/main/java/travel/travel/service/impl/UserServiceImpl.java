@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -17,10 +16,8 @@ import travel.travel.model.dto.SimpleResponse;
 import travel.travel.model.dto.request.UserRequest;
 import travel.travel.model.dto.response.UserResponse;
 import travel.travel.model.dto.response.UserResponseForGetAll;
-import travel.travel.model.entity.Travel;
 import travel.travel.model.entity.User;
 import travel.travel.model.enums.Role;
-import travel.travel.repository.TravelRepository;
 import travel.travel.repository.UserRepository;
 import travel.travel.service.UserService;
 
@@ -33,7 +30,6 @@ import java.util.List;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final TravelRepository travelRepository;
     @Override
     public UserResponse getById(Long id) {
         try {
@@ -46,7 +42,6 @@ public class UserServiceImpl implements UserService {
                     .name(user.getName())
                     .role(user.getRole())
                     .build();
-
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
 
@@ -126,7 +121,6 @@ public class UserServiceImpl implements UserService {
         if (Role.ROLE_ADMIN.name().equals(currentUser.getRole().name())) {
             userRepository.save(userToUpdate);
         }
-
         return UserResponse.builder()
                 .id(userToUpdate.getId())
                 .email(userToUpdate.getEmail())
@@ -134,7 +128,6 @@ public class UserServiceImpl implements UserService {
                 .name(userToUpdate.getName())
                 .build();
     }
-
     @Override
     public SimpleResponse deleteUser(Long id) {
         User userToUpdate = userRepository.findById(id)
@@ -157,15 +150,12 @@ public class UserServiceImpl implements UserService {
         if (userRequest == null) {
             throw new IllegalArgumentException("userRequest must not be null");
         }
-        Travel travel = travelRepository.findById(1L)
-                .orElseThrow(() -> new NotFoundException("Travel not found"));
         User user = new User();
         user.setEmail(userRequest.getEmail());
         user.setPhoneNumber(userRequest.getPhoneNumber());
         user.setName(userRequest.getName());
         user.setPassword(userRequest.getPassword());
         user.setRole(Role.ROLE_USER);
-        user.setTravel(travel);
         userRepository.save(user);
         return new SimpleResponse(HttpStatus.OK, "Колдонуучу ийгиликтүү өчүрүлдү");
     }
