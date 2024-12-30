@@ -10,14 +10,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.server.ResponseStatusException;
 import travel.travel.exception.NotFoundException;
 import travel.travel.model.dto.SimpleResponse;
 import travel.travel.model.dto.request.UserRequest;
 import travel.travel.model.dto.response.UserResponse;
 import travel.travel.model.dto.response.UserResponseForGetAll;
+import travel.travel.model.entity.Travel;
 import travel.travel.model.entity.User;
 import travel.travel.model.enums.Role;
+import travel.travel.repository.TravelRepository;
 import travel.travel.repository.UserRepository;
 import travel.travel.service.UserService;
 
@@ -30,6 +33,7 @@ import java.util.List;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final TravelRepository travelRepository;
     @Override
     public UserResponse getById(Long id) {
         try {
@@ -146,16 +150,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SimpleResponse saveUser(UserRequest userRequest) throws ChangeSetPersister.NotFoundException, AccessDeniedException {
+    public SimpleResponse saveUser(UserRequest userRequest) {
         if (userRequest == null) {
             throw new IllegalArgumentException("userRequest must not be null");
         }
+             Travel travel = travelRepository.findById(1L)
+                    .orElseThrow(() -> new NotFoundException("Travel not found"));
+
         User user = new User();
+        user.setTravel(travel);
         user.setEmail(userRequest.getEmail());
         user.setPhoneNumber(userRequest.getPhoneNumber());
         user.setName(userRequest.getName());
         user.setPassword(userRequest.getPassword());
         user.setRole(Role.ROLE_USER);
+        travel.getUser().setTravel(travel);
         userRepository.save(user);
         return new SimpleResponse(HttpStatus.OK, "Колдонуучу ийгиликтүү өчүрүлдү");
     }
