@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
                     .phoneNumber(user.getPhoneNumber())
                     .password(user.getPassword())
                     .name(user.getName())
+                    .role(user.getRole())
                     .build();
 
         } catch (IllegalArgumentException e) {
@@ -77,7 +78,6 @@ public class UserServiceImpl implements UserService {
                     filteredUsers.add(user);
                 }
             }
-
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
 
