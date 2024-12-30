@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,10 +25,10 @@ public class Category {
     @ManyToOne
     Travel travel;
 
-    @ManyToOne
-    Tour tour;
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    List<Tour> tour; //
 
-    public Category(int day, String dayTour, Travel travel, Tour tour) {
+    public Category(int day, String dayTour, Travel travel, List<Tour> tour) {
         this.day = day;
         this.dayTour = dayTour;
         this.travel = travel;
