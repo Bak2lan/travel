@@ -26,7 +26,7 @@ public class Category {
     Travel travel;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    List<Tour> tour; //
+    List<Tour> tour;
 
     public Category(int day, String dayTour, Travel travel, List<Tour> tour) {
         this.day = day;
