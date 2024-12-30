@@ -1,6 +1,7 @@
 package travel.travel.model.dto.response;
 
 import lombok.*;
+import travel.travel.model.enums.Role;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,4 +14,5 @@ public class UserResponseForGetAll {
     String email;
     String password;
     String phoneNumber;
+    Role role;
 }
