@@ -1,10 +1,7 @@
 package travel.travel.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
@@ -15,11 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "travels")
+
 public class Travel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String aboutUs;
+    String documentation;
+    String sustainability;
+    String contact;
 
     @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
     User user;
@@ -30,9 +32,28 @@ public class Travel {
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
     List<Sight> sightList;
 
-    @OneToOne(mappedBy = "travel", fetch = FetchType.LAZY)
-    AboutUs aboutUs;
-
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
     List<Category> category;
+
+    public Travel(String aboutUs, String documentation, String sustainability, String contact, User user, List<Tour> tourList, List<Sight> sightList, List<Category> category) {
+        this.aboutUs = aboutUs;
+        this.documentation = documentation;
+        this.sustainability = sustainability;
+        this.contact = contact;
+        this.user = user;
+        this.tourList = tourList;
+        this.sightList = sightList;
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Travel{" +
+                "id=" + id +
+                ", aboutUs='" + aboutUs + '\'' +
+                ", documentation='" + documentation + '\'' +
+                ", sustainability='" + sustainability + '\'' +
+                ", contact='" + contact + '\'' +
+                '}';
+    }
 }
