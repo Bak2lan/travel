@@ -17,6 +17,7 @@ import travel.travel.repository.TravelRepository;
 import travel.travel.service.TravelService;
 
 import java.time.LocalDateTime;
+
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
@@ -26,11 +27,15 @@ public class TravelServiceImpl implements TravelService {
     TravelRepository travelRepository;
     TravelMapper travelMapper;
 
-    @Override @Transactional
+    @Override
+    @Transactional
     public SimpleResponse createTravel(TravelRequest travelRequest) {
+        log.info("Creating travel: {}", travelRequest);
         Travel travel = TravelMapper.INSTANCE.travelRequestToTravel(travelRequest);
         travelRepository.save(travel);
-        return  SimpleResponse.builder()
+        log.info("Travel successfully created: {}", travel);
+
+        return SimpleResponse.builder()
                 .status(HttpStatus.CREATED)
                 .timestamp(LocalDateTime.now())
                 .message("success")
@@ -40,31 +45,36 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public TravelResponse getTravelById(Long id) {
-       Travel travel =  travelRepository.findById(id).
-                orElseThrow(()-> new NotFoundException("Travel with id "+id+" not found"));
+        log.info("Fetching travel by id: {}", id);
+        Travel travel = travelRepository.findById(id).
+                orElseThrow(() -> new NotFoundException("Travel with id " + id + " not found"));
+        log.info("Found travel: {}", travel);
         return travelMapper.travelToTravelResponse(travel);
 
     }
 
     @Override
     public SimpleResponse updateTravelById(Long id, TravelRequest travelRequest) {
-       Travel travel =  travelRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException("Travel with id "+id+" not found"));
+        log.info("Updating travel with id: {}, request: {}", id, travelRequest);
+        Travel travel = travelRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Travel with id " + id + " not found"));
         travelMapper.updateTravelFromRequest(travelRequest, travel);
-       travelRepository.save(travel);
-       return SimpleResponse.builder()
-               .message("Travel successfully updated")
-               .status(HttpStatus.OK)
-               .timestamp(LocalDateTime.now())
-               .build();
+        travelRepository.save(travel);
+        log.info("Travel successfully updated: {}", travel);
+        return SimpleResponse.builder()
+                .message("Travel successfully updated")
+                .status(HttpStatus.OK)
+                .timestamp(LocalDateTime.now())
+                .build();
 
     }
 
     @Override
     public SimpleResponse deleteTravelById(Long id) {
-      Travel travel =   travelRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException("Travel with id"+ id+" not found"));
-travelRepository.delete(travel);
+        log.info("Deleting travel with id: {}", id);
+        Travel travel = travelRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Travel with id" + id + " not found"));
+        travelRepository.delete(travel);
         return SimpleResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .message("Travel with id " + id + " successfully deleted")

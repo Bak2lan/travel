@@ -45,4 +45,15 @@ public class Travel {
         this.sightList = sightList;
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "Travel{" +
+                "id=" + id +
+                ", aboutUs='" + aboutUs + '\'' +
+                ", documentation='" + documentation + '\'' +
+                ", sustainability='" + sustainability + '\'' +
+                ", contact='" + contact + '\'' +
+                '}';
+    }
 }
