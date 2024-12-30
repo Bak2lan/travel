@@ -20,4 +20,5 @@ public interface TravelMapper {
     Travel travelRequestToTravel(TravelRequest travelRequest);
 
     void updateTravelFromRequest(TravelRequest travelRequest, @MappingTarget Travel travel);
+
 }
