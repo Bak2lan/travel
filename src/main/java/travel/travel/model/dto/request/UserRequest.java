@@ -13,7 +13,6 @@ import lombok.Setter;
 public class UserRequest {
     Long id;
     String name;
-    @EmailValidation
     String email;
     String password;
     String phoneNumber;

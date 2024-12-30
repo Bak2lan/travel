@@ -145,7 +145,6 @@ public class UserServiceImpl implements UserService {
                     .message("Очурууга мүмкүн эмес: администратордун ролу бар колдонуучуну өчүрүүгө тыюу салынат")
                     .build();
         }
-
         userRepository.delete(userToUpdate);
         return SimpleResponse.builder()
                 .httpStatus(HttpStatus.OK)
