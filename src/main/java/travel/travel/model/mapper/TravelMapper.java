@@ -1,6 +1,7 @@
 package travel.travel.model.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import travel.travel.model.dto.request.TravelRequest;
 import travel.travel.model.dto.response.TravelResponse;
@@ -18,4 +19,5 @@ public interface TravelMapper {
 
     Travel travelRequestToTravel(TravelRequest travelRequest);
 
+    void updateTravelFromRequest(TravelRequest travelRequest, @MappingTarget Travel travel);
 }

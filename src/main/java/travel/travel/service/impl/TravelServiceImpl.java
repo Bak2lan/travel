@@ -17,7 +17,6 @@ import travel.travel.repository.TravelRepository;
 import travel.travel.service.TravelService;
 
 import java.time.LocalDateTime;
-
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
@@ -51,14 +50,10 @@ public class TravelServiceImpl implements TravelService {
     public SimpleResponse updateTravelById(Long id, TravelRequest travelRequest) {
        Travel travel =  travelRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("Travel with id "+id+" not found"));
-
-       travel.setAboutUs(travelRequest.aboutUs());
-       travel.setContact(travel.getContact());
-       travel.setDocumentation(travelRequest.documentation());
-       travel.setSustainability(travelRequest.sustainability());
+        travelMapper.updateTravelFromRequest(travelRequest, travel);
        travelRepository.save(travel);
        return SimpleResponse.builder()
-               .message("success")
+               .message("Travel successfully updated")
                .status(HttpStatus.OK)
                .timestamp(LocalDateTime.now())
                .build();
@@ -72,7 +67,7 @@ public class TravelServiceImpl implements TravelService {
 travelRepository.delete(travel);
         return SimpleResponse.builder()
                 .timestamp(LocalDateTime.now())
-                .message("success")
+                .message("Travel with id " + id + " successfully deleted")
                 .status(HttpStatus.OK)
                 .build();
     }

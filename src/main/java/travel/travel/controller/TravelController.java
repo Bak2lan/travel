@@ -1,5 +1,6 @@
 package travel.travel.controller;
 
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,7 +19,7 @@ public class TravelController {
     TravelService travelService;
 
     @PostMapping("/save")
-    public ResponseEntity<SimpleResponse> createTravel(@RequestBody TravelRequest travelRequest) {
+    public ResponseEntity<SimpleResponse> createTravel(@RequestBody @Valid TravelRequest travelRequest) {
         SimpleResponse response = travelService.createTravel(travelRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
@@ -30,7 +31,7 @@ public class TravelController {
     }
 
     @PutMapping("/{id}/update")
-    public ResponseEntity<SimpleResponse> updateTravelById(@PathVariable Long id, @RequestBody TravelRequest travelRequest) {
+    public ResponseEntity<SimpleResponse> updateTravelById(@PathVariable @Valid Long id, @RequestBody TravelRequest travelRequest) {
         SimpleResponse response = travelService.updateTravelById(id, travelRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
