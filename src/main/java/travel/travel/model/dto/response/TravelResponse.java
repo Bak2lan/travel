@@ -5,6 +5,8 @@ public record TravelResponse(
         String aboutUs,
         String documentation,
         String sustainability,
-        String contact) {
+        String contact
+
+                      ) {
 
 }

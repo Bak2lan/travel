@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import travel.travel.exception.NotFoundException;
 import travel.travel.model.dto.request.TravelRequest;
 import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.model.dto.response.TravelResponse;
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 public class TravelServiceImpl implements TravelService {
 
     TravelRepository travelRepository;
+    TravelMapper travelMapper;
 
     @Override @Transactional
     public SimpleResponse createTravel(TravelRequest travelRequest) {
@@ -39,16 +41,33 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public TravelResponse getTravelById(Long id) {
-        return null;
+       Travel travel =  travelRepository.findById(id).
+                orElseThrow(()-> new NotFoundException("Travel with id "+id+" not found"));
+        return travelMapper.travelToTravelResponse(travel);
+
     }
 
     @Override
     public SimpleResponse updateTravelById(Long id, TravelRequest travelRequest) {
-        return null;
+       Travel travel =  travelRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Travel with id "+id+" not found"));
+
+       travel.setAboutUs(travelRequest.aboutUs());
+       travel.setContact(travel.getContact());
+       travel.setDocumentation(travelRequest.documentation());
+       travel.setSustainability(travelRequest.sustainability());
+       travelRepository.save(travel);
+       return SimpleResponse.builder()
+               .message("success")
+               .status(HttpStatus.OK)
+               .timestamp(LocalDateTime.now())
+               .build();
+
     }
 
     @Override
     public SimpleResponse deleteTravelById(Long id) {
+
         return null;
     }
 }
