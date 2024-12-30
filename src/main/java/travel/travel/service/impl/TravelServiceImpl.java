@@ -67,7 +67,13 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     public SimpleResponse deleteTravelById(Long id) {
-
-        return null;
+      Travel travel =   travelRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Travel with id"+ id+" not found"));
+travelRepository.delete(travel);
+        return SimpleResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .message("success")
+                .status(HttpStatus.OK)
+                .build();
     }
 }
