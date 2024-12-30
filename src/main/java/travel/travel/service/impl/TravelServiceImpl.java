@@ -40,9 +40,7 @@ public class TravelServiceImpl implements TravelService {
                 .timestamp(LocalDateTime.now())
                 .message("success")
                 .build();
-
     }
-
     @Override
     public TravelResponse getTravelById(Long id) {
         log.info("Fetching travel by id: {}", id);
@@ -52,7 +50,6 @@ public class TravelServiceImpl implements TravelService {
         return travelMapper.travelToTravelResponse(travel);
 
     }
-
     @Override
     public SimpleResponse updateTravelById(Long id, TravelRequest travelRequest) {
         log.info("Updating travel with id: {}, request: {}", id, travelRequest);
@@ -68,7 +65,6 @@ public class TravelServiceImpl implements TravelService {
                 .build();
 
     }
-
     @Override
     public SimpleResponse deleteTravelById(Long id) {
         log.info("Deleting travel with id: {}", id);
