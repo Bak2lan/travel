@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import travel.travel.model.entity.User;
+import travel.travel.validation.email.EmailValidation;
 
 import java.util.Optional;
 
@@ -16,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     Optional<User> findByEmail(String email);
+
+    boolean existsByEmail(@EmailValidation String email);
+
 }

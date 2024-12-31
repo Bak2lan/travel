@@ -7,6 +7,8 @@ import travel.travel.model.dto.request.UserRequest;
 import travel.travel.model.dto.response.UserResponse;
 import travel.travel.model.entity.User;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     @Mapping(target = "role", defaultValue = "ROLE_USER")
@@ -17,4 +19,6 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "role", source = "role")
     void updateEntityFromRequest(UserRequest userRequest, @MappingTarget User user);
+
+    List<UserResponse> toUserResponse(List<User> categories);
 }
