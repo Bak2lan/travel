@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -14,34 +15,37 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import travel.travel.config.jwt.JWTFilter;
+import travel.travel.exception.NotFoundException;
+import travel.travel.repository.UserRepository;
 
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final JWTFilter jwtFilter;
+    private final UserRepository userRepository;
 
-    public SecurityConfig(JWTFilter jwtFilter) {
+    public SecurityConfig(JWTFilter jwtFilter,UserRepository userRepository) {
         this.jwtFilter = jwtFilter;
+        this.userRepository=userRepository;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-
-        return null;
+        return email-> userRepository.findByEmail(email).orElseThrow(()-> new NotFoundException(String.format("User with email %s not found",email)));
     }
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> {
             (requests
-                    .requestMatchers("/public/**",
-                            "/swagger-ui/**",
-                            "/v3/api-docs/**"))
+                    .requestMatchers("/swagger-ui/**",
+                            "/v3/api-docs/**",
+                            "/**"))
                     .permitAll()
-                    .anyRequest()
-                    .authenticated();
+                    .anyRequest().hasAnyAuthority("ADMIN");
         });
         http.sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

@@ -6,18 +6,25 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import travel.travel.exception.NotFoundException;
+import travel.travel.model.entity.User;
+import travel.travel.repository.UserRepository;
 
 import java.io.IOException;
 
 @Component
 public class JWTFilter extends OncePerRequestFilter {
     private final JWTService jwtService;
+    private final UserRepository userRepository;
 
-    public JWTFilter(JWTService jwtService) {
+    public JWTFilter(JWTService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -30,14 +37,22 @@ public class JWTFilter extends OncePerRequestFilter {
             try{
                 if (StringUtils.hasText(token)){
                     String email = jwtService.verifyToken(token);
-                    filterChain.doFilter(request,response);
+                    User user = userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException(String.format("User with email %s not found", email)));
+                    SecurityContextHolder.getContext().setAuthentication(
+                            new UsernamePasswordAuthenticationToken(
+                                    user.getEmail(),
+                                    null,
+                                    user.getAuthorities()
+                            )
+                    );
                 }
             }catch (JWTVerificationException e){
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Invalid token");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED,e.getMessage());
+            }catch (NotFoundException e){
+                response.sendError(HttpServletResponse.SC_NOT_FOUND,e.getMessage());
             }
-        }else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
+        filterChain.doFilter(request,response);
 
     }
 }
