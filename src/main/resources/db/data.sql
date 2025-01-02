@@ -27,7 +27,7 @@ VALUES
 
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
 VALUES
-    (1, 'asan@gmail.com', 'Asan', 'asan123', '+996555123456', 'ROLE_USER', 1);
+    (1, 'asan@gmail.com', 'Asan', 'asan123', '+996555123456', 'ROLE_ADMIN', 1);
 
 INSERT INTO tours (id, latitude, longitude, about_tour, date_from, date_to, days, max, nights, price, tour_name, category_id, sight_id, travel_id)
 VALUES
