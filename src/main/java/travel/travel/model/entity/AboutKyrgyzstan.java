@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import travel.travel.model.enums.AboutType;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class AboutKyrgyzstan {
 
     @OneToOne(cascade = CascadeType.ALL)
     Sight sight;
+
+    @Enumerated(EnumType.STRING)
+    AboutType type;
 
     public AboutKyrgyzstan(String description, String videoFile, List<String> images, Sight sight) {
         this.description = description;
