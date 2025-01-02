@@ -1,0 +1,21 @@
+#spring:
+#  datasource:
+#    password: adilet.2005
+#    username: postgres
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/travel
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#  main:
+#    allow-circular-references: true
+#
+#server:
+#  port: 8080
+#
+#app:
+#  security:
+#    jwt:
+#      secret_key: java15java
+#      expiration: 3600
