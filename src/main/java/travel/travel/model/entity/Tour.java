@@ -31,8 +31,8 @@ public class Tour extends Location {
      LocalDateTime dateFrom;
      LocalDateTime dateTo;
 
-     @OneToMany(mappedBy = "tour",cascade = CascadeType.ALL)
-     List<Category> category;
+     @ManyToOne
+     Category category;
 
     @ElementCollection
      List<String> images;
@@ -46,7 +46,7 @@ public class Tour extends Location {
      @ManyToOne
      Sight sight;
 
-    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDateTime dateFrom, LocalDateTime dateTo, List<Category> category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
+    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDateTime dateFrom, LocalDateTime dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
         super(latitude, longitude);
         this.tourName = tourName;
         this.aboutTour = aboutTour;

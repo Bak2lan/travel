@@ -1,10 +1,7 @@
 package travel.travel.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
@@ -15,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "travels")
+
 public class Travel {
 
     @Id
@@ -46,5 +44,16 @@ public class Travel {
         this.tourList = tourList;
         this.sightList = sightList;
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Travel{" +
+                "id=" + id +
+                ", aboutUs='" + aboutUs + '\'' +
+                ", documentation='" + documentation + '\'' +
+                ", sustainability='" + sustainability + '\'' +
+                ", contact='" + contact + '\'' +
+                '}';
     }
 }
