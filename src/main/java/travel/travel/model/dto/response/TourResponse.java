@@ -1,8 +1,8 @@
-package travel.travel.model.dto.request;
+package travel.travel.model.dto.response;
 
 import java.time.LocalDateTime;
 
-public record TourRequest(
+public record TourResponse(
         String tourName,
         String aboutTour,
         int days,
