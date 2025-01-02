@@ -19,7 +19,7 @@ public class TravelController {
     TravelService travelService;
 
     @PostMapping("/save")
-    public ResponseEntity<SimpleResponse> createTravel(@RequestBody @Valid TravelRequest travelRequest) {
+    public ResponseEntity<SimpleResponse> createTravel(@RequestBody  TravelRequest travelRequest) {
         SimpleResponse response = travelService.createTravel(travelRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
