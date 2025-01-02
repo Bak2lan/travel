@@ -12,15 +12,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "categories")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    int day;
-    String dayTour;
+   private Long id;
+   private int day;
+   private String dayTour;
 
     @ManyToOne
     Travel travel;

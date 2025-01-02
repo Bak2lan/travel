@@ -18,18 +18,17 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tours")
 public class Tour extends Location {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
-     String tourName;
-     String aboutTour;
-     int days;
-     int nights;
-     int price;
-     int max;
-     LocalDateTime dateFrom;
-     LocalDateTime dateTo;
+    private Long id;
+    private String tourName;
+    private String aboutTour;
+    private int days;
+    private int nights;
+    private int price;
+    private int max;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTo;
 
      @ManyToOne
      Category category;

@@ -13,16 +13,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "about_kyrgyzstan")
 public class AboutKyrgyzstan {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String description;
-    String videoFile;
-    String name;
+   private Long id;
+   private String description;
+   private String videoFile;
+   private String name;
 
     @ElementCollection
     List<String> images;

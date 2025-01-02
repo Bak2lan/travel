@@ -1,10 +1,7 @@
 package travel.travel.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import travel.travel.model.Location;
 
@@ -14,15 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@ToString
 @Table(name = "sights")
 public class Sight extends Location {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String nameOfSight;
-    String description;
+    private Long id;
+    private String nameOfSight;
+    private String description;
 
     @ElementCollection
     List<String> images;
