@@ -29,7 +29,7 @@ INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
 VALUES
     (1, 'asan@gmail.com', 'Asan', 'Asan1234', '+996555123456', 'ROLE_ADMIN', 1);
 
-INSERT INTO tours (id, latitude, longitude, about_tour, date_from, date_to, days, max, nights, price, tour_name, category_id, sight_id, travel_id)
+INSERT INTO tours (id, latitude, longitude, about_tour, date_from, date_to, days, pax, nights, price, tour_name, category_id, sight_id, travel_id)
 VALUES
     (1, 42.567, 74.352, 'Ala-Archa Hiking Tour', '2025-01-01', '2025-01-03', 3, 15, 2, 100.0, 'Ala-Archa Tour', 1, 1, 1),
     (2, 41.841, 75.131, 'Son-Kul Lake Experience', '2025-02-01', '2025-02-05', 5, 20, 4, 200.0, 'Son-Kul Adventure', 2, 2, 1),
