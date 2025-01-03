@@ -28,16 +28,19 @@ public class AboutKyrgyzstan {
     @ElementCollection
     List<String> images;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "sight_id", referencedColumnName = "id",nullable = true)
     Sight sight;
 
     @Enumerated(EnumType.STRING)
     AboutType type;
 
-    public AboutKyrgyzstan(String description, String videoFile, List<String> images, Sight sight) {
+    public AboutKyrgyzstan(String description, String videoFile, String name, List<String> images, Sight sight, AboutType type) {
         this.description = description;
         this.videoFile = videoFile;
+        this.name = name;
         this.images = images;
         this.sight = sight;
+        this.type = type;
     }
 }

@@ -1,5 +1,6 @@
 package travel.travel.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import travel.travel.exception.NotFoundException;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanRequest, AboutKyrgyzstanResponse> {
     private final AboutKyrgyzstanRepository aboutKyrgyzstanRepository;
     private final SightRepository sightRepository;
@@ -30,12 +32,20 @@ public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanR
 
     @Override
     public AboutKyrgyzstanResponse save(AboutKyrgyzstanRequest aboutKyrgyzstanRequest) {
-        Sight sight = sightRepository.findById(aboutKyrgyzstanRequest.getSightId())
-                .orElseThrow(() -> new NotFoundException("Sight not found"));
         AboutKyrgyzstan aboutKyrgyzstan = aboutMapper.mapToEntity(aboutKyrgyzstanRequest);
-        aboutKyrgyzstan.setSight(sight);
+
+        // Проверяем, передан ли ID Sight в запросе
+        if (aboutKyrgyzstanRequest.getSightId() != null) {
+            // Если SightId не null, ищем объект Sight и связываем его
+            Sight sight = sightRepository.findById(aboutKyrgyzstanRequest.getSightId())
+                    .orElseThrow(() -> new NotFoundException("Sight not found"));
+            aboutKyrgyzstan.setSight(sight);
+        }
+
+        // Сохраняем объект AboutKyrgyzstan в базе
         return aboutMapper.mapToResponse(aboutKyrgyzstanRepository.save(aboutKyrgyzstan));
     }
+
 
 
     @Override
@@ -71,10 +81,18 @@ public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanR
 
     @Override
     public AboutKyrgyzstanResponse delete(Long id) {
-        AboutKyrgyzstan aboutKyrgyzstan = byId(id);
-        aboutKyrgyzstanRepository.deleteById(id);
+
+        // Проверка существования объекта
+        AboutKyrgyzstan aboutKyrgyzstan = aboutKyrgyzstanRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("AboutKyrgyzstan not found with id: " + id));
+
+        // Удаляем объект
+        aboutKyrgyzstanRepository.delete(aboutKyrgyzstan);
+
+        // Возвращаем ответ
         return aboutMapper.mapToResponse(aboutKyrgyzstan);
     }
+
 
     AboutKyrgyzstan byId(Long id) {
         return aboutKyrgyzstanRepository.findById(id)

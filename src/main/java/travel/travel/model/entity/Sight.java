@@ -28,21 +28,23 @@ public class Sight extends Location {
     List<String> images;
 
     @ManyToOne
+    @JoinColumn(name = "travel_id")
     Travel travel;
 
     @OneToMany(mappedBy = "sight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tour> tours;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "sight")
     AboutKyrgyzstan about_kyrgyzstan;
 
 
-    public Sight(double latitude, double longitude, String nameOfSight, String description, List<String> images, Travel travel, AboutKyrgyzstan about_kyrgyzstan) {
+    public Sight(double latitude, double longitude, String nameOfSight, String description, List<String> images, Travel travel, List<Tour> tours, AboutKyrgyzstan about_kyrgyzstan) {
         super(latitude, longitude);
         this.nameOfSight = nameOfSight;
         this.description = description;
         this.images = images;
         this.travel = travel;
+        this.tours = tours;
         this.about_kyrgyzstan = about_kyrgyzstan;
     }
 }
