@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import travel.travel.model.Location;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +30,8 @@ public class Tour extends Location {
      int nights;
      int price;
      int max;
-     LocalDateTime dateFrom;
-     LocalDateTime dateTo;
+     LocalDate dateFrom;
+     LocalDate dateTo;
 
      @ManyToOne
      Category category;
@@ -47,7 +48,7 @@ public class Tour extends Location {
      @ManyToOne
      Sight sight;
 
-    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDateTime dateFrom, LocalDateTime dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
+    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
         super(latitude, longitude);
         this.tourName = tourName;
         this.aboutTour = aboutTour;

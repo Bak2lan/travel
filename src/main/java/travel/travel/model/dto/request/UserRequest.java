@@ -5,11 +5,11 @@ import travel.travel.validation.password.PasswordValidation;
 import travel.travel.validation.phoneNumber.PhoneNumberValidation;
 public record UserRequest(
         String name,
-        @EmailValidation(message = "Некорректный формат email")
+        @EmailValidation //(message = "Некорректный формат email")
         String email,
-        @PasswordValidation(message = "Пароль должен содержать не менее 8 символов, включая цифры и специальные символы")
+        @PasswordValidation//(message = "Пароль должен содержать не менее 8 символов, включая цифры и специальные символы")
         String password,
-        @PhoneNumberValidation(message =  " Некорректный формат номера телефона")
+        @PhoneNumberValidation//(message =  " Некорректный формат номера телефона")
         String phoneNumber,
         Role role
 ) {

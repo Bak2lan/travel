@@ -34,7 +34,7 @@ public class Sight extends Location {
     @OneToMany(mappedBy = "sight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tour> tours;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "sight")
     AboutKyrgyzstan about_kyrgyzstan;
 
 
