@@ -15,7 +15,7 @@ import java.util.List;
 public class Sight extends Location {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sight_seq")
-    @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", initialValue = 6, allocationSize = 10)
     private Long id;
     private String nameOfSight;
     private String description;

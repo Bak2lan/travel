@@ -50,9 +50,9 @@ public class TourServiceImpl implements TourService {
             throw new BadRequestExeption("Tour name can not be empty");
         }
         if (tourRequest.pax() < 0 || tourRequest.days() < 0 || tourRequest.nights() < 0) {
-            log.warn("Details tour contain invalid values (max people, days, nights) : max people ={}, days = {}, nights = {}",
+            log.warn("Details tour contain invalid values (pax people, days, nights) : pax people ={}, days = {}, nights = {}",
                     tourRequest.pax(), tourRequest.days(), tourRequest.nights());
-            throw new BadRequestExeption("Details of tour including max people, days, nights should be greater than 0");
+            throw new BadRequestExeption("Details of tour including pax people, days, nights should be greater than 0");
         }
         Travel travel = travelRepository.findById(1L).orElseThrow(() -> {
             log.error("Travel not found with id {}", 1L);

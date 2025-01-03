@@ -21,16 +21,14 @@ import java.util.Map;
 public class Tour extends Location {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_seq")
-    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 6, allocationSize = 10)
     private Long id;
     private String tourName;
     private String aboutTour;
     private int days;
     private int nights;
     private int price;
-    private int max;
-    private LocalDate dateFrom;
-    private LocalDate dateTo;
+    private int pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
 
@@ -49,14 +47,14 @@ public class Tour extends Location {
     @ManyToOne
     private Sight sight;
 
-    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
+    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
         super(latitude, longitude);
         this.tourName = tourName;
         this.aboutTour = aboutTour;
         this.days = days;
         this.nights = nights;
         this.price = price;
-        this.max = max;
+        this.pax = pax;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.category = category;
