@@ -1,6 +1,7 @@
 package travel.travel.model.dto.response;
 
 import lombok.Builder;
+import travel.travel.model.enums.Role;
 
 @Builder
 public record UserResponse(
@@ -8,6 +9,6 @@ public record UserResponse(
         String name,
         String email,
         String phoneNumber,
-        String role
+        Role role
 ) {
 }
