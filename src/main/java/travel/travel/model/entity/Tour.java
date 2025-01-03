@@ -31,6 +31,8 @@ public class Tour extends Location {
     private int max;
     private LocalDate dateFrom;
     private LocalDate dateTo;
+    private LocalDate dateFrom;
+    private LocalDate dateTo;
 
     @ManyToOne
     private Category category;
