@@ -15,7 +15,7 @@ import java.util.List;
 public class AboutKyrgyzstan {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "about_kg_seq")
-    @SequenceGenerator(name = "about_kg_seq", sequenceName = "about_kg_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "about_kg_seq", sequenceName = "about_kg_sequence", initialValue = 6, allocationSize = 10)
     private Long id;
     private String description;
     private String videoFile;
