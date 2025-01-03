@@ -21,17 +21,16 @@ public class Sight extends Location {
     private String description;
 
     @ElementCollection
-    List<String> images;
+    private List<String> images;
 
     @ManyToOne
-    Travel travel;
+    private Travel travel;
 
     @OneToMany(mappedBy = "sight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tour> tours;
 
     @OneToOne(fetch = FetchType.LAZY)
-    AboutKyrgyzstan about_kyrgyzstan;
-
+    private AboutKyrgyzstan about_kyrgyzstan;
 
     public Sight(double latitude, double longitude, String nameOfSight, String description, List<String> images, Travel travel, AboutKyrgyzstan about_kyrgyzstan) {
         super(latitude, longitude);

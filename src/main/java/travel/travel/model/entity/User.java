@@ -27,10 +27,10 @@ public class User  implements UserDetails {
    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    Role role;
+     private Role role;
 
      @OneToOne(fetch = FetchType.LAZY)
-     Travel travel;
+     private Travel travel;
 
     public User(String name, String email, String password, String phoneNumber, Role role, Travel travel) {
         this.name = name;

@@ -31,19 +31,19 @@ public class Tour extends Location {
     private LocalDateTime dateTo;
 
      @ManyToOne
-     Category category;
+     private Category category;
 
     @ElementCollection
-     List<String> images;
+     private   List<String> images;
 
     @ElementCollection
-     Map<String,String> detailsOfTour;
+     private   Map<String,String> detailsOfTour;
 
      @ManyToOne
-     Travel travel;
+     private Travel travel;
 
      @ManyToOne
-     Sight sight;
+     private Sight sight;
 
     public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDateTime dateFrom, LocalDateTime dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
         super(latitude, longitude);

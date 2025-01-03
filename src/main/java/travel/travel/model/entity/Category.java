@@ -21,10 +21,10 @@ public class Category {
    private String dayTour;
 
     @ManyToOne
-    Travel travel;
+   private Travel travel;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    List<Tour> tour;
+   private List<Tour> tour;
 
     public Category(int day, String dayTour, Travel travel, List<Tour> tour) {
         this.day = day;

@@ -22,16 +22,16 @@ public class Travel {
    private String contact;
 
     @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
-    User user;
+    private User user;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
-    List<Tour> tourList;
+    private List<Tour> tourList;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
-    List<Sight> sightList;
+    private List<Sight> sightList;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
-    List<Category> category;
+    private List<Category> category;
 
     public Travel(String aboutUs, String documentation, String sustainability, String contact, User user, List<Tour> tourList, List<Sight> sightList, List<Category> category) {
         this.aboutUs = aboutUs;

@@ -23,10 +23,10 @@ public class AboutKyrgyzstan {
    private String name;
 
     @ElementCollection
-    List<String> images;
+   private List<String> images;
 
     @OneToOne(cascade = CascadeType.ALL)
-    Sight sight;
+   private Sight sight;
 
     public AboutKyrgyzstan(String description, String videoFile, List<String> images, Sight sight) {
         this.description = description;
