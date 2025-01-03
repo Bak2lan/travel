@@ -12,6 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PhoneNumberValidation {
     Class<?>[] groups() default {};
+    String message() default "Некорректный формат номера телефона";
 
     Class<? extends Payload>[] payload() default {};
 }

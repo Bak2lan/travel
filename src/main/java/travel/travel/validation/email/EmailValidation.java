@@ -13,7 +13,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface  EmailValidation {
+    String message() default "Некорректный формат email";
     Class<?>[] groups() default {};
+
 
     Class<? extends Payload>[] payload() default {};
 }
