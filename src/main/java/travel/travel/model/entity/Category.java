@@ -19,6 +19,7 @@ public class Category {
    private Long id;
    private int day;
    private String dayTour;
+   private String image;
 
     @ManyToOne
    private Travel travel;
@@ -26,9 +27,10 @@ public class Category {
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
    private List<Tour> tour;
 
-    public Category(int day, String dayTour, Travel travel, List<Tour> tour) {
+    public Category(int day, String dayTour, String image, Travel travel, List<Tour> tour) {
         this.day = day;
         this.dayTour = dayTour;
+        this.image = image;
         this.travel = travel;
         this.tour = tour;
     }
