@@ -49,9 +49,9 @@ public class TourServiceImpl implements TourService {
             log.warn("Attempted to save a tour with empty name");
             throw new BadRequestExeption("Tour name can not be empty");
         }
-        if (tourRequest.max() < 0 || tourRequest.days() < 0 || tourRequest.nights() < 0) {
+        if (tourRequest.pax() < 0 || tourRequest.days() < 0 || tourRequest.nights() < 0) {
             log.warn("Details tour contain invalid values (max people, days, nights) : max people ={}, days = {}, nights = {}",
-                    tourRequest.max(), tourRequest.days(), tourRequest.nights());
+                    tourRequest.pax(), tourRequest.days(), tourRequest.nights());
             throw new BadRequestExeption("Details of tour including max people, days, nights should be greater than 0");
         }
         Travel travel = travelRepository.findById(1L).orElseThrow(() -> {
@@ -74,7 +74,7 @@ public class TourServiceImpl implements TourService {
                 tourRequest.days(),
                 tourRequest.nights(),
                 tourRequest.price(),
-                tourRequest.max(),
+                tourRequest.pax(),
                 tourRequest.dateFrom(),
                 tourRequest.dateTo(),
                 category,
@@ -110,7 +110,7 @@ public class TourServiceImpl implements TourService {
                 .days(tour.getDays())
                 .nights(tour.getNights())
                 .price(tour.getPrice())
-                .max(tour.getMax())
+                .pax(tour.getPax())
                 .dateFrom(tour.getDateFrom())
                 .dateTo(tour.getDateTo())
                 .detailsOfTour(tour.getDetailsOfTour())
@@ -151,7 +151,7 @@ public class TourServiceImpl implements TourService {
         tour.setDays(tourRequest.days());
         tour.setNights(tourRequest.nights());
         tour.setPrice(tourRequest.price());
-        tour.setMax(tourRequest.max());
+        tour.setPax(tourRequest.pax());
         tour.setDateFrom(tourRequest.dateFrom());
         tour.setDateTo(tourRequest.dateTo());
         tour.setCategory(category);
@@ -170,7 +170,7 @@ public class TourServiceImpl implements TourService {
                 .days(tour.getDays())
                 .nights(tour.getNights())
                 .price(tour.getPrice())
-                .max(tour.getMax())
+                .pax(tour.getPax())
                 .dateFrom(tour.getDateFrom())
                 .dateTo(tour.getDateTo())
                 .detailsOfTour(tour.getDetailsOfTour())
