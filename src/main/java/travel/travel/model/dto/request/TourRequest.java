@@ -1,8 +1,14 @@
 package travel.travel.model.dto.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 public record TourRequest(
+        double latitude,
+        double longitude,
         String tourName,
         String aboutTour,
         int days,
@@ -11,6 +17,11 @@ public record TourRequest(
         int max,
         LocalDateTime dateFrom,
         LocalDateTime dateTo,
-        Long sightId
+        List<String> images,
+        @Schema(description = "Details of tour",
+                example = "{\"Day 1\": \"place\", \"Day 2\": \"place\", \"Day 3\": \"place\", \"Day 4\": \"place\", \"Day 5\": \"place\", \"Day 6\": \"place\"}")
+        Map<String,String> tourDetails,
+        Long sightId,
+        Long categoryId
 ) {
 }
