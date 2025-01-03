@@ -2,7 +2,6 @@ package travel.travel.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 import travel.travel.model.Location;
 
 import java.util.List;
@@ -33,8 +32,7 @@ public class Sight extends Location {
     @OneToOne(mappedBy = "sight")
     private AboutKyrgyzstan about_kyrgyzstan;
 
-
-    public Sight(double latitude, double longitude, String nameOfSight, String description, List<String> images, Travel travel, AboutKyrgyzstan about_kyrgyzstan) {
+    public Sight(double latitude, double longitude, String nameOfSight, String description, List<String> images, Travel travel, List<Tour> tours, AboutKyrgyzstan about_kyrgyzstan) {
         super(latitude, longitude);
         this.nameOfSight = nameOfSight;
         this.description = description;
