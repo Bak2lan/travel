@@ -13,22 +13,20 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "about_kyrgyzstan")
 public class AboutKyrgyzstan {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "about_kyrgyzstan_seq")
-    @SequenceGenerator(name = "about_kyrgyzstan_seq", sequenceName = "about_kyrgyzstan_sequence", allocationSize = 1)
-    String description;
-    String videoFile;
-    String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
+   private String description;
+   private String videoFile;
+   private String name;
 
     @ElementCollection
-    List<String> images;
+   private List<String> images;
 
     @OneToOne(cascade = CascadeType.ALL)
-    Sight sight;
+   private Sight sight;
 
     public AboutKyrgyzstan(String description, String videoFile, List<String> images, Sight sight) {
         this.description = description;

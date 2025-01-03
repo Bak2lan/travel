@@ -14,29 +14,26 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@ToString
 @Table(name = "sights")
 public class Sight extends Location {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sight_seq")
-    @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", allocationSize = 1)
-    Long id;
-    String nameOfSight;
-    String description;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nameOfSight;
+    private String description;
 
     @ElementCollection
-    List<String> images;
+    private List<String> images;
 
     @ManyToOne
-    Travel travel;
+    private Travel travel;
 
     @OneToMany(mappedBy = "sight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tour> tours;
 
-    @OneToOne(mappedBy = "sight")
-    AboutKyrgyzstan about_kyrgyzstan;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    private AboutKyrgyzstan about_kyrgyzstan;
 
     public Sight(double latitude, double longitude, String nameOfSight, String description, List<String> images, Travel travel, AboutKyrgyzstan about_kyrgyzstan) {
         super(latitude, longitude);

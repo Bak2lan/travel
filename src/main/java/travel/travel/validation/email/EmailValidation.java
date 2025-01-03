@@ -14,6 +14,6 @@ import java.lang.annotation.*;
 
 public @interface  EmailValidation {
     Class<?>[] groups() default {};
-
+    String message() default "Некорректный формат email";
     Class<? extends Payload>[] payload() default {};
 }

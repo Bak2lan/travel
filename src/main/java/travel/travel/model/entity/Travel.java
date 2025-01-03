@@ -10,31 +10,30 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@ToString
 @Table(name = "travels")
 
 public class Travel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "travel_seq")
-    @SequenceGenerator(name = "travel_seq", sequenceName = "travel_sequence", allocationSize = 1)
-    Long id;
-    String aboutUs;
-    String documentation;
-    String sustainability;
-    String contact;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
+   private String aboutUs;
+   private String documentation;
+   private String sustainability;
+   private String contact;
 
     @OneToOne(mappedBy = "travel",cascade = CascadeType.ALL)
-    User user;
+    private User user;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
-    List<Tour> tourList;
+    private List<Tour> tourList;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
-    List<Sight> sightList;
+    private List<Sight> sightList;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
-    List<Category> category;
+    private List<Category> category;
 
     public Travel(String aboutUs, String documentation, String sustainability, String contact, User user, List<Tour> tourList, List<Sight> sightList, List<Category> category) {
         this.aboutUs = aboutUs;
@@ -47,14 +46,4 @@ public class Travel {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Travel{" +
-                "id=" + id +
-                ", aboutUs='" + aboutUs + '\'' +
-                ", documentation='" + documentation + '\'' +
-                ", sustainability='" + sustainability + '\'' +
-                ", contact='" + contact + '\'' +
-                '}';
-    }
 }

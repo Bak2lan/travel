@@ -12,22 +12,19 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "categories")
 public class Category {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
-    @SequenceGenerator(name = "category_seq", sequenceName = "category_sequence", allocationSize = 1)
-    Long id;
-    int day;
-    String dayTour;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
+   private int day;
+   private String dayTour;
 
     @ManyToOne
-    Travel travel;
+   private Travel travel;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    List<Tour> tour;
+   private List<Tour> tour;
 
     public Category(int day, String dayTour, Travel travel, List<Tour> tour) {
         this.day = day;
