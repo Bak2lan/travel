@@ -18,7 +18,7 @@ import travel.travel.service.TravelService;
 
 import java.time.LocalDateTime;
 
-@Service
+@Service()
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 @Slf4j

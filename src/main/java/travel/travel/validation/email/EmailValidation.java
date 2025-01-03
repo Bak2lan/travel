@@ -13,8 +13,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface  EmailValidation {
-    String message() default "{The email must contain an @ symbol.}";
-
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
