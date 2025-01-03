@@ -16,7 +16,8 @@ import java.util.List;
 public class Travel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "travel_seq")
+    @SequenceGenerator(name = "travel_seq", sequenceName = "travel_sequence", allocationSize = 1)
     Long id;
     String aboutUs;
     String documentation;

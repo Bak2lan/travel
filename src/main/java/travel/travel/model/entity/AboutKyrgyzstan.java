@@ -18,8 +18,8 @@ import java.util.List;
 public class AboutKyrgyzstan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "about_kyrgyzstan_seq")
+    @SequenceGenerator(name = "about_kyrgyzstan_seq", sequenceName = "about_kyrgyzstan_sequence", allocationSize = 1)
     String description;
     String videoFile;
     String name;

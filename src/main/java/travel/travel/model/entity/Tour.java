@@ -20,8 +20,9 @@ import java.util.Map;
 public class Tour extends Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_seq")
+    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", allocationSize = 1)
+    Long id;
      String tourName;
      String aboutTour;
      int days;
