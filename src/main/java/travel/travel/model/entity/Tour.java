@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import travel.travel.model.Location;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,8 @@ import java.util.Map;
 @Table(name = "tours")
 public class Tour extends Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_seq")
+    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", allocationSize = 1)
     private Long id;
     private String tourName;
     private String aboutTour;
@@ -27,25 +29,25 @@ public class Tour extends Location {
     private int nights;
     private int price;
     private int max;
-    private LocalDateTime dateFrom;
-    private LocalDateTime dateTo;
+    private LocalDate dateFrom;
+    private LocalDate dateTo;
 
-     @ManyToOne
-     private Category category;
-
-    @ElementCollection
-     private   List<String> images;
+    @ManyToOne
+    private Category category;
 
     @ElementCollection
-     private   Map<String,String> detailsOfTour;
+    private List<String> images;
 
-     @ManyToOne
-     private Travel travel;
+    @ElementCollection
+    private Map<String, String> detailsOfTour;
 
-     @ManyToOne
-     private Sight sight;
+    @ManyToOne
+    private Travel travel;
 
-    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDateTime dateFrom, LocalDateTime dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
+    @ManyToOne
+    private Sight sight;
+
+    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int max, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
         super(latitude, longitude);
         this.tourName = tourName;
         this.aboutTour = aboutTour;

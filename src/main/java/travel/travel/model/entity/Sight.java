@@ -1,11 +1,7 @@
 package travel.travel.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.FieldDefaults;
+import lombok.*;
 import travel.travel.model.Location;
 
 import java.util.List;
@@ -18,7 +14,8 @@ import java.util.List;
 @Table(name = "sights")
 public class Sight extends Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sight_seq")
+    @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", allocationSize = 1)
     private Long id;
     private String nameOfSight;
     private String description;
