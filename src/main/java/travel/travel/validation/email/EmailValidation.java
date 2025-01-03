@@ -13,9 +13,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface  EmailValidation {
-    String message() default "{The email must contain an @ symbol.}";
-
     Class<?>[] groups() default {};
-
+    String message() default "Некорректный формат email";
     Class<? extends Payload>[] payload() default {};
 }

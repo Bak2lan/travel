@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.UserRequest;
 import travel.travel.model.dto.response.SimpleResponse;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
+@Validated
 public class UserController {
     UserService userService;
 
@@ -26,7 +28,6 @@ public class UserController {
         SimpleResponse response = userService.saveUser(userRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-
     @PostMapping("/create")
     public ResponseEntity<SimpleResponse> createUser(@Valid @RequestBody UserRequest userRequest) {
         SimpleResponse response = userService.createUser(userRequest);

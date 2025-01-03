@@ -10,9 +10,6 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD,ElementType.FIELD,ElementType.ANNOTATION_TYPE,ElementType.CONSTRUCTOR,ElementType.PARAMETER,ElementType.TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordValidation {
-    String message() default "{Your password must be at least 8 characters long.}";
-
-    Class<?>[] groups() default {};
-
+    String message() default "Пароль должен содержать не менее 8 символов, включая цифры и специальные символы";    Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
