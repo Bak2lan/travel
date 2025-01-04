@@ -31,10 +31,9 @@ public class TravelServiceImpl implements TravelService {
     @Transactional
     public SimpleResponse createTravel(TravelRequest travelRequest) {
         log.info("Creating travel: {}", travelRequest);
-        Travel travel = TravelMapper.INSTANCE.travelRequestToTravel(travelRequest);
+        Travel travel = travelMapper.travelRequestToTravel(travelRequest);
         travelRepository.save(travel);
         log.info("Travel successfully created: {}", travel);
-
         return SimpleResponse.builder()
                 .status(HttpStatus.CREATED)
                 .timestamp(LocalDateTime.now())
