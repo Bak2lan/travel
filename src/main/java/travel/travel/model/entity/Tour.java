@@ -21,7 +21,7 @@ import java.util.Map;
 public class Tour extends Location {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_seq")
-    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 6, allocationSize = 10)
+    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 6, allocationSize = 1)
     private Long id;
     private String tourName;
     private String aboutTour;

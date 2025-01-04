@@ -15,7 +15,7 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
-    @SequenceGenerator(name = "category_seq", sequenceName = "category_sequence", initialValue = 6, allocationSize = 10)
+    @SequenceGenerator(name = "category_seq", sequenceName = "category_sequence", initialValue = 6, allocationSize = 1)
     private Long id;
     private int day;
     private String dayTour;
