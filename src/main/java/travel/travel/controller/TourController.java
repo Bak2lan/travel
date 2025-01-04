@@ -36,7 +36,8 @@ public class TourController {
             description = "Get all tours from database"
     )
     @GetMapping("/getAll")
-    public ResponseEntity<TourPaginationResponse> getAll(int currentPage, int pageSize) {
+    public ResponseEntity<TourPaginationResponse> getAll(@RequestParam(defaultValue = "1") int currentPage,
+                                                         @RequestParam(defaultValue = "4") int pageSize) {
         TourPaginationResponse allTour = tourService.getAllTour(currentPage, pageSize);
         return ResponseEntity.ok(allTour);
     }
