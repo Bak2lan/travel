@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 import travel.travel.model.Location;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,8 @@ import java.util.Map;
 @Table(name = "tours")
 public class Tour extends Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_seq")
+    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 6, allocationSize = 1)
     private Long id;
     private String tourName;
     private String aboutTour;
@@ -32,20 +32,20 @@ public class Tour extends Location {
     private LocalDate dateFrom;
     private LocalDate dateTo;
 
-     @ManyToOne
-     private Category category;
+    @ManyToOne
+    private Category category;
 
     @ElementCollection
-     private   List<String> images;
+    private List<String> images;
 
     @ElementCollection
-     private   Map<String,String> detailsOfTour;
+    private Map<String, String> detailsOfTour;
 
-     @ManyToOne
-     private Travel travel;
+    @ManyToOne
+    private Travel travel;
 
-     @ManyToOne
-     private Sight sight;
+    @ManyToOne
+    private Sight sight;
 
     public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
         super(latitude, longitude);
