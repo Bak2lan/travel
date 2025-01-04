@@ -2,7 +2,6 @@ package travel.travel.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,20 +16,21 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Table(name = "users")
-public class User  implements UserDetails {
+public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
-   private String name;
-   private String email;
-   private String password;
-   private String phoneNumber;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", initialValue = 2, allocationSize = 2)
+    private Long id;
+    private String name;
+    private String email;
+    private String password;
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-     private Role role;
+    private Role role;
 
-     @OneToOne(fetch = FetchType.LAZY)
-     private Travel travel;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Travel travel;
 
     public User(String name, String email, String password, String phoneNumber, Role role, Travel travel) {
         this.name = name;

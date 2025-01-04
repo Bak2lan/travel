@@ -1,11 +1,10 @@
 package travel.travel.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldDefaults;
+
 import java.util.List;
 
 @Entity
@@ -15,17 +14,18 @@ import java.util.List;
 @Table(name = "categories")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
-   private int day;
-   private String dayTour;
-   private String image;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
+    @SequenceGenerator(name = "category_seq", sequenceName = "category_sequence", initialValue = 6, allocationSize = 10)
+    private Long id;
+    private int day;
+    private String dayTour;
+    private String image;
 
     @ManyToOne
-   private Travel travel;
+    private Travel travel;
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-   private List<Tour> tour;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Tour> tour;
 
     public Category(int day, String dayTour, String image, Travel travel, List<Tour> tour) {
         this.day = day;

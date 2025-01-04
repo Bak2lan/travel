@@ -2,7 +2,6 @@ package travel.travel.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 import travel.travel.model.Location;
 
 import java.util.List;
@@ -15,7 +14,8 @@ import java.util.List;
 @Table(name = "sights")
 public class Sight extends Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sight_seq")
+    @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", initialValue = 6, allocationSize = 10)
     private Long id;
     private String nameOfSight;
     private String description;
