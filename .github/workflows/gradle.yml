@@ -59,15 +59,17 @@ jobs:
         run: |
           # Install sshpass to allow password-based SSH
           sudo apt-get update && sudo apt-get install -y sshpass
-
+          
           # Ensure the target directory exists
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "mkdir -p /opt/trpo"
-
+          
           # Copy the JAR file
           sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no ./build/libs/travel-0.0.1-SNAPSHOT.jar $SERVER_USER@$SERVER_HOST:/opt/trpo/
-
+          
           # Verify the file and restart the service
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
             ls -la /opt/trpo/travel-0.0.1-SNAPSHOT.jar &&
             chmod 755 /opt/trpo/travel-0.0.1-SNAPSHOT.jar &&
             sudo systemctl restart test.service
+          "
+
