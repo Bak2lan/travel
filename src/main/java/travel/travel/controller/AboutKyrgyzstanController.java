@@ -1,6 +1,7 @@
 package travel.travel.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
@@ -13,40 +14,46 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/about-kyrgyzstan")
 public class AboutKyrgyzstanController {
+
     private final AboutKyrgyzstanServiceImpl aboutKyrgyzstanService;
 
     @PostMapping("/save")
-    public ResponseEntity<AboutKyrgyzstanResponse> create(
-            @RequestBody AboutKyrgyzstanRequest request) {
-        AboutKyrgyzstanResponse response = aboutKyrgyzstanService.save(request);
-        return ResponseEntity.ok(response);
+    public AboutKyrgyzstanResponse create(@RequestBody AboutKyrgyzstanRequest request) {
+        return aboutKyrgyzstanService.save(request);
+
     }
 
     @GetMapping("/{id}/get_by_id")
-    public ResponseEntity<AboutKyrgyzstanResponse> getById(
-            @PathVariable Long id) {
-        AboutKyrgyzstanResponse response = aboutKyrgyzstanService.findById(id);
-        return ResponseEntity.ok(response);
+    public AboutKyrgyzstanResponse getById(@PathVariable Long id) {
+        return aboutKyrgyzstanService.findById(id);
+
     }
 
     @GetMapping("/get_all")
-    public ResponseEntity<List<AboutKyrgyzstanResponse>> getAll() {
-        List<AboutKyrgyzstanResponse> responses = aboutKyrgyzstanService.findAll();
-        return ResponseEntity.ok(responses);
+    public List<AboutKyrgyzstanResponse> getAll() {
+        return aboutKyrgyzstanService.findAll();
     }
 
     @PutMapping("/{id}/update")
-    public ResponseEntity<AboutKyrgyzstanResponse> update(
-            @PathVariable Long id,
-            @RequestBody AboutKyrgyzstanRequest request) {
-        AboutKyrgyzstanResponse response = aboutKyrgyzstanService.update(id, request);
+    public AboutKyrgyzstanResponse update(@PathVariable Long id, @RequestBody AboutKyrgyzstanRequest request) {
+        return aboutKyrgyzstanService.update(id, request);
+    }
+
+    //    @DeleteMapping("/{id}/delete")
+//    public AboutKyrgyzstanResponse delete(@PathVariable Long id) {
+//        return aboutKyrgyzstanService.delete(id);
+//
+//    }
+    @DeleteMapping ("/{id}/delete")
+    public ResponseEntity<AboutKyrgyzstanResponse> delete(@PathVariable Long id) {
+        AboutKyrgyzstanResponse response = aboutKyrgyzstanService.delete(id);
+
+        // Возвращаем статус 200 (OK) и объект ответа
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}/delete")
-    public ResponseEntity<AboutKyrgyzstanResponse> delete(
-            @PathVariable Long id) {
-        AboutKyrgyzstanResponse response = aboutKyrgyzstanService.delete(id);
-        return ResponseEntity.ok(response);
-    }
+
 }
+
+
+

@@ -1,11 +1,15 @@
 package travel.travel.service.impl;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import travel.travel.exception.NotFoundException;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
 import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
+import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.model.entity.AboutKyrgyzstan;
 import travel.travel.model.entity.Sight;
 import travel.travel.model.mapper.AboutKyrgyzstanMapper;
@@ -18,12 +22,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@Slf4j
 public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanRequest, AboutKyrgyzstanResponse> {
+
     private final AboutKyrgyzstanRepository aboutKyrgyzstanRepository;
     private final SightRepository sightRepository;
     private final AboutKyrgyzstanMapper aboutMapper;
 
-    @Autowired
     public AboutKyrgyzstanServiceImpl(AboutKyrgyzstanRepository aboutKyrgyzstanRepository, SightRepository sightRepository, AboutKyrgyzstanMapper aboutMapper) {
         this.aboutKyrgyzstanRepository = aboutKyrgyzstanRepository;
         this.sightRepository = sightRepository;
@@ -33,19 +38,18 @@ public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanR
     @Override
     public AboutKyrgyzstanResponse save(AboutKyrgyzstanRequest aboutKyrgyzstanRequest) {
         AboutKyrgyzstan aboutKyrgyzstan = aboutMapper.mapToEntity(aboutKyrgyzstanRequest);
-
-        // Проверяем, передан ли ID Sight в запросе
         if (aboutKyrgyzstanRequest.getSightId() != null) {
-            // Если SightId не null, ищем объект Sight и связываем его
             Sight sight = sightRepository.findById(aboutKyrgyzstanRequest.getSightId())
-                    .orElseThrow(() -> new NotFoundException("Sight not found"));
+                    .orElseGet(() -> {
+                        Sight newSight = new Sight();
+                        newSight.setId(aboutKyrgyzstanRequest.getSightId());
+                        sightRepository.save(newSight);
+                        return newSight;
+                    });
             aboutKyrgyzstan.setSight(sight);
         }
-
-        // Сохраняем объект AboutKyrgyzstan в базе
         return aboutMapper.mapToResponse(aboutKyrgyzstanRepository.save(aboutKyrgyzstan));
     }
-
 
 
     @Override
@@ -81,18 +85,15 @@ public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanR
 
     @Override
     public AboutKyrgyzstanResponse delete(Long id) {
+        try {
+            AboutKyrgyzstan aboutKyrgyzstan = byId(id);
+            aboutKyrgyzstanRepository.delete(aboutKyrgyzstan);
+            return aboutMapper.mapToResponse(aboutKyrgyzstan);
 
-        // Проверка существования объекта
-        AboutKyrgyzstan aboutKyrgyzstan = aboutKyrgyzstanRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("AboutKyrgyzstan not found with id: " + id));
-
-        // Удаляем объект
-        aboutKyrgyzstanRepository.delete(aboutKyrgyzstan);
-
-        // Возвращаем ответ
-        return aboutMapper.mapToResponse(aboutKyrgyzstan);
+        } catch (Exception ex) {
+            throw new RuntimeException("Не удалось удалить AboutKyrgyzstan с id: " + id, ex);
+        }
     }
-
 
     AboutKyrgyzstan byId(Long id) {
         return aboutKyrgyzstanRepository.findById(id)

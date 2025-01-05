@@ -25,8 +25,8 @@ public class AboutKyrgyzstan {
     @ElementCollection
    private List<String> images;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "sight_id", referencedColumnName = "id",nullable = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sight_id")
     private Sight sight;
 
     @Enumerated(EnumType.STRING)

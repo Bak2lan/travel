@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
 import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
 import travel.travel.model.entity.AboutKyrgyzstan;
+import travel.travel.model.enums.AboutType;
 
 @Component
 @RequiredArgsConstructor
@@ -20,14 +21,13 @@ public class AboutKyrgyzstanMapper {
     }
 
     public AboutKyrgyzstanResponse mapToResponse(AboutKyrgyzstan aboutKyrgyzstan) {
-        AboutKyrgyzstanResponse response = new AboutKyrgyzstanResponse();
-        response.setId(aboutKyrgyzstan.getId());
-        response.setDescription(aboutKyrgyzstan.getDescription());
-        response.setVideoFile(aboutKyrgyzstan.getVideoFile());
-        response.setName(aboutKyrgyzstan.getName());
-        response.setImages(aboutKyrgyzstan.getImages());
-        response.setType(aboutKyrgyzstan.getType());
-        response.setSighId(aboutKyrgyzstan.getSight() != null ? aboutKyrgyzstan.getSight().getId() : null);
-        return response;
+        return AboutKyrgyzstanResponse.builder()
+                .id(aboutKyrgyzstan.getId())
+                .description(aboutKyrgyzstan.getDescription())
+                .videoFile(aboutKyrgyzstan.getVideoFile())
+                .name(aboutKyrgyzstan.getName())
+                .images(aboutKyrgyzstan.getImages())
+                .type(aboutKyrgyzstan.getType())
+                .sighId(aboutKyrgyzstan.getId()).build();
     }
 }
