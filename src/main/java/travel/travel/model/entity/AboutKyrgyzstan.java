@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import travel.travel.model.enums.AboutType;
 import java.util.List;
 
 @Entity
@@ -22,15 +23,21 @@ public class AboutKyrgyzstan {
     private String name;
 
     @ElementCollection
-    private List<String> images;
+   private List<String> images;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sight_id")
     private Sight sight;
 
-    public AboutKyrgyzstan(String description, String videoFile, List<String> images, Sight sight) {
+    @Enumerated(EnumType.STRING)
+    AboutType type;
+
+    public AboutKyrgyzstan(String description, String videoFile, String name, List<String> images, Sight sight, AboutType type) {
         this.description = description;
         this.videoFile = videoFile;
+        this.name = name;
         this.images = images;
         this.sight = sight;
+        this.type = type;
     }
 }

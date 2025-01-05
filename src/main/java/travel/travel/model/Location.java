@@ -1,5 +1,6 @@
 package travel.travel.model;
 
+import jakarta.persistence.Inheritance;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.NoArgsConstructor;
