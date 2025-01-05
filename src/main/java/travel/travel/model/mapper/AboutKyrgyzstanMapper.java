@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
 import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
 import travel.travel.model.entity.AboutKyrgyzstan;
-import travel.travel.model.enums.AboutType;
 
 @Component
 @RequiredArgsConstructor

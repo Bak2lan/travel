@@ -1,11 +1,10 @@
 package travel.travel.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
 import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
+import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.service.impl.AboutKyrgyzstanServiceImpl;
 
 import java.util.List;
@@ -39,17 +38,10 @@ public class AboutKyrgyzstanController {
         return aboutKyrgyzstanService.update(id, request);
     }
 
-    //    @DeleteMapping("/{id}/delete")
-//    public AboutKyrgyzstanResponse delete(@PathVariable Long id) {
-//        return aboutKyrgyzstanService.delete(id);
-//
-//    }
-    @DeleteMapping ("/{id}/delete")
-    public ResponseEntity<AboutKyrgyzstanResponse> delete(@PathVariable Long id) {
-        AboutKyrgyzstanResponse response = aboutKyrgyzstanService.delete(id);
+    @DeleteMapping("/{id}/delete")
+    public SimpleResponse delete(@PathVariable Long id) {
+        return aboutKyrgyzstanService.delete(id);
 
-        // Возвращаем статус 200 (OK) и объект ответа
-        return ResponseEntity.ok(response);
     }
 
 

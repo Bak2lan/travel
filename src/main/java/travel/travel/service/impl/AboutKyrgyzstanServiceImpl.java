@@ -1,9 +1,7 @@
 package travel.travel.service.impl;
 
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import travel.travel.exception.NotFoundException;
@@ -17,6 +15,7 @@ import travel.travel.repository.AboutKyrgyzstanRepository;
 import travel.travel.repository.SightRepository;
 import travel.travel.service.ServiceLayer;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,11 +83,11 @@ public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanR
     }
 
     @Override
-    public AboutKyrgyzstanResponse delete(Long id) {
+    public SimpleResponse delete(Long id) {
         try {
             AboutKyrgyzstan aboutKyrgyzstan = byId(id);
             aboutKyrgyzstanRepository.delete(aboutKyrgyzstan);
-            return aboutMapper.mapToResponse(aboutKyrgyzstan);
+            return SimpleResponse.builder().message("deleted").status(HttpStatus.OK).timestamp(LocalDateTime.now()).build();
 
         } catch (Exception ex) {
             throw new RuntimeException("Не удалось удалить AboutKyrgyzstan с id: " + id, ex);

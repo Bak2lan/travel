@@ -1,6 +1,7 @@
 package travel.travel.service;
 
 import org.springframework.stereotype.Service;
+import travel.travel.model.dto.response.SimpleResponse;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface ServiceLayer<RQST,RSNPS> {
 
     RSNPS update(Long id, RQST rqst);
 
-    RSNPS delete(Long id);
+    SimpleResponse delete(Long id);
 }
