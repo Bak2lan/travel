@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
+      
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -24,7 +24,7 @@ jobs:
       
       - name: Grant execute permissions to gradlew
         run: chmod +x ./gradlew
-
+      
       - name: Cache Gradle Dependencies
         uses: actions/cache@v3
         with:
@@ -47,7 +47,7 @@ jobs:
   deploy:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    needs: build  # The deploy job now depends on the build job
+    needs: build
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Download Artifact
@@ -68,45 +68,91 @@ jobs:
           # Install sshpass
           sudo apt-get update && sudo apt-get install -y sshpass
           
-          # Deploy the JAR
-          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "mkdir -p /opt/trpo"
-          sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no ./build/libs/travel-0.0.1-SNAPSHOT.jar $SERVER_USER@$SERVER_HOST:/opt/trpo/
-          
-          # Restart service and verify
+          # Create backup and new deployment directories
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
+            mkdir -p /opt/trpo/backup
+            mkdir -p /opt/trpo/new
+          "
+          
+          # Backup current version if it exists
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
+            if [ -f /opt/trpo/travel-0.0.1-SNAPSHOT.jar ]; then
+              cp /opt/trpo/travel-0.0.1-SNAPSHOT.jar /opt/trpo/backup/
+              echo 'Current version backed up successfully'
+            fi
+          "
+          
+          # Upload new version to temporary location
+          sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no ./build/libs/travel-0.0.1-SNAPSHOT.jar $SERVER_USER@$SERVER_HOST:/opt/trpo/new/
+          
+          # Deployment and verification
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
+            # Set permissions for new version
+            chmod 755 /opt/trpo/new/travel-0.0.1-SNAPSHOT.jar
+            
             # Stop the service
             sudo systemctl stop test.service
             
-            # Set permissions
-            chmod 755 /opt/trpo/travel-0.0.1-SNAPSHOT.jar
+            # Move new version into place
+            mv /opt/trpo/new/travel-0.0.1-SNAPSHOT.jar /opt/trpo/
             
             # Start the service
             sudo systemctl start test.service
             
-            # Wait for application to start (adjust timeout as needed)
+            # Wait for application to start
             echo 'Waiting for application to start...'
             sleep 120
+            
+            # Verification checks
+            DEPLOYMENT_SUCCESS=true
             
             # Check if service is running
             if ! systemctl is-active --quiet test.service; then
               echo 'Service failed to start'
-              journalctl -u test.service -n 50
-              exit 1
+              DEPLOYMENT_SUCCESS=false
             fi
             
-            # Check if process is running and listening on port (adjust port number)
+            # Check if process is listening on port
             if ! netstat -tulpn | grep :8080; then
               echo 'Application is not listening on port 8080'
-              journalctl -u test.service -n 50
-              exit 1
+              DEPLOYMENT_SUCCESS=false
             fi
             
             # Check if application logs show successful startup
             if ! journalctl -u test.service -n 50 | grep -i 'Started .* in .* seconds'; then
               echo 'Application startup message not found in logs'
-              journalctl -u test.service -n 50
-              exit 1
+              DEPLOYMENT_SUCCESS=false
             fi
-  
-            echo 'Application deployed and verified successfully'
+            
+            # If any checks failed, perform rollback
+            if [ \"\$DEPLOYMENT_SUCCESS\" = false ]; then
+              echo 'Deployment verification failed. Rolling back to previous version...'
+              
+              # Stop the failed service
+              sudo systemctl stop test.service
+              
+              # Restore backup if it exists
+              if [ -f /opt/trpo/backup/travel-0.0.1-SNAPSHOT.jar ]; then
+                cp /opt/trpo/backup/travel-0.0.1-SNAPSHOT.jar /opt/trpo/
+                chmod 755 /opt/trpo/travel-0.0.1-SNAPSHOT.jar
+                
+                # Start service with previous version
+                sudo systemctl start test.service
+                echo 'Rollback completed. Previous version restored.'
+                
+                # Clean up
+                rm -rf /opt/trpo/new
+                exit 1
+              else
+                echo 'No backup available for rollback'
+                exit 1
+              fi
+            fi
+            
+            # If deployment succeeded, clean up
+            echo 'Deployment successful'
+            rm -rf /opt/trpo/new
+            
+            # Keep one previous version in backup
+            echo 'Cleanup completed'
           "
