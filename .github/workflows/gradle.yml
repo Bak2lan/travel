@@ -107,14 +107,15 @@ jobs:
               journalctl -u test.service -n 50
               exit 1
             fi
-              # Check if application responds to HTTP requests (even 404 is acceptable)
-            HTTP_RESPONSE=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/)
-            if [[ $HTTP_RESPONSE == 000 ]]; then
+             # Check if application responds to HTTP requests
+            HTTP_STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/)
+            echo \"HTTP Status Code: $HTTP_STATUS\"
+            
+            # As long as we get a response (even 404), consider it success
+            if [ \"$HTTP_STATUS\" = \"000\" ]; then
               echo 'Application is not responding to HTTP requests'
               journalctl -u test.service -n 50
               exit 1
-            else
-              echo "Application is responding with HTTP status: $HTTP_RESPONSE"
             fi
             
             echo 'Application deployed and verified successfully'
