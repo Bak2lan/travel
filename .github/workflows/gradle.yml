@@ -85,7 +85,7 @@ jobs:
             
             # Wait for application to start (adjust timeout as needed)
             echo 'Waiting for application to start...'
-            sleep 50
+            sleep 90
             
             # Check if service is running
             if ! systemctl is-active --quiet test.service; then
