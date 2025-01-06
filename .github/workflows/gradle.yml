@@ -109,18 +109,21 @@ jobs:
             # Check if service is running
             if ! systemctl is-active --quiet test.service; then
               echo 'Service failed to start'
+              journalctl -u test.service -n 50 || echo 'No service logs available'
               DEPLOYMENT_SUCCESS=false
             fi
             
             # Check if process is listening on port
             if ! netstat -tulpn | grep :8080; then
               echo 'Application is not listening on port 8080'
+              journalctl -u test.service -n 50 || echo 'No service logs available'
               DEPLOYMENT_SUCCESS=false
             fi
             
             # Check if application logs show successful startup
             if ! journalctl -u test.service -n 50 | grep -i 'Started .* in .* seconds'; then
               echo 'Application startup message not found in logs'
+              journalctl -u test.service -n 50 || echo 'No service logs available' 
               DEPLOYMENT_SUCCESS=false
             fi
             
@@ -151,6 +154,7 @@ jobs:
             
             # If deployment succeeded, clean up
             echo 'Deployment successful'
+            journalctl -u test.service -n 50 || echo 'No service logs available'
             rm -rf /opt/trpo/new
             
             # Keep one previous version in backup
