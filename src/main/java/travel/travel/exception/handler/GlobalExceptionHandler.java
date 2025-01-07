@@ -2,6 +2,7 @@ package travel.travel.exception.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -68,6 +69,16 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ExeptionResponse handleBadCredentialsException(BadCredentialsException ex) {
+        return ExeptionResponse.builder()
+                .httpStatus(HttpStatus.UNAUTHORIZED)
+                .esceptionClassName(ex.getClass().getSimpleName())
+                .massage("Invalid email or password")
+                .build();
     }
 }
 
