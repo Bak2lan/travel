@@ -114,8 +114,8 @@ jobs:
             fi
             
             # Check if process is listening on port
-            if ! netstat -tulpn | grep :8080; then
-              echo 'Application is not listening on port 8080'
+            if ! netstat -tulpn | grep :8084; then
+              echo 'Application is not listening on port 8084'
               journalctl -u test.service -n 50 || echo 'No service logs available'
               DEPLOYMENT_SUCCESS=false
             fi
