@@ -15,7 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/cloudinary")
 @Tag(name = "REST APIs for Files",
-description = "REST APIs to Upload, get and delete files")
+        description = "REST APIs to Upload, get and delete files")
 public class CloudinaryController {
     private final CloudinaryService cloudinaryService;
 
@@ -43,11 +43,13 @@ public class CloudinaryController {
         }
     }
 
+    @Operation(summary = "Get file by publicId")
     @GetMapping("/file/{publicId}")
     public Map<String, Object> getFileDetails(@PathVariable String publicId) throws Exception {
         return cloudinaryService.getFileDetails(publicId);
     }
 
+    @Operation(summary = "Delete file by publicId")
     @DeleteMapping("/file/{publicId}")
     public Map<String, Object> deleteFile(@PathVariable String publicId) throws Exception {
         return cloudinaryService.deleteFile(publicId);
