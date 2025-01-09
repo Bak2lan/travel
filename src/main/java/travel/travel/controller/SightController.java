@@ -25,6 +25,7 @@ public class SightController {
     public SimpleResponse save(@RequestBody SightRequest request) throws NotFoundException {
         return sightService.createSight(request);
     }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get by id sight", description = "Get by id sight by administrator")
     public SightResponse getById(@PathVariable Long id) throws NotFoundException {
@@ -36,16 +37,24 @@ public class SightController {
     public SimpleResponse deleteSightById(@PathVariable Long id) throws NotFoundException {
         return sightService.deleteSightById(id);
     }
+
     @PutMapping("/{id}/update")
     @Operation(summary = "Update sight", description = "Update sight by administrator from database")
     public SimpleResponse updateSight(@PathVariable Long id, @RequestBody SightRequest sightRequest) throws NotFoundException {
         return sightService.updateSightById(id, sightRequest);
     }
 
-      @GetMapping("/getAll")
+    @GetMapping("/getAll")
     @Operation(summary = "Get all sights", description = "Retrieve all sights")
     public List<SightResponse> getAll() throws NotFoundException {
         return sightService.findAllSight();
     }
 
+    @GetMapping("/getAllPaginatedSights")
+    @Operation(summary = "Get all sights", description = "Retrieve all sights with pagination")
+    public List<SightResponse> getAll(
+            @RequestParam(defaultValue = "1") int currentPage,
+            @RequestParam(defaultValue = "9") int pageSize) {
+        return sightService.findAllSight(currentPage, pageSize);
+    }
 }
