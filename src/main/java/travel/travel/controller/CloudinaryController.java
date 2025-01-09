@@ -44,13 +44,13 @@ public class CloudinaryController {
     }
 
     @Operation(summary = "Get file by publicId")
-    @GetMapping("/file/{publicId}")
+    @GetMapping("/getFile/{publicId}")
     public Map<String, Object> getFileDetails(@PathVariable String publicId) throws Exception {
         return cloudinaryService.getFileDetails(publicId);
     }
 
     @Operation(summary = "Delete file by publicId")
-    @DeleteMapping("/file/{publicId}")
+    @DeleteMapping("/deleteFile/{publicId}")
     public Map<String, Object> deleteFile(@PathVariable String publicId) throws Exception {
         return cloudinaryService.deleteFile(publicId);
     }
