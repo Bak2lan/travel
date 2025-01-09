@@ -41,4 +41,5 @@ public class AuthController {
         SignUpAndInResponse signUpAndInResponse = userService.signIn(signInRequest);
         return ResponseEntity.ok(signUpAndInResponse);
     }
+
 }
