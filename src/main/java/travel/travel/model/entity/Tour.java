@@ -44,7 +44,7 @@ public class Tour extends Location {
     @ManyToOne
     private Travel travel;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Sight sight;
 
     public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
