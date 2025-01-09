@@ -26,6 +26,7 @@ VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritag
 
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
 VALUES (1, 'asan@gmail.com', 'Asan', 'Asan1234', '+996555123456', 'ROLE_ADMIN', 1);
+ALTER TABLE users DROP CONSTRAINT users_travel_id_key;
 
 INSERT INTO tours (id, latitude, longitude, about_tour, date_from, date_to, days, pax, nights, price, tour_name,
                    category_id, sight_id, travel_id)

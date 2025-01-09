@@ -45,7 +45,7 @@ public class SecurityConfig {
                             "/v3/api-docs/**",
                             "/**"))
                     .permitAll()
-                    .anyRequest().hasAnyAuthority("ADMIN");
+                    .anyRequest().hasAnyAuthority("ROLE_ADMIN");
         });
         http.sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
