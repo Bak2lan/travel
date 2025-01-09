@@ -23,7 +23,6 @@ import java.util.List;
 public class SightServiceImpl implements SightService {
     private final SightRepository sightRepository;
     private final TravelRepository travelRepository;
-
     @Override
     public SimpleResponse createSight(SightRequest sightRequest) {
         if (sightRequest == null) {
