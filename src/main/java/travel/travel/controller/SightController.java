@@ -12,6 +12,7 @@ import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.service.SightService;
 
 import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/sight")
@@ -26,31 +27,36 @@ public class SightController {
     public SimpleResponse save(@RequestBody SightRequest request) throws NotFoundException {
         return sightService.createSight(request);
     }
+
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/{id}")
     @Operation(summary = "Get by id sight", description = "Get by id sight by administrator")
     public SightResponse getById(@PathVariable Long id) throws NotFoundException {
         return sightService.findSightById(id);
     }
+
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete sight", description = "Delete sight by administrator from database")
     public SimpleResponse deleteSightById(@PathVariable Long id) throws NotFoundException {
         return sightService.deleteSightById(id);
     }
+
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PutMapping("/{id}/update")
     @Operation(summary = "Update sight", description = "Update sight by administrator from database")
     public SimpleResponse updateSight(@PathVariable Long id, @RequestBody SightRequest sightRequest) throws NotFoundException {
         return sightService.updateSightById(id, sightRequest);
     }
+
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
-      @GetMapping("/getAll")
+    @GetMapping("/getAll")
     @Operation(summary = "Get all sights", description = "Retrieve all sights")
     public List<SightResponse> getAll() throws NotFoundException {
         return sightService.findAllSight();
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/getAllPaginatedSights")
     @Operation(summary = "Get all sights", description = "Retrieve all sights with pagination")
     public List<SightResponse> getAll(

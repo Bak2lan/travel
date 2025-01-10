@@ -42,7 +42,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> {
             (requests
-                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**"))
+                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/**"))
                     .permitAll()
                     .requestMatchers(HttpMethod.GET, "/tour/**", "/sight/**", "/about-kyrgyzstan/**", "/category/**")
                     .hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")

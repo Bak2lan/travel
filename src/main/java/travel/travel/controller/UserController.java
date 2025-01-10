@@ -24,14 +24,14 @@ import java.util.List;
 public class UserController {
     UserService userService;
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/save")
     public ResponseEntity<SimpleResponse> saveUser(@Valid @RequestBody UserRequest userRequest) {
         SimpleResponse response = userService.saveUser(userRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/create")
     public ResponseEntity<SimpleResponse> createUser(@Valid @RequestBody UserRequest userRequest) {
         SimpleResponse response = userService.createUser(userRequest);
@@ -52,14 +52,14 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @PutMapping("/updated/{id}")
     public ResponseEntity<SimpleResponse> updateUserById(@PathVariable Long id, @RequestBody UserRequest newUserRequest) {
         SimpleResponse response = userService.updateUserById(id, newUserRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<SimpleResponse> deleteById(@PathVariable Long id) {
         SimpleResponse response = userService.deleteUserById(id);
