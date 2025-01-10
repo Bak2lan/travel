@@ -3,6 +3,7 @@ package travel.travel.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.TourRequest;
 import travel.travel.model.dto.response.SimpleResponse;
@@ -21,6 +22,7 @@ public class TourController {
         this.tourService = tourService;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Save Tour",
             description = "Save tour by administrator to database"
@@ -31,6 +33,7 @@ public class TourController {
         return ResponseEntity.status(simpleResponse.getStatus()).body(simpleResponse);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @Operation(
             summary = "Get All Tours",
             description = "Get all tours from database"
@@ -42,6 +45,7 @@ public class TourController {
         return ResponseEntity.ok(allTour);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @Operation(
             summary = "Get Tour By ID",
             description = "Get tour by id from database"
@@ -52,6 +56,7 @@ public class TourController {
         return ResponseEntity.ok(tourById);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Update Tour",
             description = "Update tour by administrator from database"
@@ -63,6 +68,7 @@ public class TourController {
         return ResponseEntity.ok(tourResponseGetByID);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Delete Tour",
             description = "Delete tour by administrator from database "

@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.UserRequest;
@@ -23,35 +24,42 @@ import java.util.List;
 public class UserController {
     UserService userService;
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<SimpleResponse> saveUser(@Valid @RequestBody UserRequest userRequest) {
         SimpleResponse response = userService.saveUser(userRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<SimpleResponse> createUser(@Valid @RequestBody UserRequest userRequest) {
         SimpleResponse response = userService.createUser(userRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/all")
     public ResponseEntity<List<UserResponse>> allUsers() {
         List<UserResponse> users = userService.findAllUsers();
         return ResponseEntity.ok(users);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/by_id/{id}")
     public ResponseEntity<UserResponse> userById(@PathVariable Long id) {
         UserResponse userResponse = userService.findUserById(id);
         return ResponseEntity.ok(userResponse);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping("/updated/{id}")
     public ResponseEntity<SimpleResponse> updateUserById(@PathVariable Long id, @RequestBody UserRequest newUserRequest) {
         SimpleResponse response = userService.updateUserById(id, newUserRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<SimpleResponse> deleteById(@PathVariable Long id) {
         SimpleResponse response = userService.deleteUserById(id);

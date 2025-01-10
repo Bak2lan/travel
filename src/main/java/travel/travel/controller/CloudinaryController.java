@@ -3,6 +3,7 @@ package travel.travel.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import travel.travel.exception.BadRequestExeption;
@@ -23,6 +24,7 @@ public class CloudinaryController {
         this.cloudinaryService = cloudinaryService;
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(summary = "Upload a file to Cloudinary")
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,12 +45,14 @@ public class CloudinaryController {
         }
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @Operation(summary = "Get file by publicId")
     @GetMapping("/getFile/{publicId}")
     public Map<String, Object> getFileDetails(@PathVariable String publicId) throws Exception {
         return cloudinaryService.getFileDetails(publicId);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(summary = "Delete file by publicId")
     @DeleteMapping("/deleteFile/{publicId}")
     public Map<String, Object> deleteFile(@PathVariable String publicId) throws Exception {

@@ -3,6 +3,7 @@ package travel.travel.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.CategoryRequest;
 import travel.travel.model.dto.response.CategoryPagination;
@@ -14,13 +15,14 @@ import travel.travel.service.CategoryService;
         description = "CRUD REST APIs to CREATE, READ, UPDATE, DELETE a Category in Tourism")
 @RestController
 @RequestMapping("/api/categories")
-
 public class CategoryController {
     private final CategoryService categoryService;
 
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Save category",
             description = "REST API to save category by administrator"
@@ -30,6 +32,8 @@ public class CategoryController {
         SimpleResponse simpleResponse = categoryService.saveCategory(categoryRequest);
         return ResponseEntity.status(simpleResponse.getStatus()).body(simpleResponse);
     }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @Operation(
             summary = "Get category by ID",
             description = "REST API to get category"
@@ -39,6 +43,8 @@ public class CategoryController {
         CategoryResponse byId = categoryService.getById(id);
         return ResponseEntity.ok(byId);
     }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     @Operation(
             summary = "Get all categories",
             description = "REST API to get all categories"
@@ -49,6 +55,8 @@ public class CategoryController {
         CategoryPagination allCategory = categoryService.getAllCategory(currentPage, pageSize);
         return ResponseEntity.ok(allCategory);
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Update category",
             description = "REST API to update category by administrator"
@@ -59,12 +67,14 @@ public class CategoryController {
         SimpleResponse simpleResponse = categoryService.updateCategory(id, categoryRequest);
         return ResponseEntity.status(simpleResponse.getStatus()).body(simpleResponse);
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Delete category",
             description = "REST API to delete category by administrator"
     )
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<SimpleResponse> deleteCategory(@PathVariable Long id){
+    public ResponseEntity<SimpleResponse> deleteCategory(@PathVariable Long id) {
         SimpleResponse simpleResponse = categoryService.deleteCategory(id);
         return ResponseEntity.status(simpleResponse.getStatus()).body(simpleResponse);
     }
