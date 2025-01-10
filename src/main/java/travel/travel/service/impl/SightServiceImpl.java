@@ -39,6 +39,8 @@ public class SightServiceImpl implements SightService {
         sight.setImages(sightRequest.getImages());
         sight.setNameOfSight(sightRequest.getNameOfSight());
         sight.setDescription(sightRequest.getDescription());
+        sight.setLatitude(sightRequest.getLatitude());
+        sight.setLongitude(sightRequest.getLongitude());
         sight.setTravel(travel);
         sight.getTravel().getSightList().add(sight);
         sightRepository.save(sight);
@@ -107,6 +109,8 @@ public class SightServiceImpl implements SightService {
         sight.setNameOfSight(sightRequest.getNameOfSight());
         sight.setDescription(sightRequest.getDescription());
         sight.setImages(sightRequest.getImages());
+        sight.setLatitude(sightRequest.getLatitude());
+        sight.setLongitude(sightRequest.getLongitude());
 
         sightRepository.save(sight);
 
