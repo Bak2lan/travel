@@ -1,6 +1,7 @@
 package travel.travel.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
 import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
@@ -16,6 +17,7 @@ public class AboutKyrgyzstanController {
 
     private final AboutKyrgyzstanServiceImpl aboutKyrgyzstanService;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/save")
     public AboutKyrgyzstanResponse create(@RequestBody AboutKyrgyzstanRequest request) {
         return aboutKyrgyzstanService.save(request);
@@ -33,11 +35,13 @@ public class AboutKyrgyzstanController {
         return aboutKyrgyzstanService.findAll();
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PutMapping("/{id}/update")
     public AboutKyrgyzstanResponse update(@PathVariable Long id, @RequestBody AboutKyrgyzstanRequest request) {
         return aboutKyrgyzstanService.update(id, request);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @DeleteMapping("/{id}/delete")
     public SimpleResponse delete(@PathVariable Long id) {
         return aboutKyrgyzstanService.delete(id);

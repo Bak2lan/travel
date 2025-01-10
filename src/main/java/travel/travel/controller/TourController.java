@@ -3,6 +3,7 @@ package travel.travel.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.TourRequest;
 import travel.travel.model.dto.response.SimpleResponse;
@@ -21,6 +22,7 @@ public class TourController {
         this.tourService = tourService;
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Save Tour",
             description = "Save tour by administrator to database"
@@ -52,6 +54,7 @@ public class TourController {
         return ResponseEntity.ok(tourById);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Update Tour",
             description = "Update tour by administrator from database"
@@ -63,6 +66,7 @@ public class TourController {
         return ResponseEntity.ok(tourResponseGetByID);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(
             summary = "Delete Tour",
             description = "Delete tour by administrator from database "
