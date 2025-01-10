@@ -51,4 +51,11 @@ public class SightController {
         return sightService.findAllSight();
     }
 
+    @GetMapping("/getAllPaginatedSights")
+    @Operation(summary = "Get all sights", description = "Retrieve all sights with pagination")
+    public List<SightResponse> getAll(
+            @RequestParam(defaultValue = "1") int currentPage,
+            @RequestParam(defaultValue = "9") int pageSize) {
+        return sightService.findAllSight(currentPage, pageSize);
+    }
 }

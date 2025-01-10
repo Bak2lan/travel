@@ -14,15 +14,19 @@ import travel.travel.model.entity.Travel;
 import travel.travel.repository.SightRepository;
 import travel.travel.repository.TravelRepository;
 import travel.travel.service.SightService;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class SightServiceImpl implements SightService {
     private final SightRepository sightRepository;
     private final TravelRepository travelRepository;
+
     @Override
     public SimpleResponse createSight(SightRequest sightRequest) {
         if (sightRequest == null) {
@@ -58,7 +62,7 @@ public class SightServiceImpl implements SightService {
 
         for (Sight sight : sights) {
             SightResponse sightResponse = new SightResponse();
-            sightResponse.setId(sight.getId() != null ? sight.getId() : 0L); // NullCheck
+            sightResponse.setId(sight.getId() != null ? sight.getId() : 0L);
             sightResponse.setNameOfSight(sight.getNameOfSight() != null ? sight.getNameOfSight() : "No Name");
             sightResponse.setDescription(sight.getDescription() != null ? sight.getDescription() : "No Description");
             sightResponses.add(sightResponse);
@@ -119,21 +123,52 @@ public class SightServiceImpl implements SightService {
                 .orElseThrow(() -> new NotFoundException("Sight Not Found"));
 
         if (sight.getTravel() != null) {
+            ;
             sight.setTravel(null);
         }
-        if (sight.getTours() != null) {
+
+        if (sight.getTours() != null && !sight.getTours().isEmpty()) {
+            sight.getTours().forEach(tour -> tour.setSight(null));
             sight.setTours(null);
         }
+
         if (sight.getAbout_kyrgyzstan() != null) {
+            sight.getAbout_kyrgyzstan().setSight(null);
             sight.setAbout_kyrgyzstan(null);
         }
-        sightRepository.save(sight);
-        sightRepository.deleteById(sight.getId());
+
+        sightRepository.delete(sight);
 
         return SimpleResponse.builder()
                 .message("Successfully deleted")
                 .status(HttpStatus.NO_CONTENT)
                 .timestamp(LocalDateTime.now())
                 .build();
+    }
+
+    @Override
+    public List<SightResponse> findAllSight(int currentPage, int pageSize) {
+        if (currentPage <= 0) {
+            throw new IllegalArgumentException("Page number must be greater than 0");
+        }
+
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(currentPage - 1, pageSize);
+
+        org.springframework.data.domain.Page<Sight> sightPage = sightRepository.findAll(pageable);
+        List<Sight> sights = sightPage.getContent();
+
+        if (sights.isEmpty()) {
+            throw new NotFoundException("No sights found");
+        }
+
+        List<SightResponse> sightResponses = sights.stream()
+                .map(sight -> SightResponse.builder()
+                        .id(sight.getId())
+                        .nameOfSight(sight.getNameOfSight())
+                        .description(sight.getDescription())
+                        .build())
+                .collect(Collectors.toList());
+
+        return sightResponses;
     }
 }
