@@ -13,6 +13,8 @@ import java.util.List;
 public class SightRequest {
     private String nameOfSight;
     private String description;
+    private double latitude;
+    private double longitude;
     @ElementCollection
     private List<String> images;
 }
