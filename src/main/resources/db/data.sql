@@ -3,11 +3,11 @@ values (1, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents
         'We prioritize sustainability in tourism.');
 
 INSERT INTO categories (id, day, day_tour, travel_id)
-VALUES (1, 2025 - 01 - 01, 'Day tour example 1', 1),
-       (2, 2025 - 02 - 01, 'Day tour example 2', 1),
-       (3, 2025 - 03 - 01, 'Day tour example 3', 1),
-       (4, 2025 - 04 - 01, 'Day tour example 4', 1),
-       (5, 2025 - 05 - 01, 'Day tour example 5', 1);
+VALUES (1, 5, 'Day tour example 1', 1),
+       (2, 6, 'Day tour example 2', 1),
+       (3, 7, 'Day tour example 3', 1),
+       (4, 8, 'Day tour example 4', 1),
+       (5, 9, 'Day tour example 5', 1);
 
 INSERT INTO sights (id, latitude, longitude, description, name_of_sight, travel_id)
 VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),
