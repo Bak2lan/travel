@@ -61,7 +61,6 @@ public class CategoryServiceImpl implements CategoryService {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
-
     @Override
     public CategoryPagination getAllCategory(int currentPage, int pageSize) {
         log.info("Fetching all categories");
