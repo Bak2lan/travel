@@ -31,7 +31,7 @@ public class EmailServiceImpl implements EmailService {
         try {
             Tour tour = tourRepository.findById(bookingRequest.tourId())
                     .orElseThrow(() -> new NotFoundException("Tour not found for id: " + bookingRequest.tourId()));
-            String to = "travels12.service@gmail.com";
+            String to = "beksonss1@gmail.com";
             String subject = "New Booking from " + bookingRequest.firstName();
             StringBuilder body = new StringBuilder();
             body.append("<p>A new booking has been made:</p>")
@@ -53,7 +53,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendGetInTouchMessage(GetInTouchRequest request) {
         try {
-            String to = "travels12.service@gmail.com";
+            String to = "beksonss1@gmail.com";
             String subject = "New Message from " + request.fullName();
             StringBuilder body = new StringBuilder();
             body.append("<p>A new message has been received:</p>")
