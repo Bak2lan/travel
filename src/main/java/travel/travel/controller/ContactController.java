@@ -21,7 +21,7 @@ public class ContactController {
 
     }
     @PostMapping("/get-in-touch")
-    public ResponseEntity<String> sendGetInTouchMessage( @Valid @RequestBody GetInTouchRequest getInTouchRequest) {
+    public ResponseEntity<String> sendGetInTouchMessage(@Valid @RequestBody GetInTouchRequest getInTouchRequest) {
         emailService.sendGetInTouchMessage(getInTouchRequest);
         return ResponseEntity.ok("Message sent successfully!");
     }
