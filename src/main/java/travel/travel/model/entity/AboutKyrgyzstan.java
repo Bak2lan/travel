@@ -23,14 +23,13 @@ public class AboutKyrgyzstan {
     private String name;
 
     @ElementCollection
-   private List<String> images;
+    private List<String> images;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sight_id")
+    @OneToOne
     private Sight sight;
 
     @Enumerated(EnumType.STRING)
-    AboutType type;
+    private AboutType type;
 
     public AboutKyrgyzstan(String description, String videoFile, String name, List<String> images, Sight sight, AboutType type) {
         this.description = description;
