@@ -39,7 +39,7 @@ jobs:
           GRADLE_USER_HOME: ${{ github.workspace }}/.gradle
       
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: application-jar
           path: build/libs/*.jar
