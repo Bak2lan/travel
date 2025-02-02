@@ -62,9 +62,9 @@ jobs:
       
       - name: Deploy and Verify Application
         env:
-          SERVER_HOST: 89.250.70.43
+          SERVER_HOST: 62.171.147.215
           SERVER_USER: root
-          SERVER_PASSWORD: Kyrgyzstanym01!
+          SERVER_PASSWORD: Mekenim01
         run: |
           # Install sshpass
           sudo apt-get update && sudo apt-get install -y sshpass
