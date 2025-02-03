@@ -14,6 +14,7 @@ import travel.travel.service.CategoryService;
 @Tag(name = "REST APIs for Category in Tourism",
         description = "CRUD REST APIs to CREATE, READ, UPDATE, DELETE a Category in Tourism")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/categories")
 
 public class CategoryController {

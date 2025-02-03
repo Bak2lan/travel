@@ -14,6 +14,7 @@ import travel.travel.service.TourService;
 @Tag(name = "REST APIs for Tour in Tourism",
         description = "CRUD APIs to CREATE, READ, UPDATE, DELETE tour details")
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/tours")
 public class TourController {
     private final TourService tourService;

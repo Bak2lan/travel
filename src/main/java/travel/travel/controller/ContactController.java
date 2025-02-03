@@ -2,15 +2,13 @@ package travel.travel.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.BookingRequest;
 import travel.travel.model.dto.request.GetInTouchRequest;
 import travel.travel.service.EmailService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/bookings")
 @Validated
 public class ContactController {
