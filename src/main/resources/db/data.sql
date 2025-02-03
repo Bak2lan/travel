@@ -3,11 +3,11 @@ values (1, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents
         'We prioritize sustainability in tourism.');
 
 INSERT INTO categories (id, day, day_tour, travel_id, image)
-VALUES (1, 5, 'Day tour example 1', 1,'image'),
-       (2, 6, 'Day tour example 2', 1,'image'),
-       (3, 7, 'Day tour example 3', 1,'image'),
-       (4, 8, 'Day tour example 4', 1,'image'),
-       (5, 9, 'Day tour example 5', 1,'image');
+VALUES (1, 1, 'Day tour example 1', 1,'image'),
+       (2, 2, 'Day tour example 2', 1,'image'),
+       (3, 3, 'Day tour example 3', 1,'image'),
+       (4, 4, 'Day tour example 4', 1,'image'),
+       (5, 5, 'Day tour example 5', 1,'image');
 
 INSERT INTO sights (id, latitude, longitude, description, name_of_sight, travel_id)
 VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),
@@ -25,7 +25,7 @@ VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritag
        (5, 'Karakol Valley is famous for its trekking routes.', 'Karakol Valley', 'karakol.mp4', 5);
 
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
-VALUES (1, 'asan@gmail.com', 'Asan', 'Asan1234', '+996555123456', 'ROLE_ADMIN', 1);
+VALUES (1, 'asan@gmail.com', 'Asan', '$2a$12$dyHbyL5DkJFtoGTgk0jaouZAhpmu6mfZOg7tgrXCae2VmHOIsVvqS', '+996555123456', 'ROLE_ADMIN', 1);
 ALTER TABLE users DROP CONSTRAINT users_travel_id_key;
 
 INSERT INTO tours (id, latitude, longitude, about_tour, date_from, date_to, days, pax, nights, price, tour_name,
