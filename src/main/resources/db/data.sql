@@ -59,7 +59,9 @@ VALUES (1, 'Comfortable accommodation', 'accommodation'),
 
 INSERT INTO tour_images (tour_id, images)
 VALUES (1, 'tour1_img1.jpg'),
-       (1, 'tour1_img2.jpg'),
-       (2, 'tour2_img1.jpg');
+       (2, 'tour2_img2.jpg'),
+       (3, 'tour3_img1.jpg'),
+       (4, 'tour4_img1.jpg'),
+       (5, 'tour5_img1.jpg');
 
 

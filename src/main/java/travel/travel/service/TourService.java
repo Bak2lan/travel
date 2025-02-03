@@ -2,8 +2,11 @@ package travel.travel.service;
 
 import travel.travel.model.dto.request.TourRequest;
 import travel.travel.model.dto.response.SimpleResponse;
+import travel.travel.model.dto.response.TourGetAllResponse;
 import travel.travel.model.dto.response.TourPaginationResponse;
 import travel.travel.model.dto.response.TourResponseGetByID;
+
+import java.util.List;
 
 public interface TourService {
     SimpleResponse saveTour(TourRequest tourRequest);
@@ -15,4 +18,8 @@ public interface TourService {
     TourResponseGetByID updateTour(Long id, TourRequest tourRequest);
 
     SimpleResponse deleteTour(Long id);
+
+    List<TourGetAllResponse> getAllTours();
+
+
 }
