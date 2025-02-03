@@ -10,10 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import travel.travel.exception.BadRequestExeption;
 import travel.travel.exception.NotFoundException;
 import travel.travel.model.dto.request.TourRequest;
-import travel.travel.model.dto.response.SimpleResponse;
-import travel.travel.model.dto.response.TourPaginationResponse;
-import travel.travel.model.dto.response.TourResponseForPagination;
-import travel.travel.model.dto.response.TourResponseGetByID;
+import travel.travel.model.dto.response.*;
 import travel.travel.model.entity.Category;
 import travel.travel.model.entity.Sight;
 import travel.travel.model.entity.Tour;
@@ -25,6 +22,7 @@ import travel.travel.repository.TravelRepository;
 import travel.travel.service.TourService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -200,5 +198,23 @@ public class TourServiceImpl implements TourService {
                 .status(HttpStatus.OK)
                 .timestamp(LocalDateTime.now())
                 .build();
+    }
+
+    @Override
+    public List<TourGetAllResponse> getAllTours() {
+        List<Tour> all = tourRepository.findAll();
+        return all.stream()
+                .map(tour -> TourGetAllResponse
+                        .builder()
+                        .id(tour.getId())
+                        .tourName(tour.getTourName())
+                        .image(tour.getImages()!=null && !tour.getImages().isEmpty() ? tour.getImages().get(0): null)
+                        .aboutTour(tour.getAboutTour())
+                        .days(tour.getDays())
+                        .nights(tour.getNights())
+                        .price(tour.getPrice())
+                        .pax(tour.getPax())
+                        .dateFrom(tour.getDateFrom())
+                        .dateTo(tour.getDateTo()).build()).toList();
     }
 }

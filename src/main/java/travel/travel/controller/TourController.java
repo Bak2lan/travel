@@ -7,9 +7,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.TourRequest;
 import travel.travel.model.dto.response.SimpleResponse;
+import travel.travel.model.dto.response.TourGetAllResponse;
 import travel.travel.model.dto.response.TourPaginationResponse;
 import travel.travel.model.dto.response.TourResponseGetByID;
 import travel.travel.service.TourService;
+
+import java.util.List;
 
 @Tag(name = "REST APIs for Tour in Tourism",
         description = "CRUD APIs to CREATE, READ, UPDATE, DELETE tour details")
@@ -36,9 +39,9 @@ public class TourController {
 
     @Operation(
             summary = "Get All Tours",
-            description = "Get all tours from database"
+            description = "Get all tours with pagination from database"
     )
-    @GetMapping("/getAll")
+    @GetMapping("/getAllWithPagination")
     public ResponseEntity<TourPaginationResponse> getAll(@RequestParam(defaultValue = "1") int currentPage,
                                                          @RequestParam(defaultValue = "4") int pageSize) {
         TourPaginationResponse allTour = tourService.getAllTour(currentPage, pageSize);
@@ -76,5 +79,15 @@ public class TourController {
     public ResponseEntity<SimpleResponse> deleteTour(@PathVariable Long id) {
         SimpleResponse simpleResponse = tourService.deleteTour(id);
         return ResponseEntity.status(simpleResponse.getStatus()).body(simpleResponse);
+    }
+
+    @Operation(
+            summary = "Get all tours",
+            description = "Get all tours from database"
+    )
+    @GetMapping("/getAllTours")
+    public ResponseEntity<List<TourGetAllResponse>> getAllTours(){
+        List<TourGetAllResponse> allTours = tourService.getAllTours();
+        return ResponseEntity.ok(allTours);
     }
 }
