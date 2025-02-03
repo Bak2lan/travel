@@ -2,12 +2,12 @@ insert into travels (id, about_us, contact, documentation, sustainability)
 values (1, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents are verified.',
         'We prioritize sustainability in tourism.');
 
-INSERT INTO categories (id, day, day_tour, travel_id)
-VALUES (1, 5, 'Day tour example 1', 1),
-       (2, 6, 'Day tour example 2', 1),
-       (3, 7, 'Day tour example 3', 1),
-       (4, 8, 'Day tour example 4', 1),
-       (5, 9, 'Day tour example 5', 1);
+INSERT INTO categories (id, day, day_tour, travel_id, image)
+VALUES (1, 5, 'Day tour example 1', 1,'image'),
+       (2, 6, 'Day tour example 2', 1,'image'),
+       (3, 7, 'Day tour example 3', 1,'image'),
+       (4, 8, 'Day tour example 4', 1,'image'),
+       (5, 9, 'Day tour example 5', 1,'image');
 
 INSERT INTO sights (id, latitude, longitude, description, name_of_sight, travel_id)
 VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),

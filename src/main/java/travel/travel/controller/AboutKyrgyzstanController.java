@@ -11,6 +11,7 @@ import travel.travel.service.impl.AboutKyrgyzstanServiceImpl;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/api/about-kyrgyzstan")
 public class AboutKyrgyzstanController {
