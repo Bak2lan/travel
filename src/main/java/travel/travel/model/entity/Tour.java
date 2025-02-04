@@ -32,19 +32,19 @@ public class Tour extends Location {
     private LocalDate dateFrom;
     private LocalDate dateTo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     private List<String> images;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     private Map<String, String> detailsOfTour;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Travel travel;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Sight sight;
 
     public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
