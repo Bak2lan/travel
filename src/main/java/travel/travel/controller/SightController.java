@@ -16,7 +16,7 @@ import travel.travel.service.SightService;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/api/sight")
 @AllArgsConstructor
 @Tag(name = "Sight API", description = "Sight API")

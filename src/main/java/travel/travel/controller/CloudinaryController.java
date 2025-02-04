@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/api/cloudinary")
 @Tag(name = "REST APIs for Files",
         description = "REST APIs to Upload, get and delete files")

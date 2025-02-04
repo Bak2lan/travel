@@ -16,8 +16,7 @@ import java.util.List;
 
 @Tag(name = "REST APIs for Tour in Tourism",
         description = "CRUD APIs to CREATE, READ, UPDATE, DELETE tour details")
-@RestController
-@CrossOrigin(origins = "*")
+@RestController@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/api/tours")
 public class TourController {
     private final TourService tourService;

@@ -13,7 +13,7 @@ import travel.travel.service.UserService;
 @Tag(name = "REST APIs for Authentication",
 description = "REST APIs to sign up and sign in")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/api/auth")
 @Validated
 public class AuthController {
