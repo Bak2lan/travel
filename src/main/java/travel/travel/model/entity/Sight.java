@@ -24,7 +24,7 @@ public class Sight extends Location {
     @ElementCollection
     private List<String> images;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     Travel travel;
 
     @OneToMany(mappedBy = "sight", cascade = CascadeType.ALL, orphanRemoval = true)

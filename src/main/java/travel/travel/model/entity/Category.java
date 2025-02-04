@@ -21,10 +21,10 @@ public class Category {
     private String dayTour;
     private String image;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Travel travel;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Tour> tour;
 
     public Category(int day, String dayTour, String image, Travel travel, List<Tour> tour) {

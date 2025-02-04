@@ -21,27 +21,26 @@ public class Travel {
     private String sustainability;
     private String contact;
 
-    @OneToOne(mappedBy = "travel", cascade = CascadeType.ALL)
-    private User user;
+    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<User> users;
 
-    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Tour> tourList;
 
-    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Sight> sightList;
 
-    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Category> category;
 
-    public Travel(String aboutUs, String documentation, String sustainability, String contact, User user, List<Tour> tourList, List<Sight> sightList, List<Category> category) {
+    public Travel(String aboutUs, String documentation, String sustainability, String contact, List<User> users, List<Tour> tourList, List<Sight> sightList, List<Category> category) {
         this.aboutUs = aboutUs;
         this.documentation = documentation;
         this.sustainability = sustainability;
         this.contact = contact;
-        this.user = user;
+        this.users = users;
         this.tourList = tourList;
         this.sightList = sightList;
         this.category = category;
     }
-
 }
