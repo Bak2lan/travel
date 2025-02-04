@@ -14,5 +14,5 @@ import java.util.List;
 public class CategoryPagination {
     private int currentPage;
     private int pageSize;
-    private List<CategoryResponseForPagination> categories;
+    private List<CategoryResponseForGetAll> categories;
 }
