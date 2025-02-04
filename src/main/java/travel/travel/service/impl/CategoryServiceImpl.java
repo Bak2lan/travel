@@ -35,19 +35,19 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public SimpleResponse saveCategory(CategoryRequest categoryRequest) {
-        if (categoryRequest.day()<0){
+        if (categoryRequest.day() < 0) {
             log.warn("Attempted to save category with negative day");
-            throw  new BadRequestExeption("Category day should be greater than zero");
+            throw new BadRequestExeption("Category day should be greater than zero");
         }
-        if (categoryRequest.dayTour().isEmpty()){
+        if (categoryRequest.dayTour().isEmpty()) {
             log.warn("Attempted to save category with empty day of tour");
             throw new BadRequestExeption("Day of tour can not be empty");
         }
-        Travel travel = travelRepository.findById(1L).orElseThrow(()->{
-            log.error("Travel with id {} not found",1);
-            return new NotFoundException(String.format("Travel with id %s not found",1));
+        Travel travel = travelRepository.findById(1L).orElseThrow(() -> {
+            log.error("Travel with id {} not found", 1);
+            return new NotFoundException(String.format("Travel with id %s not found", 1));
         });
-        Category category= new Category();
+        Category category = new Category();
         category.setDay(categoryRequest.day());
         category.setImage(categoryRequest.image());
         category.setDayTour(categoryRequest.dayTour());
@@ -61,15 +61,16 @@ public class CategoryServiceImpl implements CategoryService {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
+
     @Override
     public CategoryPagination getAllCategory(int currentPage, int pageSize) {
         log.info("Fetching all categories");
         Pageable pageable = PageRequest.of(currentPage - 1, pageSize);
-        Page<CategoryResponseForPagination> allCategory = categoryRepository.getAllCategory(pageable);
+        Page<CategoryResponseForGetAll> allCategory = categoryRepository.getAllCategory(pageable);
         return CategoryPagination
                 .builder()
                 .categories(allCategory.getContent())
-                .currentPage(allCategory.getNumber()+1)
+                .currentPage(allCategory.getNumber() + 1)
                 .pageSize(allCategory.getTotalPages())
                 .build();
     }
@@ -80,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
             log.error("Category with id {} not found", id);
             return new NotFoundException(String.format("Category with id %s not found", id));
         });
-        log.info("Fetching Category by id {}",id);
+        log.info("Fetching Category by id {}", id);
         List<Tour> tour = category.getTour();
         return CategoryResponse
                 .builder()
@@ -107,11 +108,11 @@ public class CategoryServiceImpl implements CategoryService {
             log.error("Category with id: {} not found", id);
             return new NotFoundException(String.format("Category with id %s not found", id));
         });
-        if (categoryRequest.day()<0){
+        if (categoryRequest.day() < 0) {
             log.warn("Attempted to save category, with negative day");
-            throw  new BadRequestExeption("Category day should be greater than zero");
+            throw new BadRequestExeption("Category day should be greater than zero");
         }
-        if (categoryRequest.dayTour().isEmpty()){
+        if (categoryRequest.dayTour().isEmpty()) {
             log.warn("Attempted to save category, with empty day of tour");
             throw new BadRequestExeption("Day of tour can not be empty");
         }
@@ -119,7 +120,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setImage(categoryRequest.image());
         category.setDayTour(categoryRequest.dayTour());
         categoryRepository.save(category);
-        log.info("Category with id {} is successfully updated",id);
+        log.info("Category with id {} is successfully updated", id);
         return SimpleResponse
                 .builder()
                 .message("Successfully updated")
@@ -135,17 +136,30 @@ public class CategoryServiceImpl implements CategoryService {
             return new NotFoundException(String.format("Category with id %s not found", id));
         });
         List<Tour> tour = category.getTour();
-        for(Tour tour1:tour){
+        for (Tour tour1 : tour) {
             tour1.setCategory(null);
         }
         category.setTravel(null);
         categoryRepository.delete(category);
-        log.info("Category with id {} is successfully deleted",id);
+        log.info("Category with id {} is successfully deleted", id);
         return SimpleResponse
                 .builder()
                 .message("Successfully deleted")
                 .status(HttpStatus.OK)
                 .timestamp(LocalDateTime.now())
                 .build();
+    }
+
+    @Override
+    public List<CategoryResponseForGetAll> getAllCategories() {
+        List<Category> all = categoryRepository.findAll();
+        return all.stream()
+                .map(category -> CategoryResponseForGetAll
+                        .builder()
+                        .id(category.getId())
+                        .dayTour(category.getDayTour())
+                        .image(category.getImage())
+                        .build())
+                .toList();
     }
 }

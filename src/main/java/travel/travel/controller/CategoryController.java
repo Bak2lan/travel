@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.CategoryRequest;
 import travel.travel.model.dto.response.CategoryPagination;
 import travel.travel.model.dto.response.CategoryResponse;
+import travel.travel.model.dto.response.CategoryResponseForGetAll;
 import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.service.CategoryService;
+
+import java.util.List;
 
 @Tag(name = "REST APIs for Category in Tourism",
         description = "CRUD REST APIs to CREATE, READ, UPDATE, DELETE a Category in Tourism")
@@ -45,16 +48,16 @@ public class CategoryController {
         return ResponseEntity.ok(byId);
     }
 
-    @Operation(
-            summary = "Get all categories",
-            description = "REST API to get all categories"
-    )
-    @GetMapping("/getAll")
-    public ResponseEntity<CategoryPagination> getAllCategory(@RequestParam(defaultValue = "1") int currentPage,
-                                                             @RequestParam(defaultValue = "5") int pageSize) {
-        CategoryPagination allCategory = categoryService.getAllCategory(currentPage, pageSize);
-        return ResponseEntity.ok(allCategory);
-    }
+//    @Operation(
+//            summary = "Get all categories",
+//            description = "REST API to get all categories"
+//    )
+//    @GetMapping("/getAll")
+//    public ResponseEntity<CategoryPagination> getAllCategory(@RequestParam(defaultValue = "1") int currentPage,
+//                                                             @RequestParam(defaultValue = "5") int pageSize) {
+//        CategoryPagination allCategory = categoryService.getAllCategory(currentPage, pageSize);
+//        return ResponseEntity.ok(allCategory);
+//    }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(
@@ -77,5 +80,11 @@ public class CategoryController {
     public ResponseEntity<SimpleResponse> deleteCategory(@PathVariable Long id) {
         SimpleResponse simpleResponse = categoryService.deleteCategory(id);
         return ResponseEntity.status(simpleResponse.getStatus()).body(simpleResponse);
+    }
+
+    @GetMapping("/getAllCategories")
+    public ResponseEntity<List<CategoryResponseForGetAll>> getAllCategories(){
+        List<CategoryResponseForGetAll> allCategories = categoryService.getAllCategories();
+        return ResponseEntity.ok(allCategories);
     }
 }
