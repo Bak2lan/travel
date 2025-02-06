@@ -2,6 +2,7 @@ package travel.travel.service;
 
 import travel.travel.model.dto.request.SightRequest;
 import travel.travel.model.dto.response.SightResponse;
+import travel.travel.model.dto.response.SightResponseForGetById;
 import travel.travel.model.dto.response.SimpleResponse;
 
 import java.awt.print.Pageable;
@@ -12,7 +13,7 @@ public interface SightService {
 
     List<SightResponse> findAllSight();
 
-    SightResponse findSightById(Long id);
+    SightResponseForGetById findSightById(Long id);
 
     SimpleResponse updateSightById(Long id, SightRequest sightRequest);
 

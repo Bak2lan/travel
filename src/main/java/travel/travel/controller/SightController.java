@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import travel.travel.exception.NotFoundException;
 import travel.travel.model.dto.request.SightRequest;
 import travel.travel.model.dto.response.SightResponse;
+import travel.travel.model.dto.response.SightResponseForGetById;
 import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.service.SightService;
 
@@ -32,7 +33,7 @@ public class SightController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get by id sight", description = "Get by id sight by administrator")
-    public SightResponse getById(@PathVariable Long id) throws NotFoundException {
+    public SightResponseForGetById getById(@PathVariable Long id) throws NotFoundException {
         return sightService.findSightById(id);
     }
 
