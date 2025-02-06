@@ -30,16 +30,12 @@ public class Sight extends Location {
     @OneToMany(mappedBy = "sight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tour> tours;
 
-    @OneToOne(mappedBy = "sight")
-    private AboutKyrgyzstan about_kyrgyzstan;
 
-    public Sight(double latitude, double longitude, String nameOfSight, String description, List<String> images, Travel travel, List<Tour> tours, AboutKyrgyzstan about_kyrgyzstan) {
-        super(latitude, longitude);
+    public Sight(String nameOfSight, String description, List<String> images, Travel travel, List<Tour> tours) {
         this.nameOfSight = nameOfSight;
         this.description = description;
         this.images = images;
         this.travel = travel;
         this.tours = tours;
-        this.about_kyrgyzstan = about_kyrgyzstan;
     }
 }

@@ -25,28 +25,16 @@ import java.util.stream.Collectors;
 public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanRequest, AboutKyrgyzstanResponse> {
 
     private final AboutKyrgyzstanRepository aboutKyrgyzstanRepository;
-    private final SightRepository sightRepository;
     private final AboutKyrgyzstanMapper aboutMapper;
 
-    public AboutKyrgyzstanServiceImpl(AboutKyrgyzstanRepository aboutKyrgyzstanRepository, SightRepository sightRepository, AboutKyrgyzstanMapper aboutMapper) {
+    public AboutKyrgyzstanServiceImpl(AboutKyrgyzstanRepository aboutKyrgyzstanRepository, AboutKyrgyzstanMapper aboutMapper) {
         this.aboutKyrgyzstanRepository = aboutKyrgyzstanRepository;
-        this.sightRepository = sightRepository;
         this.aboutMapper = aboutMapper;
     }
 
     @Override
     public AboutKyrgyzstanResponse save(AboutKyrgyzstanRequest aboutKyrgyzstanRequest) {
         AboutKyrgyzstan aboutKyrgyzstan = aboutMapper.mapToEntity(aboutKyrgyzstanRequest);
-        if (aboutKyrgyzstanRequest.getSightId() != null) {
-            Sight sight = sightRepository.findById(aboutKyrgyzstanRequest.getSightId())
-                    .orElseGet(() -> {
-                        Sight newSight = new Sight();
-                        newSight.setId(aboutKyrgyzstanRequest.getSightId());
-                        sightRepository.save(newSight);
-                        return newSight;
-                    });
-            aboutKyrgyzstan.setSight(sight);
-        }
         return aboutMapper.mapToResponse(aboutKyrgyzstanRepository.save(aboutKyrgyzstan));
     }
 
@@ -92,6 +80,48 @@ public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanR
         } catch (Exception ex) {
             throw new RuntimeException("Не удалось удалить AboutKyrgyzstan с id: " + id, ex);
         }
+    }
+
+    @Override
+    public List<AboutKyrgyzstanResponse> getCultura() {
+        List<AboutKyrgyzstan> culture = aboutKyrgyzstanRepository.getCulture();
+        return culture.stream()
+                .map(aboutKyrgyzstan -> AboutKyrgyzstanResponse
+                        .builder()
+                        .id(aboutKyrgyzstan.getId())
+                        .description(aboutKyrgyzstan.getDescription())
+                        .videoFile(aboutKyrgyzstan.getVideoFile())
+                        .name(aboutKyrgyzstan.getName())
+                        .images(aboutKyrgyzstan.getImages())
+                        .type(aboutKyrgyzstan.getType()).build()).toList();
+    }
+
+    @Override
+    public List<AboutKyrgyzstanResponse> getTradition() {
+        List<AboutKyrgyzstan> tradition = aboutKyrgyzstanRepository.getTradition();
+        return tradition.stream()
+                .map(aboutKyrgyzstan -> AboutKyrgyzstanResponse
+                        .builder()
+                        .id(aboutKyrgyzstan.getId())
+                        .description(aboutKyrgyzstan.getDescription())
+                        .videoFile(aboutKyrgyzstan.getVideoFile())
+                        .name(aboutKyrgyzstan.getName())
+                        .images(aboutKyrgyzstan.getImages())
+                        .type(aboutKyrgyzstan.getType()).build()).toList();
+    }
+
+    @Override
+    public List<AboutKyrgyzstanResponse> getHistoricalPlaces() {
+        List<AboutKyrgyzstan> historicalPlaces = aboutKyrgyzstanRepository.getHistoricalPlaces();
+        return historicalPlaces.stream()
+                .map(aboutKyrgyzstan -> AboutKyrgyzstanResponse
+                        .builder()
+                        .id(aboutKyrgyzstan.getId())
+                        .description(aboutKyrgyzstan.getDescription())
+                        .videoFile(aboutKyrgyzstan.getVideoFile())
+                        .name(aboutKyrgyzstan.getName())
+                        .images(aboutKyrgyzstan.getImages())
+                        .type(aboutKyrgyzstan.getType()).build()).toList();
     }
 
     AboutKyrgyzstan byId(Long id) {

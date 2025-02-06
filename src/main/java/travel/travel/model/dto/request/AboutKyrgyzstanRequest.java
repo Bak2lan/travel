@@ -18,5 +18,4 @@ public class AboutKyrgyzstanRequest {
     private String name;
     private List<String> images;
     private AboutType type;
-    private Long sightId;
 }

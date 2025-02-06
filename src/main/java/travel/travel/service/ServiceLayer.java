@@ -1,6 +1,7 @@
 package travel.travel.service;
 
 import org.springframework.stereotype.Service;
+import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
 import travel.travel.model.dto.response.SimpleResponse;
 
 import java.util.List;
@@ -16,4 +17,10 @@ public interface ServiceLayer<RQST,RSNPS> {
     RSNPS update(Long id, RQST rqst);
 
     SimpleResponse delete(Long id);
+
+    List<AboutKyrgyzstanResponse> getCultura();
+
+    List<AboutKyrgyzstanResponse> getTradition();
+
+    List<AboutKyrgyzstanResponse> getHistoricalPlaces();
 }
