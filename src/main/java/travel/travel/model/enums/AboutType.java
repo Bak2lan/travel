@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public enum AboutType {
-    CULTURE, TRADITIONAL
+    CULTURE, TRADITIONAL, HISTORICAL_PLACES
 }

@@ -25,18 +25,15 @@ public class AboutKyrgyzstan {
     @ElementCollection
     private List<String> images;
 
-    @OneToOne
-    private Sight sight;
 
     @Enumerated(EnumType.STRING)
     private AboutType type;
 
-    public AboutKyrgyzstan(String description, String videoFile, String name, List<String> images, Sight sight, AboutType type) {
+    public AboutKyrgyzstan(String description, String videoFile, String name, List<String> images, AboutType type) {
         this.description = description;
         this.videoFile = videoFile;
         this.name = name;
         this.images = images;
-        this.sight = sight;
         this.type = type;
     }
 }

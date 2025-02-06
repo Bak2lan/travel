@@ -139,11 +139,6 @@ public class SightServiceImpl implements SightService {
             sight.setTours(null);
         }
 
-        if (sight.getAbout_kyrgyzstan() != null) {
-            sight.getAbout_kyrgyzstan().setSight(null);
-            sight.setAbout_kyrgyzstan(null);
-        }
-
         sightRepository.delete(sight);
 
         return SimpleResponse.builder()

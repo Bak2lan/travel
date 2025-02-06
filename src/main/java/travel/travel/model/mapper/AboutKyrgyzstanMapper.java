@@ -26,7 +26,7 @@ public class AboutKyrgyzstanMapper {
                 .videoFile(aboutKyrgyzstan.getVideoFile())
                 .name(aboutKyrgyzstan.getName())
                 .images(aboutKyrgyzstan.getImages())
-                .type(aboutKyrgyzstan.getType())
-                .sighId(aboutKyrgyzstan.getId()).build();
+                .type(aboutKyrgyzstan.getType()).build();
+
     }
 }

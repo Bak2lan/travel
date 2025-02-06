@@ -17,6 +17,5 @@ public class AboutKyrgyzstanResponse {
     private String name;
     private List<String> images;
     private AboutType type;
-    private Long sighId;
 
 }
