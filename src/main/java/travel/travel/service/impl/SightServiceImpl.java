@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import travel.travel.exception.NotFoundException;
 import travel.travel.model.dto.request.SightRequest;
 import travel.travel.model.dto.response.SightResponse;
+import travel.travel.model.dto.response.SightResponseForGetById;
 import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.model.entity.Sight;
 import travel.travel.model.entity.Travel;
@@ -65,6 +66,7 @@ public class SightServiceImpl implements SightService {
         for (Sight sight : sights) {
             SightResponse sightResponse = new SightResponse();
             sightResponse.setId(sight.getId() != null ? sight.getId() : 0L);
+            sightResponse.setImage(sight.getImages()!=null&&!sight.getImages().isEmpty()? sight.getImages().get(0): null);
             sightResponse.setNameOfSight(sight.getNameOfSight() != null ? sight.getNameOfSight() : "No Name");
             sightResponse.setDescription(sight.getDescription() != null ? sight.getDescription() : "No Description");
             sightResponses.add(sightResponse);
@@ -74,7 +76,7 @@ public class SightServiceImpl implements SightService {
     }
 
     @Override
-    public SightResponse findSightById(Long id) {
+    public SightResponseForGetById findSightById(Long id) {
         try {
             Sight sight = sightRepository.findById(id)
                     .orElseThrow(() -> new NotFoundException("Sight with id " + id + " not found"));
@@ -83,8 +85,9 @@ public class SightServiceImpl implements SightService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sight data is incomplete");
             }
 
-            return SightResponse.builder()
+            return SightResponseForGetById.builder()
                     .id(sight.getId())
+                    .images(sight.getImages())
                     .nameOfSight(sight.getNameOfSight())
                     .description(sight.getDescription())
                     .build();
@@ -168,6 +171,7 @@ public class SightServiceImpl implements SightService {
         List<SightResponse> sightResponses = sights.stream()
                 .map(sight -> SightResponse.builder()
                         .id(sight.getId())
+                        .image(sight.getImages()!=null&&!sight.getImages().isEmpty()? sight.getImages().get(0) : null)
                         .nameOfSight(sight.getNameOfSight())
                         .description(sight.getDescription())
                         .build())
