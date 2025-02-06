@@ -7,6 +7,7 @@ import travel.travel.model.dto.response.TourPaginationResponse;
 import travel.travel.model.dto.response.TourResponseGetByID;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TourService {
     SimpleResponse saveTour(TourRequest tourRequest);
@@ -20,6 +21,8 @@ public interface TourService {
     SimpleResponse deleteTour(Long id);
 
     List<TourGetAllResponse> getAllTours();
+
+    Map<Integer,List<TourGetAllResponse>> getAllToursSortByCategory();
 
 
 }

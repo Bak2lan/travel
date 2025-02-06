@@ -23,6 +23,7 @@ import travel.travel.service.TourService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -216,5 +217,12 @@ public class TourServiceImpl implements TourService {
                         .pax(tour.getPax())
                         .dateFrom(tour.getDateFrom())
                         .dateTo(tour.getDateTo()).build()).toList();
+    }
+
+    @Override
+    public Map<Integer, List<TourGetAllResponse>> getAllToursSortByCategory() {
+        List<Category> all = categoryRepository.findAll();
+
+        return Map.of();
     }
 }
