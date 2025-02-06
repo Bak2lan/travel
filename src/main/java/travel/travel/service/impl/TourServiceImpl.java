@@ -24,6 +24,8 @@ import travel.travel.service.TourService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -221,8 +223,8 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public Map<Integer, List<TourGetAllResponse>> getAllToursSortByCategory() {
-        List<Category> all = categoryRepository.findAll();
-
-        return Map.of();
+        List<TourGetAllResponse> allTours = getAllTours();
+      return   allTours.stream()
+                .collect(Collectors.groupingBy(TourGetAllResponse::days));
     }
 }

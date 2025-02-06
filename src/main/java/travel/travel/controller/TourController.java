@@ -13,6 +13,7 @@ import travel.travel.model.dto.response.TourResponseGetByID;
 import travel.travel.service.TourService;
 
 import java.util.List;
+import java.util.Map;
 
 @Tag(name = "REST APIs for Tour in Tourism",
         description = "CRUD APIs to CREATE, READ, UPDATE, DELETE tour details")
@@ -88,5 +89,15 @@ public class TourController {
     public ResponseEntity<List<TourGetAllResponse>> getAllTours(){
         List<TourGetAllResponse> allTours = tourService.getAllTours();
         return ResponseEntity.ok(allTours);
+    }
+
+    @Operation(
+            summary = "Get all tours (Grouping by Category)",
+            description = "Get all tours from database grouping by Category"
+    )
+    @GetMapping("/getAllToursSortByCategory")
+    public ResponseEntity<Map<Integer,List<TourGetAllResponse>>> getAllTourGroupingByCategory(){
+        Map<Integer, List<TourGetAllResponse>> allToursSortByCategory = tourService.getAllToursSortByCategory();
+        return ResponseEntity.ok(allToursSortByCategory);
     }
 }
