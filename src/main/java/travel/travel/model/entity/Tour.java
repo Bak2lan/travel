@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@Getter
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -32,7 +31,7 @@ public class Tour extends Location {
     private LocalDate dateFrom;
     private LocalDate dateTo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Category category;
 
     @ElementCollection(fetch = FetchType.LAZY)
@@ -62,5 +61,61 @@ public class Tour extends Location {
         this.detailsOfTour = detailsOfTour;
         this.travel = travel;
         this.sight = sight;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTourName() {
+        return tourName;
+    }
+
+    public String getAboutTour() {
+        return aboutTour;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public int getNights() {
+        return nights;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getPax() {
+        return pax;
+    }
+
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public Map<String, String> getDetailsOfTour() {
+        return detailsOfTour;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public Sight getSight() {
+        return sight;
     }
 }
