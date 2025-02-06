@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface SightRepository extends JpaRepository<Sight,Long> {
-    @Query("select new travel.travel.model.dto.response.SightResponse(s.id,s.nameOfSight,s.description) from Sight s ")
+    @Query("select new travel.travel.model.dto.response.SightResponse(s.id,s.images,s.nameOfSight,s.description) from Sight s ")
     List<SightResponse> getAllSights(Pageable pageable);
 
 
