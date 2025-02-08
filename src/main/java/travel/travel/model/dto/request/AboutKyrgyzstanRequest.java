@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AboutKyrgyzstanRequest {
-    private String description;
+    private List<String> description;
     private String videoFile;
     private String name;
     private List<String> images;

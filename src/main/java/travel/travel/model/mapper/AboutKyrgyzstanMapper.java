@@ -9,6 +9,7 @@ import travel.travel.model.entity.AboutKyrgyzstan;
 @Component
 @RequiredArgsConstructor
 public class AboutKyrgyzstanMapper {
+
     public AboutKyrgyzstan mapToEntity(AboutKyrgyzstanRequest aboutKyrgyzstanRequest) {
         AboutKyrgyzstan aboutKyrgyzstan = new AboutKyrgyzstan();
         aboutKyrgyzstan.setDescription(aboutKyrgyzstanRequest.getDescription());
