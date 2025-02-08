@@ -18,6 +18,7 @@ public class AboutKyrgyzstan {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "about_kg_seq")
     @SequenceGenerator(name = "about_kg_seq", sequenceName = "about_kg_sequence", initialValue = 6, allocationSize = 1)
     private Long id;
+    @Column(length = 2000)
     private String description;
     private String videoFile;
     private String name;

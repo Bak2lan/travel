@@ -16,13 +16,58 @@ VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),
        (4, 40.528, 72.805, 'Suleiman Mountain', 'Suleiman Mountain', 1),
        (5, 42.484, 78.395, 'Karakol Valley', 'Karakol', 1);
 
-INSERT INTO about_kyrgyzstan (id, description, name, video_file, sight_id)
-VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.', 'Explore Kyrgyzstan', 'intro.mp4',
+INSERT INTO about_kyrgyzstan (id,  description, name, video_file, sight_id)
+VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.
+The towering, glacier-covered mountains showcase the wonders of nature.
+Issyk-Kul, the pearl of the lake, is famous worldwide.
+Its ancient history and nomadic culture make it unique.
+The melodious sound of the komuz reflects the soul of the people.
+The yurt is a symbol of the Kyrgyz people''s national tradition.
+Horse racing and kok-boru games glorify the spirit of our nation.
+The delicious Kyrgyz cuisine captivates with its hospitality.
+The warm-hearted people preserve the tradition of honoring guests.
+Kyrgyzstan is a magnificent homeland where nature and history unite!', 'Explore Kyrgyzstan', 'intro.mp4',
         1),
-       (2, 'Son-Kul Lake is a high-altitude summer pasture.', 'Son-Kul Lake', 'sonkul.mp4', 2),
-       (3, 'Burana Tower is a historical site of the Silk Road.', 'Burana Tower', 'burana.mp4', 3),
-       (4, 'Suleiman Mountain is a sacred place in Kyrgyzstan.', 'Suleiman Mountain', 'suleiman.mp4', 4),
-       (5, 'Karakol Valley is famous for its trekking routes.', 'Karakol Valley', 'karakol.mp4', 5);
+       (2, 'Son-Kul Lake is a high-altitude summer pasture.
+It is surrounded by rolling green meadows and majestic mountains.
+The lake sits at an elevation of over 3,000 meters above sea level.
+Nomadic herders bring their livestock here during the warm months.
+Traditional yurts dot the landscape, preserving ancient ways of life.
+The crystal-clear waters reflect the endless sky above.
+Wild horses roam freely across the vast grasslands.
+The serene beauty of Son-Kul makes it a perfect retreat for nature lovers.
+Stunning sunrises and sunsets paint the sky with vibrant colors.
+Son-Kul Lake is a true hidden gem of Kyrgyzstan’s natural wonders.', 'Son-Kul Lake', 'sonkul.mp4', 2),
+       (3, 'Burana Tower is a historical site of the Silk Road.
+It is located in the Chüy Valley of northern Kyrgyzstan.
+The tower is a remnant of the ancient city of Balasagun.
+It was originally built in the 10th or 11th century.
+The tower once stood at 45 meters but now remains at 25 meters due to earthquakes.
+Burana Tower served as a minaret for a grand mosque.
+Surrounding the site are ancient petroglyphs and balbals (stone carvings).
+It is an important archaeological and cultural heritage of Kyrgyzstan.
+The site offers stunning views of the Tian Shan mountains.
+Burana Tower is a fascinating glimpse into the region’s Silk Road history.', 'Burana Tower', 'burana.mp4', 3),
+       (4, 'Suleiman Mountain is a sacred place in Kyrgyzstan.
+It is located in the city of Osh, one of the oldest cities in Central Asia.
+The mountain has been a pilgrimage site for centuries.
+It is believed to have spiritual and healing properties.
+Ancient petroglyphs and cave sites can be found on its slopes.
+A small mosque built by Babur, the founder of the Mughal Empire, sits atop the mountain.
+The site is recognized as a UNESCO World Heritage Site.
+Thousands of visitors and pilgrims climb the mountain each year.
+The panoramic view from the top offers breathtaking scenery of Osh.
+Suleiman Mountain is a symbol of Kyrgyz history, spirituality, and culture.', 'Suleiman Mountain', 'suleiman.mp4', 4),
+       (5, 'Karakol Valley is famous for its trekking routes.
+It is located in the eastern part of Kyrgyzstan, near Issyk-Kul Lake.
+The valley is surrounded by the stunning Terskey Alatau mountains.
+It offers breathtaking landscapes with alpine meadows, rivers, and glaciers.
+Trekkers can explore scenic trails leading to Ala-Kul Lake and other natural wonders.
+The valley is home to diverse wildlife, including ibex and marmots.
+During summer, nomads set up yurts, offering a glimpse into Kyrgyz traditions.
+Karakol Valley is a gateway to adventure sports like horseback riding and skiing.
+The crystal-clear rivers make it a perfect spot for camping and photography.
+It is one of the best destinations for nature lovers and outdoor enthusiasts.', 'Karakol Valley', 'karakol.mp4', 5);
 
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
 VALUES (1, 'asan@gmail.com', 'Asan', 'Asan1234', '+996555123456', 'ROLE_ADMIN', 1);
