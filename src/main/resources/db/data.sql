@@ -3,11 +3,11 @@ values (1, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents
         'We prioritize sustainability in tourism.');
 
 INSERT INTO categories (id, day, day_tour, travel_id, image)
-VALUES (1, 1, 'Day tour example 1', 1,'image'),
-       (2, 2, 'Day tour example 2', 1,'image'),
-       (3, 3, 'Day tour example 3', 1,'image'),
-       (4, 4, 'Day tour example 4', 1,'image'),
-       (5, 5, 'Day tour example 5', 1,'image');
+VALUES (1, 1, 'Day tour example 1', 1, 'image'),
+       (2, 2, 'Day tour example 2', 1, 'image'),
+       (3, 3, 'Day tour example 3', 1, 'image'),
+       (4, 4, 'Day tour example 4', 1, 'image'),
+       (5, 5, 'Day tour example 5', 1, 'image');
 
 INSERT INTO sights (id, latitude, longitude, description, name_of_sight, travel_id)
 VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),
@@ -16,11 +16,10 @@ VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),
        (4, 40.528, 72.805, 'Suleiman Mountain', 'Suleiman Mountain', 1),
        (5, 42.484, 78.395, 'Karakol Valley', 'Karakol', 1);
 
-INSERT INTO about_kyrgyzstan (id, description, name, video_file, type)
-VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.', 'Explore Kyrgyzstan', 'intro.mp4',
-        'CULTURE'),
-       (2, 'Son-Kul Lake is a high-altitude summer pasture.', 'Son-Kul Lake', 'sonkul.mp4', 'TRADITIONAL'),
-       (3, 'Burana Tower is a historical site of the Silk Road.', 'Burana Tower', 'burana.mp4', 'HISTORICAL_PLACES');
+INSERT INTO about_kyrgyzstan (id, name, video_file, type)
+VALUES (1, 'Explore Kyrgyzstan', 'intro.mp4', 'CULTURE'),
+       (2, 'Son - Kul Lake', 'sonkul.mp4', 'TRADITIONAL'),
+       (3, 'Burana Tower', 'burana.mp4', 'HISTORICAL_PLACES');
 
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
 VALUES (1, 'asan@gmail.com', 'Asan', '$2a$12$dyHbyL5DkJFtoGTgk0jaouZAhpmu6mfZOg7tgrXCae2VmHOIsVvqS', '+996555123456', 'ROLE_ADMIN', 1);
@@ -44,6 +43,10 @@ VALUES (1, 'image1.jpg'),
        (1, 'image2.jpg'),
        (1, 'image3.jpg');
 
+INSERT INTO about_kyrgyzstan_description (about_kyrgyzstan_id, description)
+VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.');
+VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.');
+VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.');
 
 INSERT INTO sight_images (sight_id, images)
 VALUES (1, 'sight1.jpg'),

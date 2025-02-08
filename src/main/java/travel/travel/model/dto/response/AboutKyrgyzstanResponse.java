@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AboutKyrgyzstanResponse {
     private Long id;
-    private String description;
+    private List<String> description;
     private String videoFile;
     private String name;
     private List<String> images;
