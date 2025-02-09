@@ -2,19 +2,19 @@ package travel.travel.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import travel.travel.exception.NotFoundException;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
+import travel.travel.model.dto.response.AboutKyrgyzstanImagesResponse;
 import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
 import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.model.entity.AboutKyrgyzstan;
-import travel.travel.model.entity.Sight;
 import travel.travel.model.mapper.AboutKyrgyzstanMapper;
 import travel.travel.repository.AboutKyrgyzstanRepository;
-import travel.travel.repository.SightRepository;
 import travel.travel.service.ServiceLayer;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -127,5 +127,34 @@ public class AboutKyrgyzstanServiceImpl implements ServiceLayer<AboutKyrgyzstanR
     AboutKyrgyzstan byId(Long id) {
         return aboutKyrgyzstanRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("AboutKyrgyzstan with id: " + id + " not found!"));
+    }
+
+    @Override
+    public List<AboutKyrgyzstanImagesResponse
+
+            > aboutKyrgyzstan(int currentPage, int pageSize) {
+        if (currentPage <= 0) {
+            throw new IllegalArgumentException("Page number must be greater than 0");
+        }
+
+        long totalRecords = aboutKyrgyzstanRepository.count();
+
+        if (pageSize <= 0 || pageSize > totalRecords) {
+            pageSize = (int) totalRecords;
+        }
+
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize);
+        List<AboutKyrgyzstan> aboutKyrgyzstans = aboutKyrgyzstanRepository.findAll(pageable).getContent();
+
+        if (aboutKyrgyzstans.isEmpty()) {
+            throw new NotFoundException("No sights found");
+        }
+
+        return aboutKyrgyzstans.stream()
+                .map(s -> AboutKyrgyzstanImagesResponse.builder()
+                        .image(String.join(",", s.getImages()))
+                        .build()
+                )
+                .collect(Collectors.toList());
     }
 }
