@@ -5,10 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.AboutKyrgyzstanRequest;
+import travel.travel.model.dto.response.AboutKyrgyzstanImagesResponse;
 import travel.travel.model.dto.response.AboutKyrgyzstanResponse;
 import travel.travel.model.dto.response.SimpleResponse;
+import travel.travel.repository.AboutKyrgyzstanRepository;
 import travel.travel.service.impl.AboutKyrgyzstanServiceImpl;
-
 import java.util.List;
 
 @RestController
@@ -18,6 +19,7 @@ import java.util.List;
 public class AboutKyrgyzstanController {
 
     private final AboutKyrgyzstanServiceImpl aboutKyrgyzstanService;
+    private final AboutKyrgyzstanRepository aboutKyrgyzstanRepository;
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/save")
@@ -26,16 +28,16 @@ public class AboutKyrgyzstanController {
 
     }
 
-    @GetMapping("/{id}/get_by_id")
+    @GetMapping("/{id}")
     public AboutKyrgyzstanResponse getById(@PathVariable Long id) {
         return aboutKyrgyzstanService.findById(id);
 
     }
 
-//    @GetMapping("/get_all")
-//    public List<AboutKyrgyzstanResponse> getAll() {
-//        return aboutKyrgyzstanService.findAll();
-//    }
+    @GetMapping("/get_all")
+    public List<AboutKyrgyzstanResponse> getAll() {
+        return aboutKyrgyzstanService.findAll();
+    }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PutMapping("/{id}/update")
@@ -66,6 +68,18 @@ public class AboutKyrgyzstanController {
     public ResponseEntity<List<AboutKyrgyzstanResponse>>getHistoricalPlaces(){
         List<AboutKyrgyzstanResponse> historicalPlaces = aboutKyrgyzstanService.getHistoricalPlaces();
         return ResponseEntity.ok(historicalPlaces);
+    }
+
+    @GetMapping("/about-kyrgyzstanImage")
+    public List<AboutKyrgyzstanImagesResponse> getAboutKyrgyzstanImages(
+            @RequestParam(defaultValue = "1") int currentPage,
+            @RequestParam(required = false) Integer pageSize) {
+        if (pageSize == null || pageSize <= 0) {
+            long totalRecords = aboutKyrgyzstanRepository.count();
+            pageSize = (int) totalRecords;
+        }
+
+        return aboutKyrgyzstanService.aboutKyrgyzstan(currentPage, pageSize);
     }
 
 

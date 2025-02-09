@@ -16,10 +16,37 @@ VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),
        (4, 40.528, 72.805, 'Suleiman Mountain', 'Suleiman Mountain', 1),
        (5, 42.484, 78.395, 'Karakol Valley', 'Karakol', 1);
 
-INSERT INTO about_kyrgyzstan (id, name, video_file, type)
-VALUES (1, 'Explore Kyrgyzstan', 'intro.mp4', 'CULTURE'),
-       (2, 'Son - Kul Lake', 'sonkul.mp4', 'TRADITIONAL'),
-       (3, 'Burana Tower', 'burana.mp4', 'HISTORICAL_PLACES');
+INSERT INTO about_kyrgyzstan (id, name, video_file, type,description)
+VALUES (1, 'Explore Kyrgyzstan', 'intro.mp4', 'CULTURE','Кыргызстан өзүнүн кооз тоолору жана маданий мурасы менен белгилүү.
+     Асман тиреген мөңгүлүү тоолор жаратылыштын кереметин тартуулайт.
+     Ысык-Көл, көлдүн бермети, дүйнө жүзүндө таанымал.
+     Анын байыркы тарыхы жана көчмөн маданияты аны өзгөчөлөндүрөт.
+     Комуздун мукам үнү элдин жан дүйнөсүн чагылдырат.
+     Кийиз үй – кыргыз элинин улуттук салтынын символу.
+     Ат чабыш жана көк бөрү оюндары элибиздин рухун даңазалайт.
+     Даамдуу кыргыз ашканасы өзүнүн меймандостугу менен суктандырат.
+     Кең пейил эли конокту урматтоо салтын сактап келет.
+     Кыргызстан – жаратылыш менен тарых бириккен керемет мекен!'),
+       (2, 'Son - Kul Lake', 'sonkul.mp4', 'TRADITIONAL','Кыргызстан өзүнүн кооз тоолору жана маданий мурасы менен белгилүү.
+     Асман тиреген мөңгүлүү тоолор жаратылыштын кереметин тартуулайт.
+     Ысык-Көл, көлдүн бермети, дүйнө жүзүндө таанымал.
+     Анын байыркы тарыхы жана көчмөн маданияты аны өзгөчөлөндүрөт.
+     Комуздун мукам үнү элдин жан дүйнөсүн чагылдырат.
+     Кийиз үй – кыргыз элинин улуттук салтынын символу.
+     Ат чабыш жана көк бөрү оюндары элибиздин рухун даңазалайт.
+     Даамдуу кыргыз ашканасы өзүнүн меймандостугу менен суктандырат.
+     Кең пейил эли конокту урматтоо салтын сактап келет.
+     Кыргызстан – жаратылыш менен тарых бириккен керемет мекен!'),
+       (3, 'Burana Tower', 'burana.mp4', 'HISTORICAL_PLACES','Кыргызстан өзүнүн кооз тоолору жана маданий мурасы менен белгилүү.
+     Асман тиреген мөңгүлүү тоолор жаратылыштын кереметин тартуулайт.
+     Ысык-Көл, көлдүн бермети, дүйнө жүзүндө таанымал.
+     Анын байыркы тарыхы жана көчмөн маданияты аны өзгөчөлөндүрөт.
+     Комуздун мукам үнү элдин жан дүйнөсүн чагылдырат.
+     Кийиз үй – кыргыз элинин улуттук салтынын символу.
+     Ат чабыш жана көк бөрү оюндары элибиздин рухун даңазалайт.
+     Даамдуу кыргыз ашканасы өзүнүн меймандостугу менен суктандырат.
+     Кең пейил эли конокту урматтоо салтын сактап келет.
+     Кыргызстан – жаратылыш менен тарых бириккен керемет мекен!');
 
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
 VALUES (1, 'asan@gmail.com', 'Asan', '$2a$12$dyHbyL5DkJFtoGTgk0jaouZAhpmu6mfZOg7tgrXCae2VmHOIsVvqS', '+996555123456', 'ROLE_ADMIN', 1);
@@ -43,10 +70,6 @@ VALUES (1, 'image1.jpg'),
        (1, 'image2.jpg'),
        (1, 'image3.jpg');
 
-INSERT INTO about_kyrgyzstan_description (about_kyrgyzstan_id, description)
-VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.');
-VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.');
-VALUES (1, 'Kyrgyzstan is known for its beautiful mountains and cultural heritage.');
 
 INSERT INTO sight_images (sight_id, images)
 VALUES (1, 'sight1.jpg'),
