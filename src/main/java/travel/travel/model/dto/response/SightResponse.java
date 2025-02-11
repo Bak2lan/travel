@@ -1,32 +1,16 @@
 package travel.travel.model.dto.response;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SightResponse {
     private Long id;
     private String image;
     private String nameOfSight;
     private String description;
-
-    public SightResponse(Long id, List<String> images, String nameOfSight, String description) {
-        this.id = id;
-        this.image = images!=null&&!images.isEmpty()? images.get(0):null;
-        this.nameOfSight = nameOfSight;
-        this.description = description;
-    }
-
-    public SightResponse(Long id, String image, String nameOfSight, String description) {
-        this.id = id;
-        this.image = image;
-        this.nameOfSight = nameOfSight;
-        this.description = description;
-    }
+    private String titleFromVideo;
 }
