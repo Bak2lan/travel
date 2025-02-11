@@ -1,5 +1,7 @@
 insert into travels (id, about_us, contact, documentation, sustainability)
 values (1, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents are verified.',
+        'We prioritize sustainability in tourism.'),
+       (2, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents are verified.',
         'We prioritize sustainability in tourism.');
 
 INSERT INTO categories (id, day, day_tour, travel_id, image)
@@ -48,8 +50,8 @@ VALUES (1, 'Explore Kyrgyzstan', 'intro.mp4', 'CULTURE','Кыргызстан ө
      Кыргызстан – жаратылыш менен тарых бириккен керемет мекен!');
 
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
-VALUES (1, 'asan@gmail.com', 'Asan', '$2a$12$dyHbyL5DkJFtoGTgk0jaouZAhpmu6mfZOg7tgrXCae2VmHOIsVvqS', '+996555123456', 'ROLE_ADMIN', 1);
-
+VALUES (1, 'asan@gmail.com', 'Asan', '$2a$12$dyHbyL5DkJFtoGTgk0jaouZAhpmu6mfZOg7tgrXCae2VmHOIsVvqS', '+996555123456', 'ROLE_ADMIN', 1),
+       (2, 'bekbolot@gmail.com', 'Bekbolot', '$2y$10$4Y4xzBVSR5n3PcbCg9sjbur0eVXCC6U8ehHbhH.G/Yizg4oILmi0u', '+996554450820', 'ROLE_ADMIN', 2);
 
 INSERT INTO tours (id, latitude, longitude, about_tour, date_from, date_to, days, pax, nights, price, tour_name,
                    category_id, sight_id, travel_id)
