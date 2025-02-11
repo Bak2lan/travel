@@ -9,12 +9,12 @@ VALUES (1, 1, 'Day tour example 1', 1, 'image'),
        (4, 4, 'Day tour example 4', 1, 'image'),
        (5, 5, 'Day tour example 5', 1, 'image');
 
-INSERT INTO sights (id, latitude, longitude, description, name_of_sight, travel_id)
-VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1),
-       (2, 41.841, 75.131, 'Son-Kul Lake', 'Son-Kul', 1),
-       (3, 42.720, 75.891, 'Burana Tower', 'Burana Tower', 1),
-       (4, 40.528, 72.805, 'Suleiman Mountain', 'Suleiman Mountain', 1),
-       (5, 42.484, 78.395, 'Karakol Valley', 'Karakol', 1);
+INSERT INTO sights (id, latitude, longitude, description, name_of_sight, travel_id, title_from_video)
+VALUES (1, 42.567, 74.352, 'Ala-Archa National Park', 'Ala-Archa', 1, 'Ala-Archa National Park Video'),
+       (2, 41.841, 75.131, 'Son-Kul Lake', 'Son-Kul', 1, 'Son-Kul Lake Video'),
+       (3, 42.720, 75.891, 'Burana Tower', 'Burana Tower', 1, 'Burana Tower Video'),
+       (4, 40.528, 72.805, 'Suleiman Mountain', 'Suleiman Mountain', 1, 'Suleiman Mountain Video'),
+       (5, 42.484, 78.395, 'Karakol Valley', 'Karakol', 1, 'Karakol Valley Video');
 
 INSERT INTO about_kyrgyzstan (id, name, video_file, type,description)
 VALUES (1, 'Explore Kyrgyzstan', 'intro.mp4', 'CULTURE','Кыргызстан өзүнүн кооз тоолору жана маданий мурасы менен белгилүү.
@@ -68,7 +68,8 @@ VALUES (1, 42.567, 74.352, 'Ala-Archa Hiking Tour', '2025-01-01', '2025-01-03', 
 insert into about_kyrgyzstan_images (about_kyrgyzstan_id, images)
 VALUES (1, 'image1.jpg'),
        (1, 'image2.jpg'),
-       (1, 'image3.jpg');
+       (1, 'image3.jpg'),
+        (1, 'image4.jpg');
 
 
 INSERT INTO sight_images (sight_id, images)

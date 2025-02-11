@@ -19,8 +19,10 @@ public class Sight extends Location {
     @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", initialValue = 6, allocationSize = 1)
     private Long id;
     private String nameOfSight;
+    @Column(length = 8000)
     private String description;
-
+    @Column(length = 8000)
+    private String titleFromVideo;
     @ElementCollection
     private List<String> images;
 
@@ -29,13 +31,4 @@ public class Sight extends Location {
 
     @OneToMany(mappedBy = "sight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tour> tours;
-
-
-    public Sight(String nameOfSight, String description, List<String> images, Travel travel, List<Tour> tours) {
-        this.nameOfSight = nameOfSight;
-        this.description = description;
-        this.images = images;
-        this.travel = travel;
-        this.tours = tours;
-    }
 }

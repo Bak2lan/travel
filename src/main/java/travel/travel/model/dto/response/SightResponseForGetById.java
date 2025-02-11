@@ -13,4 +13,5 @@ public class SightResponseForGetById {
     private List<String>images;
     private String nameOfSight;
     private String description;
+    private String titleFromVideo;
 }

@@ -15,6 +15,7 @@ public class SightRequest {
     private String description;
     private double latitude;
     private double longitude;
+    private String titleFromVideo;
     @ElementCollection
     private List<String> images;
 }
