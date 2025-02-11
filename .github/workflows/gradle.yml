@@ -102,7 +102,7 @@ jobs:
             
             # Wait for application to start
             echo 'Waiting for application to start...'
-            sleep 250
+            sleep 200
             
             # Verification checks
             DEPLOYMENT_SUCCESS=true
