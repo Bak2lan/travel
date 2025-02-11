@@ -23,7 +23,7 @@ public class Tour extends Location {
     @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 6, allocationSize = 1)
     private Long id;
     private String tourName;
-    @Column(length = 2000)
+    @Column(length = 8000)
     private String aboutTour;
     private int days;
     private int nights;

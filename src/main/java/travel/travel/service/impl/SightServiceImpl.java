@@ -15,7 +15,6 @@ import travel.travel.model.entity.Travel;
 import travel.travel.repository.SightRepository;
 import travel.travel.repository.TravelRepository;
 import travel.travel.service.SightService;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +41,7 @@ public class SightServiceImpl implements SightService {
         sight.setDescription(sightRequest.getDescription());
         sight.setLatitude(sightRequest.getLatitude());
         sight.setLongitude(sightRequest.getLongitude());
+        sight.setTitleFromVideo(sightRequest.getTitleFromVideo());
         sight.setTravel(travel);
         sight.getTravel().getSightList().add(sight);
         sightRepository.save(sight);
@@ -69,6 +69,7 @@ public class SightServiceImpl implements SightService {
             sightResponse.setImage(sight.getImages()!=null&&!sight.getImages().isEmpty()? sight.getImages().get(0): null);
             sightResponse.setNameOfSight(sight.getNameOfSight() != null ? sight.getNameOfSight() : "No Name");
             sightResponse.setDescription(sight.getDescription() != null ? sight.getDescription() : "No Description");
+            sightResponse.setTitleFromVideo(sight.getTitleFromVideo() !=null ? sight.getTitleFromVideo() : "No Title");
             sightResponses.add(sightResponse);
         }
 
@@ -90,6 +91,7 @@ public class SightServiceImpl implements SightService {
                     .images(sight.getImages())
                     .nameOfSight(sight.getNameOfSight())
                     .description(sight.getDescription())
+                    .titleFromVideo(sight.getNameOfSight())
                     .build();
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
@@ -114,6 +116,7 @@ public class SightServiceImpl implements SightService {
         sight.setImages(sightRequest.getImages());
         sight.setLatitude(sightRequest.getLatitude());
         sight.setLongitude(sightRequest.getLongitude());
+        sight.setTitleFromVideo(sightRequest.getTitleFromVideo());
 
         sightRepository.save(sight);
 

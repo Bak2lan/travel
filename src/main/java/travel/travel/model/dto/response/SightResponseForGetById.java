@@ -1,5 +1,6 @@
 package travel.travel.model.dto.response;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public class SightResponseForGetById {
     private List<String>images;
     private String nameOfSight;
     private String description;
+    private String titleFromVideo;
 }

@@ -19,8 +19,10 @@ public class Sight extends Location {
     @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", initialValue = 6, allocationSize = 1)
     private Long id;
     private String nameOfSight;
+    @Column(length = 8000)
     private String description;
-
+    @Column(length = 8000)
+    private String titleFromVideo;
     @ElementCollection
     private List<String> images;
 
