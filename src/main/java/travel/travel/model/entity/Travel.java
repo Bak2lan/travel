@@ -2,7 +2,6 @@ package travel.travel.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
 
 @Entity
@@ -13,8 +12,7 @@ import java.util.List;
 @Table(name = "travels")
 public class Travel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "travel_seq")
-    @SequenceGenerator(name = "travel_seq", sequenceName = "travel_sequence", initialValue = 2, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String aboutUs;
     private String documentation;

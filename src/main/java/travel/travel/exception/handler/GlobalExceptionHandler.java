@@ -50,6 +50,17 @@ public class GlobalExceptionHandler {
                 .massage(badCredentialException.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExeptionResponse tokenExpiredException(TokenExpiredException tokenExpiredException){
+        return ExeptionResponse.builder()
+                .httpStatus(HttpStatus.FORBIDDEN)
+                .esceptionClassName(tokenExpiredException.getClass().getSimpleName())
+                .massage(tokenExpiredException.getMessage())
+                .build();
+    }
+
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ExeptionResponse accessDeniedException(AccessDeniedException accessDeniedException){
@@ -70,4 +81,3 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
-
