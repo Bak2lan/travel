@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import travel.travel.exception.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,16 +47,6 @@ public class GlobalExceptionHandler {
                 .httpStatus(HttpStatus.UNAUTHORIZED)
                 .esceptionClassName(badCredentialException.getClass().getSimpleName())
                 .massage(badCredentialException.getMessage())
-                .build();
-    }
-
-    @ExceptionHandler(TokenExpiredException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ExeptionResponse tokenExpiredException(TokenExpiredException tokenExpiredException){
-        return ExeptionResponse.builder()
-                .httpStatus(HttpStatus.FORBIDDEN)
-                .esceptionClassName(tokenExpiredException.getClass().getSimpleName())
-                .massage(tokenExpiredException.getMessage())
                 .build();
     }
 
