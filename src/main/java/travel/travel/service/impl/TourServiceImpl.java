@@ -24,7 +24,6 @@ import travel.travel.service.TourService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,10 +58,6 @@ public class TourServiceImpl implements TourService {
             log.error("Travel not found with id {}", 1L);
             return new NotFoundException(String.format("Travel with id %s not found", 1));
         });
-        Sight sight = sightRepository.findById(tourRequest.sightId()).orElseThrow(() -> {
-            log.error("Sight with id {} not found ", tourRequest.sightId());
-            return new NotFoundException(String.format("Sight with id %s not found", tourRequest.sightId()));
-        });
         Category category = categoryRepository.findById(tourRequest.categoryId()).orElseThrow(() -> {
             log.error("Category with id {} not found", tourRequest.categoryId());
             return new NotFoundException(String.format("Category with id %s not found", tourRequest.categoryId()));
@@ -81,8 +76,7 @@ public class TourServiceImpl implements TourService {
                 category,
                 tourRequest.images(),
                 tourRequest.tourDetails(),
-                travel,
-                sight
+                travel
         );
         tourRepository.save(tour);
         log.info("Tour successfully saved");
