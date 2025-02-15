@@ -63,6 +63,21 @@ public class Tour extends Location {
         this.travel = travel;
         this.sight = sight;
     }
+    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel) {
+        super(latitude, longitude);
+        this.tourName = tourName;
+        this.aboutTour = aboutTour;
+        this.days = days;
+        this.nights = nights;
+        this.price = price;
+        this.pax = pax;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.category = category;
+        this.images = images;
+        this.detailsOfTour = detailsOfTour;
+        this.travel = travel;
+    }
 
     public Long getId() {
         return id;
