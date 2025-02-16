@@ -2,12 +2,10 @@ package travel.travel.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import travel.travel.model.Location;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +44,7 @@ public class Tour extends Location {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Sight sight;
+    private String valueCategory;
 
     public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
         super(latitude, longitude);
@@ -63,7 +62,7 @@ public class Tour extends Location {
         this.travel = travel;
         this.sight = sight;
     }
-    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel) {
+    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel,String valueCategory) {
         super(latitude, longitude);
         this.tourName = tourName;
         this.aboutTour = aboutTour;
@@ -77,6 +76,7 @@ public class Tour extends Location {
         this.images = images;
         this.detailsOfTour = detailsOfTour;
         this.travel = travel;
+        this.valueCategory = valueCategory;
     }
 
     public Long getId() {
@@ -130,8 +130,7 @@ public class Tour extends Location {
     public Travel getTravel() {
         return travel;
     }
-
-    public Sight getSight() {
-        return sight;
+    public String getValueCategory() {
+        return valueCategory;
     }
 }
