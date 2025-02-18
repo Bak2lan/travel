@@ -15,6 +15,7 @@ import travel.travel.model.entity.Category;
 import travel.travel.model.entity.Tour;
 import travel.travel.model.entity.Travel;
 import travel.travel.repository.CategoryRepository;
+import travel.travel.repository.JDBCTemplate.TourJDBCTemplate;
 import travel.travel.repository.SightRepository;
 import travel.travel.repository.TourRepository;
 import travel.travel.repository.TravelRepository;
@@ -31,10 +32,12 @@ public class TourServiceImpl implements TourService {
 
     private final TravelRepository travelRepository;
     private final TourRepository tourRepository;
+    private final TourJDBCTemplate tourJDBCTemplate;
 
-    public TourServiceImpl(TravelRepository travelRepository, SightRepository sightRepository, CategoryRepository categoryRepository, TourRepository tourRepository) {
+    public TourServiceImpl(TravelRepository travelRepository, SightRepository sightRepository, CategoryRepository categoryRepository, TourRepository tourRepository, TourJDBCTemplate tourJDBCTemplate) {
         this.travelRepository = travelRepository;
         this.tourRepository = tourRepository;
+        this.tourJDBCTemplate = tourJDBCTemplate;
     }
 
     @Override
@@ -89,7 +92,7 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public TourResponseGetByID getTourById(Long id) {
-        return tourRepository.getTourById(id);
+        return tourJDBCTemplate.getTourById(id);
     }
 
     @Override
