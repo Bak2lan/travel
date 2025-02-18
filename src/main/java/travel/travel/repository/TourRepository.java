@@ -1,5 +1,6 @@
 package travel.travel.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import travel.travel.model.dto.response.TourResponseForPagination;
 import travel.travel.model.dto.response.TourResponseGetByID;
 import travel.travel.model.entity.Tour;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 
 @Repository
 public interface TourRepository extends JpaRepository<Tour,Long> {
@@ -15,9 +18,4 @@ public interface TourRepository extends JpaRepository<Tour,Long> {
             "FROM Tour t JOIN t.category tc ORDER BY tc.day ASC")
     Page<TourResponseForPagination> getAllTour(Pageable pageable);
 
-    @Query("SELECT new travel.travel.model.dto.response.TourResponseGetByID(t.id, t.tourName, t.aboutTour, t.days, t.nights, t.price, t.pax, t.dateFrom, t.dateTo, t.detailsOfTour, t.coordinatesImage) " +
-            "FROM Tour t WHERE t.id = ?1")
-    TourResponseGetByID getTourById(Long id);
-
-
-}
+    }
