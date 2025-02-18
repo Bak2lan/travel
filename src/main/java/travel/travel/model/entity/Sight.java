@@ -14,7 +14,7 @@ public class Sight{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sight_seq")
-    @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", initialValue = 6, allocationSize = 1)
+    @SequenceGenerator(name = "sight_seq", sequenceName = "sight_sequence", initialValue = 13, allocationSize = 1)
     private Long id;
     private String nameOfSight;
     @Column(length = 8000)

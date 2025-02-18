@@ -31,7 +31,7 @@ public class SightController {
         return sightService.createSight(request);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getSightById/{id}")
     @Operation(summary = "Get by id sight", description = "Get by id sight by administrator")
     public SightResponseForGetById getById(@PathVariable Long id) throws NotFoundException {
         return sightService.findSightById(id);
