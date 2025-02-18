@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import travel.travel.model.Location;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +14,10 @@ import java.util.Map;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "tours")
-public class Tour extends Location {
+public class Tour{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_seq")
-    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 6, allocationSize = 1)
+    @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 13, allocationSize = 1)
     private Long id;
     private String tourName;
     @Column(length = 8000)
@@ -26,7 +25,7 @@ public class Tour extends Location {
     private int days;
     private int nights;
     private int price;
-    private int pax;
+    private String pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
 
@@ -36,8 +35,7 @@ public class Tour extends Location {
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> images;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    private Map<String, String> detailsOfTour;
+    private String detailsOfTour;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Travel travel;
@@ -45,9 +43,10 @@ public class Tour extends Location {
     @ManyToOne(fetch = FetchType.LAZY)
     private Sight sight;
     private String valueCategory;
+    private boolean popular;
+    private String coordinatesImage;
 
-    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight) {
-        super(latitude, longitude);
+    public Tour(String tourName, String aboutTour, int days, int nights, int price, String pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, String detailsOfTour, Travel travel, Sight sight,boolean popular, String coordinatesImage) {
         this.tourName = tourName;
         this.aboutTour = aboutTour;
         this.days = days;
@@ -61,9 +60,10 @@ public class Tour extends Location {
         this.detailsOfTour = detailsOfTour;
         this.travel = travel;
         this.sight = sight;
+        this.popular = popular;
+        this.coordinatesImage = coordinatesImage;
     }
-    public Tour(double latitude, double longitude, String tourName, String aboutTour, int days, int nights, int price, int pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel,String valueCategory) {
-        super(latitude, longitude);
+    public Tour(String tourName, String aboutTour, int days, int nights, int price, String pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, String detailsOfTour, Travel travel,String valueCategory, boolean popular, String coordinatesImage) {
         this.tourName = tourName;
         this.aboutTour = aboutTour;
         this.days = days;
@@ -77,6 +77,8 @@ public class Tour extends Location {
         this.detailsOfTour = detailsOfTour;
         this.travel = travel;
         this.valueCategory = valueCategory;
+        this.popular = popular;
+        this.coordinatesImage = coordinatesImage;
     }
 
     public Long getId() {
@@ -103,7 +105,7 @@ public class Tour extends Location {
         return price;
     }
 
-    public int getPax() {
+    public String getPax() {
         return pax;
     }
 
@@ -123,14 +125,22 @@ public class Tour extends Location {
         return images;
     }
 
-    public Map<String, String> getDetailsOfTour() {
+    public String getDetailsOfTour() {
         return detailsOfTour;
     }
 
     public Travel getTravel() {
         return travel;
     }
+
     public String getValueCategory() {
         return valueCategory;
+    }
+    public boolean isPopular() {
+        return isPopular();
+    }
+
+    public String getCoordinatesImage() {
+        return getCoordinatesImage();
     }
 }

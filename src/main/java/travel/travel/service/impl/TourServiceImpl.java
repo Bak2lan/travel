@@ -30,14 +30,10 @@ import java.util.stream.Collectors;
 public class TourServiceImpl implements TourService {
 
     private final TravelRepository travelRepository;
-    private final SightRepository sightRepository;
-    private final CategoryRepository categoryRepository;
     private final TourRepository tourRepository;
 
     public TourServiceImpl(TravelRepository travelRepository, SightRepository sightRepository, CategoryRepository categoryRepository, TourRepository tourRepository) {
         this.travelRepository = travelRepository;
-        this.sightRepository = sightRepository;
-        this.categoryRepository = categoryRepository;
         this.tourRepository = tourRepository;
     }
 
@@ -50,9 +46,9 @@ public class TourServiceImpl implements TourService {
                 log.warn("Attempted to save a tour with empty name");
                 throw new BadRequestExeption("Tour name can not be empty");
             }
-            if (tourRequest.pax() < 0 || tourRequest.days() < 0 || tourRequest.nights() < 0) {
-                log.warn("Details tour contain invalid values (max people, days, nights) : max people ={}, days = {}, nights = {}",
-                        tourRequest.pax(), tourRequest.days(), tourRequest.nights());
+            if (tourRequest.days() < 0 || tourRequest.nights() < 0) {
+                log.warn("Details tour contain invalid values (max people, days, nights) : max people ={}, days = {}, nights = {}"
+                       , tourRequest.days(), tourRequest.nights());
                 throw new BadRequestExeption("Details of tour including max people, days, nights should be greater than 0");
             }
 
@@ -63,8 +59,6 @@ public class TourServiceImpl implements TourService {
 
 
             Tour tour = new Tour();
-            tour.setLatitude(tourRequest.latitude());
-            tour.setLongitude(tourRequest.longitude());
             tour.setTourName(tourRequest.tourName());
             tour.setAboutTour(tourRequest.aboutTour());
             tour.setDays(tourRequest.days());
@@ -77,7 +71,8 @@ public class TourServiceImpl implements TourService {
             tour.setDetailsOfTour(tourRequest.tourDetails());
             tour.setTravel(travel);
             tour.setValueCategory(tourRequest.valueCategory());
-
+            tour.setPopular(tourRequest.popular());
+            tour.setCoordinatesImage(tourRequest.coordinatesImage());
             tourRepository.save(tour);
             log.info("Tour successfully saved");
 
@@ -94,26 +89,7 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public TourResponseGetByID getTourById(Long id) {
-        Tour tour = tourRepository.findById(id).orElseThrow(() -> {
-            log.error("Tour with id {} not found", id);
-            return new NotFoundException(String.format("Tour with id %s not found", id));
-        });
-        log.info("Fetching tour with id {}", id);
-        return TourResponseGetByID
-                .builder()
-                .id(tour.getId())
-                .latitude(tour.getLatitude())
-                .longitude(tour.getLongitude())
-                .tourName(tour.getTourName())
-                .aboutTour(tour.getAboutTour())
-                .days(tour.getDays())
-                .nights(tour.getNights())
-                .price(tour.getPrice())
-                .pax(tour.getPax())
-                .dateFrom(tour.getDateFrom())
-                .dateTo(tour.getDateTo())
-                .detailsOfTour(tour.getDetailsOfTour())
-                .build();
+        return tourRepository.getTourById(id);
     }
 
     @Override
@@ -136,8 +112,6 @@ public class TourServiceImpl implements TourService {
             return new NotFoundException(String.format("Tour with id %s not found", id));
         });
 
-        tour.setLatitude(tourRequest.latitude());
-        tour.setLongitude(tourRequest.longitude());
         tour.setTourName(tourRequest.tourName());
         tour.setAboutTour(tourRequest.aboutTour());
         tour.setDays(tourRequest.days());
@@ -148,12 +122,12 @@ public class TourServiceImpl implements TourService {
         tour.setDateTo(tourRequest.dateTo());
         tour.setImages(tourRequest.images());
         tour.setDetailsOfTour(tourRequest.tourDetails());
+        tour.setPopular(tourRequest.popular());
+        tour.setCoordinatesImage(tourRequest.coordinatesImage());
         tourRepository.save(tour);
         log.info("Tour with id {} is successfully updated", id);
         return TourResponseGetByID.builder()
                 .id(tour.getId())
-                .latitude(tour.getLatitude())
-                .longitude(tour.getLongitude())
                 .tourName(tour.getTourName())
                 .aboutTour(tour.getAboutTour())
                 .days(tour.getDays())

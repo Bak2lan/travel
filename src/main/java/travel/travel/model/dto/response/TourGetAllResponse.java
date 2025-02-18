@@ -12,7 +12,7 @@ public record TourGetAllResponse(
         int days,
         int nights,
         int price,
-        int pax,
+        String pax,
         LocalDate dateFrom,
         LocalDate dateTo
 ) {

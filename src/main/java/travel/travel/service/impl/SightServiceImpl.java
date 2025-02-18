@@ -39,11 +39,10 @@ public class SightServiceImpl implements SightService {
         sight.setImages(sightRequest.getImages());
         sight.setNameOfSight(sightRequest.getNameOfSight());
         sight.setDescription(sightRequest.getDescription());
-        sight.setLatitude(sightRequest.getLatitude());
-        sight.setLongitude(sightRequest.getLongitude());
         sight.setTitleFromVideo(sightRequest.getTitleFromVideo());
         sight.setTravel(travel);
         sight.getTravel().getSightList().add(sight);
+        sight.setCoordinatesImage(sightRequest.getCoordinatesImage());
         sightRepository.save(sight);
 
         return SimpleResponse.builder()
@@ -92,6 +91,7 @@ public class SightServiceImpl implements SightService {
                     .nameOfSight(sight.getNameOfSight())
                     .description(sight.getDescription())
                     .titleFromVideo(sight.getNameOfSight())
+                    .coordinatesImage(sight.getCoordinatesImage())
                     .build();
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
@@ -114,9 +114,8 @@ public class SightServiceImpl implements SightService {
         sight.setNameOfSight(sightRequest.getNameOfSight());
         sight.setDescription(sightRequest.getDescription());
         sight.setImages(sightRequest.getImages());
-        sight.setLatitude(sightRequest.getLatitude());
-        sight.setLongitude(sightRequest.getLongitude());
         sight.setTitleFromVideo(sightRequest.getTitleFromVideo());
+        sight.setCoordinatesImage(sightRequest.getCoordinatesImage());
 
         sightRepository.save(sight);
 

@@ -1,8 +1,6 @@
 package travel.travel.model.dto.response;
 
-import jakarta.persistence.Column;
 import lombok.*;
-
 import java.util.List;
 
 @Getter
@@ -15,4 +13,5 @@ public class SightResponseForGetById {
     private String nameOfSight;
     private String description;
     private String titleFromVideo;
+    private String coordinatesImage;
 }
