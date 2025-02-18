@@ -1,36 +1,33 @@
 package travel.travel.model.dto.response;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Map;
 @Data
 @Builder
 public class TourResponseGetByID {
     private Long id;
-    private double latitude;
-    private double longitude;
     private String tourName;
     private String aboutTour;
     private int days;
     private int nights;
     private int price;
-    private int pax;
+    private String pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    private Map<String,String> detailsOfTour;
+    private String detailsOfTour;
+    private String coordinatesImage;
 
-    public TourResponseGetByID(Long id, double latitude,
-                               double longitude, String tourName,
+    public TourResponseGetByID(Long id,String tourName,
                                String aboutTour, int days,
-                               int nights, int price, int pax,
+                               int nights, int price, String pax,
                                LocalDate dateFrom,
-                               LocalDate dateTo, Map<String, String> detailsOfTour) {
+                               LocalDate dateTo, String detailsOfTour, String coordinatesImage) {
         this.id = id;
-        this.latitude = latitude;
-        this.longitude = longitude;
         this.tourName = tourName;
         this.aboutTour = aboutTour;
         this.days = days;
@@ -40,6 +37,7 @@ public class TourResponseGetByID {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.detailsOfTour = detailsOfTour;
+        this.coordinatesImage = coordinatesImage;
     }
 
     public TourResponseGetByID() {

@@ -19,7 +19,7 @@ public class TourResponseCategoryPage {
     private int days;
     private int nights;
     private int price;
-    private int pax;
+    private String pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
 }

@@ -14,9 +14,9 @@ import java.util.List;
 public class SightRequest {
     private String nameOfSight;
     private String description;
-    private double latitude;
-    private double longitude;
     private String titleFromVideo;
     @ElementCollection
     private List<String> images;
+    private String coordinatesImage;
+
 }
