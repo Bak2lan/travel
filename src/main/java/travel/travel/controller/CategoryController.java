@@ -48,16 +48,16 @@ public class CategoryController {
         return ResponseEntity.ok(byId);
     }
 
-//    @Operation(
-//            summary = "Get all categories",
-//            description = "REST API to get all categories"
-//    )
-//    @GetMapping("/getAll")
-//    public ResponseEntity<CategoryPagination> getAllCategory(@RequestParam(defaultValue = "1") int currentPage,
-//                                                             @RequestParam(defaultValue = "5") int pageSize) {
-//        CategoryPagination allCategory = categoryService.getAllCategory(currentPage, pageSize);
-//        return ResponseEntity.ok(allCategory);
-//    }
+    @Operation(
+            summary = "Get all categories",
+            description = "REST API to get all categories"
+    )
+    @GetMapping("/getAll")
+    public ResponseEntity<CategoryPagination> getAllCategory(@RequestParam(defaultValue = "1") int currentPage,
+                                                             @RequestParam(defaultValue = "5") int pageSize) {
+        CategoryPagination allCategory = categoryService.getAllCategory(currentPage, pageSize);
+        return ResponseEntity.ok(allCategory);
+    }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Operation(

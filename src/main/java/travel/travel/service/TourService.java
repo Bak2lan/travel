@@ -11,17 +11,12 @@ import java.util.Map;
 
 public interface TourService {
     SimpleResponse saveTour(TourRequest tourRequest);
-
     TourResponseGetByID getTourById(Long id);
-
     TourPaginationResponse getAllTour(int currentPage, int pageSize);
-
+    TourPaginationResponse getAllTourByPopular(int currentPage, int pageSize);
     TourResponseGetByID updateTour(Long id, TourRequest tourRequest);
-
     SimpleResponse deleteTour(Long id);
-
     List<TourGetAllResponse> getAllTours();
-
     Map<Integer,List<TourGetAllResponse>> getAllToursSortByCategory();
 
 
