@@ -109,6 +109,19 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
+    public TourPaginationResponse getAllTourByPopular(int currentPage, int pageSize) {
+        log.info("Fetching all tours by popular");
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize);
+        Page<TourResponseForPagination> allTour = tourRepository.getAllTourByPopular(pageable);
+        return TourPaginationResponse
+                .builder()
+                .tourResponses(allTour.getContent())
+                .currentPage(allTour.getNumber() + 1)
+                .pageSize(allTour.getTotalPages())
+                .build();
+    }
+
+    @Override
     public TourResponseGetByID updateTour(Long id, TourRequest tourRequest) {
         Tour tour = tourRepository.findById(id).orElseThrow(() -> {
             log.error("Tour with id {} not found", id);

@@ -43,10 +43,17 @@ public class TourController {
             summary = "Get All Tours",
             description = "Get all tours with pagination from database"
     )
-    @GetMapping("/getAllWithPagination")
+    @GetMapping("/getAllToursWithPagination")
     public ResponseEntity<TourPaginationResponse> getAll(@RequestParam(defaultValue = "1") int currentPage,
                                                          @RequestParam(defaultValue = "4") int pageSize) {
         TourPaginationResponse allTour = tourService.getAllTour(currentPage, pageSize);
+        return ResponseEntity.ok(allTour);
+    }
+
+    @GetMapping("/getAllToursByPopular")
+    public ResponseEntity<TourPaginationResponse> getAllTourByPopular(@RequestParam(defaultValue = "1") int currentPage,
+                                                         @RequestParam(defaultValue = "4") int pageSize) {
+        TourPaginationResponse allTour = tourService.getAllTourByPopular(currentPage, pageSize);
         return ResponseEntity.ok(allTour);
     }
 
