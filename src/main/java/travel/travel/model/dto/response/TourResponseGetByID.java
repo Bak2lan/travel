@@ -20,10 +20,11 @@ public class TourResponseGetByID {
     private LocalDate dateTo;
     private List<String> detailsOfTour;
     private String coordinatesImage;
+    private List<String> tourImages;
 
     public TourResponseGetByID(Long id, String tourName, String aboutTour, int days, int nights, int price,
                                String pax, LocalDate dateFrom, LocalDate dateTo, List<String> detailsOfTour,
-                               String coordinatesImage) {
+                               String coordinatesImage,List<String> tourImages) {
         this.id = id;
         this.tourName = tourName;
         this.aboutTour = aboutTour;
@@ -35,5 +36,6 @@ public class TourResponseGetByID {
         this.dateTo = dateTo;
         this.detailsOfTour = detailsOfTour;
         this.coordinatesImage = coordinatesImage;
+        this.tourImages = tourImages;
     }
 }
