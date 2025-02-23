@@ -33,7 +33,7 @@ public class Tour{
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> images;
     @ElementCollection(fetch = FetchType.LAZY)
-    private List<String> detailsOfTour;
+    private Map<String, String> detailsOfTour;
     @ManyToOne(fetch = FetchType.LAZY)
     private Travel travel;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,7 +42,7 @@ public class Tour{
     private boolean popular;
     private String coordinatesImage;
 
-    public Tour(String tourName, String aboutTour, int days, int nights, int price, String pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, List<String> detailsOfTour, Travel travel, Sight sight,boolean popular, String coordinatesImage) {
+    public Tour(String tourName, String aboutTour, int days, int nights, int price, String pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel, Sight sight,boolean popular, String coordinatesImage) {
         this.tourName = tourName;
         this.aboutTour = aboutTour;
         this.days = days;
@@ -59,7 +59,7 @@ public class Tour{
         this.popular = popular;
         this.coordinatesImage = coordinatesImage;
     }
-    public Tour(String tourName, String aboutTour, int days, int nights, int price, String pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, List<String> detailsOfTour, Travel travel,String valueCategory, boolean popular, String coordinatesImage) {
+    public Tour(String tourName, String aboutTour, int days, int nights, int price, String pax, LocalDate dateFrom, LocalDate dateTo, Category category, List<String> images, Map<String, String> detailsOfTour, Travel travel,String valueCategory, boolean popular, String coordinatesImage) {
         this.tourName = tourName;
         this.aboutTour = aboutTour;
         this.days = days;
@@ -121,7 +121,7 @@ public class Tour{
         return images;
     }
 
-    public List<String> getDetailsOfTour() {
+    public Map<String, String>  getDetailsOfTour() {
         return detailsOfTour;
     }
 
