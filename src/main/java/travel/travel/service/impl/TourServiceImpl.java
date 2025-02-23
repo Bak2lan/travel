@@ -79,6 +79,8 @@ public class TourServiceImpl implements TourService {
             tour.setValueCategory(tourRequest.valueCategory());
             tour.setPopular(tourRequest.popular());
             tour.setCoordinatesImage(tourRequest.coordinatesImage());
+            tour.setWhatIsIncluded(tourRequest.whatIsIncluded());
+            tour.setWhatIsExcluded(tourRequest.whatIsExcluded());
             tourRepository.save(tour);
             log.info("Tour successfully saved");
 
@@ -144,6 +146,8 @@ public class TourServiceImpl implements TourService {
         tour.setDetailsOfTour(detailsMap);
         tour.setPopular(tourRequest.popular());
         tour.setCoordinatesImage(tourRequest.coordinatesImage());
+        tour.setWhatIsIncluded(tourRequest.whatIsIncluded());
+        tour.setWhatIsExcluded(tourRequest.whatIsExcluded());
         tourRepository.save(tour);
         log.info("Tour with id {} is successfully updated", id);
         return TourResponseGetByID.builder()
