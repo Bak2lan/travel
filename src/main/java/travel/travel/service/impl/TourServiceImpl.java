@@ -21,6 +21,7 @@ import travel.travel.repository.TourRepository;
 import travel.travel.repository.TravelRepository;
 import travel.travel.service.TourService;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -71,7 +72,9 @@ public class TourServiceImpl implements TourService {
             tour.setDateFrom(tourRequest.dateFrom());
             tour.setDateTo(tourRequest.dateTo());
             tour.setImages(tourRequest.images());
-            tour.setDetailsOfTour(tourRequest.tourDetails());
+            Map<String, String> detailsMap = tourRequest.tourDetails();
+            tour.setDetailsOfTour(detailsMap);
+            tour.setDetailsOfTour(detailsMap);
             tour.setTravel(travel);
             tour.setValueCategory(tourRequest.valueCategory());
             tour.setPopular(tourRequest.popular());
@@ -137,7 +140,8 @@ public class TourServiceImpl implements TourService {
         tour.setDateFrom(tourRequest.dateFrom());
         tour.setDateTo(tourRequest.dateTo());
         tour.setImages(tourRequest.images());
-        tour.setDetailsOfTour(tourRequest.tourDetails());
+        Map<String, String> detailsMap = tourRequest.tourDetails();
+        tour.setDetailsOfTour(detailsMap);
         tour.setPopular(tourRequest.popular());
         tour.setCoordinatesImage(tourRequest.coordinatesImage());
         tourRepository.save(tour);

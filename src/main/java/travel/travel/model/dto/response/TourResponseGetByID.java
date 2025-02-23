@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Builder
 @Getter
@@ -18,12 +19,12 @@ public class TourResponseGetByID {
     private String pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    private List<String> detailsOfTour;
+    private Map<String, String> detailsOfTour;
     private String coordinatesImage;
     private List<String> tourImages;
 
     public TourResponseGetByID(Long id, String tourName, String aboutTour, int days, int nights, int price,
-                               String pax, LocalDate dateFrom, LocalDate dateTo, List<String> detailsOfTour,
+                               String pax, LocalDate dateFrom, LocalDate dateTo, Map<String, String> detailsOfTour,
                                String coordinatesImage,List<String> tourImages) {
         this.id = id;
         this.tourName = tourName;
