@@ -1,5 +1,6 @@
 package travel.travel.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,15 +14,12 @@ import travel.travel.model.dto.request.TourRequest;
 import travel.travel.model.dto.response.*;
 import travel.travel.model.entity.Category;
 import travel.travel.model.entity.Tour;
+import travel.travel.model.entity.TourDetails;
 import travel.travel.model.entity.Travel;
-import travel.travel.repository.CategoryRepository;
+import travel.travel.repository.*;
 import travel.travel.repository.JDBCTemplate.TourJDBCTemplate;
-import travel.travel.repository.SightRepository;
-import travel.travel.repository.TourRepository;
-import travel.travel.repository.TravelRepository;
 import travel.travel.service.TourService;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,17 +27,13 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @Slf4j
+@RequiredArgsConstructor
 public class TourServiceImpl implements TourService {
 
     private final TravelRepository travelRepository;
     private final TourRepository tourRepository;
     private final TourJDBCTemplate tourJDBCTemplate;
-
-    public TourServiceImpl(TravelRepository travelRepository, SightRepository sightRepository, CategoryRepository categoryRepository, TourRepository tourRepository, TourJDBCTemplate tourJDBCTemplate) {
-        this.travelRepository = travelRepository;
-        this.tourRepository = tourRepository;
-        this.tourJDBCTemplate = tourJDBCTemplate;
-    }
+    private final TourDetailsRepository tourDetailsRepository;
 
     @Override
     public SimpleResponse saveTour(TourRequest tourRequest) {
@@ -61,6 +55,13 @@ public class TourServiceImpl implements TourService {
                 return new NotFoundException(String.format("Travel with id %s not found", 1));
             });
 
+            TourDetails tourDetails = new TourDetails();
+            tourDetails.setAboutTourDetails(tourRequest.tourDetailsRequest().getAboutTourDetails());
+            tourDetails.setToursDetailName(tourRequest.tourDetailsRequest().getToursDetailName());
+            tourDetails.setImageTourDetails(tourRequest.tourDetailsRequest().getImageTourDetails());
+            tourDetails.setDays(tourRequest.tourDetailsRequest().getDays());
+            tourDetails.setDistance(tourRequest.tourDetailsRequest().getDistance());
+            tourDetailsRepository.save(tourDetails);
 
             Tour tour = new Tour();
             tour.setTourName(tourRequest.tourName());
@@ -72,9 +73,7 @@ public class TourServiceImpl implements TourService {
             tour.setDateFrom(tourRequest.dateFrom());
             tour.setDateTo(tourRequest.dateTo());
             tour.setImages(tourRequest.images());
-            Map<String, String> detailsMap = tourRequest.tourDetails();
-            tour.setDetailsOfTour(detailsMap);
-            tour.setDetailsOfTour(detailsMap);
+            tour.setTourDetails(tourDetails);
             tour.setTravel(travel);
             tour.setValueCategory(tourRequest.valueCategory());
             tour.setPopular(tourRequest.popular());
@@ -85,7 +84,7 @@ public class TourServiceImpl implements TourService {
             log.info("Tour successfully saved");
 
             return SimpleResponse.builder()
-                    .message("CREATED")
+                    .message("Created tour with id: "+ tour.getId())
                     .status(HttpStatus.CREATED)
                     .timestamp(LocalDateTime.now())
                     .build();
@@ -133,6 +132,13 @@ public class TourServiceImpl implements TourService {
             return new NotFoundException(String.format("Tour with id %s not found", id));
         });
 
+        TourDetails tourDetails = new TourDetails();
+        tourDetails.setAboutTourDetails(tourRequest.tourDetailsRequest().getAboutTourDetails());
+        tourDetails.setToursDetailName(tourRequest.tourDetailsRequest().getToursDetailName());
+        tourDetails.setImageTourDetails(tourRequest.tourDetailsRequest().getImageTourDetails());
+        tourDetails.setDays(tourRequest.tourDetailsRequest().getDays());
+        tourDetails.setDistance(tourRequest.tourDetailsRequest().getDistance());
+
         tour.setTourName(tourRequest.tourName());
         tour.setAboutTour(tourRequest.aboutTour());
         tour.setDays(tourRequest.days());
@@ -142,8 +148,7 @@ public class TourServiceImpl implements TourService {
         tour.setDateFrom(tourRequest.dateFrom());
         tour.setDateTo(tourRequest.dateTo());
         tour.setImages(tourRequest.images());
-        Map<String, String> detailsMap = tourRequest.tourDetails();
-        tour.setDetailsOfTour(detailsMap);
+        tour.setTourDetails(tourDetails);
         tour.setPopular(tourRequest.popular());
         tour.setCoordinatesImage(tourRequest.coordinatesImage());
         tour.setWhatIsIncluded(tourRequest.whatIsIncluded());
@@ -160,7 +165,14 @@ public class TourServiceImpl implements TourService {
                 .pax(tour.getPax())
                 .dateFrom(tour.getDateFrom())
                 .dateTo(tour.getDateTo())
-                .detailsOfTour(tour.getDetailsOfTour())
+                .tourDetailsResponse(new TourDetailsResponse(
+                        tourDetails.getId(),
+                        tourDetails.getToursDetailName(),
+                        tourDetails.getDays(),
+                        tourDetails.getDistance(),
+                        tourDetails.getAboutTourDetails(),
+                        tourDetails.getImageTourDetails()
+                ))
                 .build();
     }
 

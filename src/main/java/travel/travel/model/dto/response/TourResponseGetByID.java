@@ -19,7 +19,7 @@ public class TourResponseGetByID {
     private String pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    private Map<String, String> detailsOfTour;
+    private TourDetailsResponse tourDetailsResponse;
     private String coordinatesImage;
     private List<String> tourImages;
     private List<String> whatIsIncluded;   // добавлено
@@ -27,7 +27,7 @@ public class TourResponseGetByID {
 
     // Обновленный конструктор
     public TourResponseGetByID(Long id, String tourName, String aboutTour, int days, int nights, int price,
-                               String pax, LocalDate dateFrom, LocalDate dateTo, Map<String, String> detailsOfTour,
+                               String pax, LocalDate dateFrom, LocalDate dateTo, TourDetailsResponse tourDetailsResponse,
                                String coordinatesImage, List<String> tourImages, List<String> whatIsIncluded, List<String> whatIsExcluded) {
         this.id = id;
         this.tourName = tourName;
@@ -38,7 +38,7 @@ public class TourResponseGetByID {
         this.pax = pax;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
-        this.detailsOfTour = detailsOfTour;
+        this.tourDetailsResponse = tourDetailsResponse;
         this.coordinatesImage = coordinatesImage;
         this.tourImages = tourImages;
         this.whatIsIncluded = whatIsIncluded;  // добавлено

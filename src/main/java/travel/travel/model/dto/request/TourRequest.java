@@ -16,7 +16,7 @@ public record TourRequest(
         List<String> images,
         boolean popular,
         String coordinatesImage,
-        Map<String, String> tourDetails,
+        TourDetailsRequest tourDetailsRequest,
         String valueCategory,
         List<String> whatIsIncluded,
         List<String> whatIsExcluded) {
