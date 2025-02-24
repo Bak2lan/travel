@@ -32,8 +32,6 @@ public class Tour {
     private Category category;
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> images;
-    @ElementCollection(fetch = FetchType.LAZY)
-    private Map<String, String> detailsOfTour;
     @ManyToOne(fetch = FetchType.LAZY)
     private Travel travel;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,4 +43,6 @@ public class Tour {
     private List<String> whatIsIncluded;
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> whatIsExcluded;
+    @OneToOne
+    private TourDetails tourDetails;
 }
