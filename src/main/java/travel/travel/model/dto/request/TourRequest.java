@@ -2,12 +2,11 @@ package travel.travel.model.dto.request;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public record TourRequest(
         String tourName,
         String aboutTour,
-        int days,
+        int daysByCategory,
         int nights,
         int price,
         String pax,
@@ -16,8 +15,7 @@ public record TourRequest(
         List<String> images,
         boolean popular,
         String coordinatesImage,
-        TourDetailsRequest tourDetailsRequest,
-        String valueCategory,
+        List<TourDetailsRequest> tourDetailsRequest,
         List<String> whatIsIncluded,
         List<String> whatIsExcluded) {
 }

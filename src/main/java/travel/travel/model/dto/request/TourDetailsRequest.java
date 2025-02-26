@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 public class TourDetailsRequest {
     private String toursDetailName;
-    private String days;
+    private String day;
     private String distance;
     private String aboutTourDetails;
     private List<String> imageTourDetails;
@@ -16,9 +16,9 @@ public class TourDetailsRequest {
     public TourDetailsRequest() {
     }
 
-    public TourDetailsRequest(String toursDetailName, String days, String distance, String aboutTourDetails, List<String> imageTourDetails) {
+    public TourDetailsRequest(String toursDetailName, String day, String distance, String aboutTourDetails, List<String> imageTourDetails) {
         this.toursDetailName = toursDetailName;
-        this.days = days;
+        this.day = day;
         this.distance = distance;
         this.aboutTourDetails = aboutTourDetails;
         this.imageTourDetails = imageTourDetails;
