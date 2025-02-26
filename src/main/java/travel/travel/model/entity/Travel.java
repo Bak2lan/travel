@@ -28,10 +28,7 @@ public class Travel {
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Sight> sightList;
 
-    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Category> category;
-
-    public Travel(String aboutUs, String documentation, String sustainability, String contact, List<User> users, List<Tour> tourList, List<Sight> sightList, List<Category> category) {
+    public Travel(String aboutUs, String documentation, String sustainability, String contact, List<User> users, List<Tour> tourList, List<Sight> sightList) {
         this.aboutUs = aboutUs;
         this.documentation = documentation;
         this.sustainability = sustainability;
@@ -39,6 +36,5 @@ public class Travel {
         this.users = users;
         this.tourList = tourList;
         this.sightList = sightList;
-        this.category = category;
     }
 }

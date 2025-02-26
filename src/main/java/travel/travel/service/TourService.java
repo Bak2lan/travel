@@ -16,8 +16,4 @@ public interface TourService {
     TourPaginationResponse getAllTourByPopular(int currentPage, int pageSize);
     TourResponseGetByID updateTour(Long id, TourRequest tourRequest);
     SimpleResponse deleteTour(Long id);
-    List<TourGetAllResponse> getAllTours();
-    Map<Integer,List<TourGetAllResponse>> getAllToursSortByCategory();
-
-
 }

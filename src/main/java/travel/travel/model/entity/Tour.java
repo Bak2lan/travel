@@ -5,7 +5,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Setter
@@ -22,27 +21,25 @@ public class Tour {
     private String tourName;
     @Column(length = 8000)
     private String aboutTour;
-    private int days;
+    private int daysByCategory;
     private int nights;
     private int price;
     private String pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
-    @ManyToOne
-    private Category category;
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> images;
     @ManyToOne(fetch = FetchType.LAZY)
     private Travel travel;
     @ManyToOne(fetch = FetchType.LAZY)
     private Sight sight;
-    private String valueCategory;
     private boolean popular;
     private String coordinatesImage;
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> whatIsIncluded;
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String> whatIsExcluded;
-    @OneToOne
-    private TourDetails tourDetails;
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TourDetails> tourDetails;
+
 }

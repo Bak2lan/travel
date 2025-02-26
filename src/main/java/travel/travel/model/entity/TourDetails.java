@@ -16,9 +16,11 @@ public class TourDetails {
     @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 13, allocationSize = 1)
     private Long id;
     private String toursDetailName;
-    private String days;
-    private String distance;
+    private String day;
     private String aboutTourDetails;
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String>imageTourDetails;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tour_id")
+    private Tour tour;
 }
