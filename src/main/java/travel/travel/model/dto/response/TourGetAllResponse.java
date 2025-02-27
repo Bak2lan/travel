@@ -7,13 +7,13 @@ import java.time.LocalDate;
 public record TourGetAllResponse(
         Long id,
         String tourName,
-        String image,
         String aboutTour,
         int days,
         int nights,
         int price,
         String pax,
         LocalDate dateFrom,
-        LocalDate dateTo
+        LocalDate dateTo,
+        String image
 ) {
 }

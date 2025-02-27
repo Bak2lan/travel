@@ -8,9 +8,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.TourRequest;
 import travel.travel.model.dto.response.SimpleResponse;
-import travel.travel.model.dto.response.TourPaginationResponse;
+import travel.travel.model.dto.response.TourGetAllResponse;
 import travel.travel.model.dto.response.TourResponseGetByID;
 import travel.travel.service.TourService;
+
+import java.util.List;
 
 @Tag(name = "REST APIs for Tour in Tourism",
         description = "CRUD APIs to CREATE, READ, UPDATE, DELETE tour details")
@@ -39,18 +41,16 @@ public class TourController {
             summary = "Get All Tours",
             description = "Get all tours with pagination from database"
     )
-    @GetMapping("/getAllToursWithPagination")
-    public ResponseEntity<TourPaginationResponse> getAll(@RequestParam(defaultValue = "1") int currentPage,
-                                                         @RequestParam(defaultValue = "4") int pageSize) {
-        TourPaginationResponse allTour = tourService.getAllTour(currentPage, pageSize);
-        return ResponseEntity.ok(allTour);
+    @GetMapping("/getAllTours")
+    public List<TourGetAllResponse> getAll() {
+        return tourService.getAllTour();
+
     }
 
     @GetMapping("/getAllToursByPopular")
-    public ResponseEntity<TourPaginationResponse> getAllTourByPopular(@RequestParam(defaultValue = "1") int currentPage,
-                                                         @RequestParam(defaultValue = "4") int pageSize) {
-        TourPaginationResponse allTour = tourService.getAllTourByPopular(currentPage, pageSize);
-        return ResponseEntity.ok(allTour);
+    public List<TourGetAllResponse>getAllTourByPopular(){
+     return tourService.getAllTourByPopular();
+
     }
 
     @Operation(
