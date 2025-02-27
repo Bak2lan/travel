@@ -104,29 +104,13 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public TourPaginationResponse getAllTour(int currentPage, int pageSize) {
-        log.info("Fetching all tours");
-        Pageable pageable = PageRequest.of(currentPage - 1, pageSize);
-        Page<TourResponseForPagination> allTour = tourJDBCTemplate.getAllTour(pageable);
-        return TourPaginationResponse
-                .builder()
-                .tourResponses(allTour.getContent())
-                .currentPage(allTour.getNumber() + 1)
-                .pageSize(allTour.getTotalPages())
-                .build();
+    public List<TourGetAllResponse> getAllTour() {
+        return tourJDBCTemplate.getAllTour();
     }
 
     @Override
-    public TourPaginationResponse getAllTourByPopular(int currentPage, int pageSize) {
-        log.info("Fetching all tours by popular");
-        Pageable pageable = PageRequest.of(currentPage - 1, pageSize);
-        Page<TourResponseForPagination> allTour = tourJDBCTemplate.getAllTourByPopular(pageable);
-        return TourPaginationResponse
-                .builder()
-                .tourResponses(allTour.getContent())
-                .currentPage(allTour.getNumber() + 1)
-                .pageSize(allTour.getTotalPages())
-                .build();
+    public List<TourGetAllResponse> getAllTourByPopular(){
+        return tourJDBCTemplate.getAllTourByPopular();
     }
 
     @Override
