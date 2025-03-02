@@ -69,10 +69,9 @@ public class TourController {
             description = "Update tour by administrator from database"
     )
     @PutMapping("/updateTour/{id}")
-    public ResponseEntity<TourResponseGetByID> updateTour(@PathVariable Long id,
-                                                          @RequestBody TourRequest tourRequest) {
-        TourResponseGetByID tourResponseGetByID = tourService.updateTour(id, tourRequest);
-        return ResponseEntity.ok(tourResponseGetByID);
+    public SimpleResponse updateTour(@PathVariable Long id,
+                                     @RequestBody TourRequest tourRequest) {
+        return tourService.updateTour(id, tourRequest);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")

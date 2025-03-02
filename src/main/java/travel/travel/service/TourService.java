@@ -11,6 +11,6 @@ public interface TourService {
     TourResponseGetByID getTourById(Long id);
     List<TourGetAllResponse> getAllTour();
     List<TourGetAllResponse> getAllTourByPopular();
-    TourResponseGetByID updateTour(Long id, TourRequest tourRequest);
+    SimpleResponse  updateTour(Long id, TourRequest tourRequest);
     SimpleResponse deleteTour(Long id);
 }
