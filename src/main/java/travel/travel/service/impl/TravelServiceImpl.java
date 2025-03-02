@@ -30,10 +30,14 @@ public class TravelServiceImpl implements TravelService {
     @Override
     @Transactional
     public SimpleResponse createTravel(TravelRequest travelRequest) {
-        log.info("Creating travel: {}", travelRequest);
-        Travel travel = travelMapper.travelRequestToTravel(travelRequest);
-        travelRepository.save(travel);
-        log.info("Travel successfully created: {}", travel);
+        Travel existingTravel = travelRepository.findById(1L)
+                .orElseThrow(() -> new NotFoundException("Travel with id 1 not found"));
+
+        travelMapper.updateTravelFromRequest(travelRequest, existingTravel);
+
+        travelRepository.save(existingTravel);
+        log.info("Travel successfully updated: {}", existingTravel);
+
         return SimpleResponse.builder()
                 .status(HttpStatus.CREATED)
                 .timestamp(LocalDateTime.now())
