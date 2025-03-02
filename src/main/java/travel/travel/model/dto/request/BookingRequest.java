@@ -2,10 +2,8 @@ package travel.travel.model.dto.request;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import travel.travel.validation.email.EmailValidation;
 import travel.travel.validation.phoneNumber.PhoneNumberValidation;
-
 import java.time.LocalDate;
 
 public record BookingRequest(
