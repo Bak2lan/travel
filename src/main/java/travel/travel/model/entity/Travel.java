@@ -12,7 +12,6 @@ import java.util.List;
 @Table(name = "travels")
 public class Travel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String aboutUs;
     private String documentation;

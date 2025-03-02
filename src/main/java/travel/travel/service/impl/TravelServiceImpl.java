@@ -1,6 +1,5 @@
 package travel.travel.service.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,7 +14,6 @@ import travel.travel.model.entity.Travel;
 import travel.travel.model.mapper.TravelMapper;
 import travel.travel.repository.TravelRepository;
 import travel.travel.service.TravelService;
-
 import java.time.LocalDateTime;
 
 @Service()
@@ -26,25 +24,6 @@ public class TravelServiceImpl implements TravelService {
 
     TravelRepository travelRepository;
     TravelMapper travelMapper;
-
-    @Override
-    @Transactional
-    public SimpleResponse createTravel(TravelRequest travelRequest) {
-        Travel existingTravel = travelRepository.findById(1L)
-                .orElseThrow(() -> new NotFoundException("Travel with id 1 not found"));
-
-        travelMapper.updateTravelFromRequest(travelRequest, existingTravel);
-
-        travelRepository.save(existingTravel);
-        log.info("Travel successfully updated: {}", existingTravel);
-
-        return SimpleResponse.builder()
-                .status(HttpStatus.CREATED)
-                .timestamp(LocalDateTime.now())
-                .message("success")
-                .build();
-
-    }
 
     @Override
     public TravelResponse getTravelById(Long id) {
@@ -70,18 +49,5 @@ public class TravelServiceImpl implements TravelService {
                 .timestamp(LocalDateTime.now())
                 .build();
 
-    }
-
-    @Override
-    public SimpleResponse deleteTravelById(Long id) {
-        log.info("Deleting travel with id: {}", id);
-        Travel travel = travelRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Travel with id" + id + " not found"));
-        travelRepository.delete(travel);
-        return SimpleResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .message("Travel with id " + id + " successfully deleted")
-                .status(HttpStatus.OK)
-                .build();
     }
 }

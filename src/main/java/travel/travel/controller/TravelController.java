@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import travel.travel.model.dto.request.TravelRequest;
@@ -11,6 +12,7 @@ import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.model.dto.response.TravelResponse;
 import travel.travel.service.TravelService;
 
+@Slf4j
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequiredArgsConstructor
@@ -18,12 +20,6 @@ import travel.travel.service.TravelService;
 @RequestMapping("/travels")
 public class TravelController {
     TravelService travelService;
-
-    @PostMapping("/save")
-    public ResponseEntity<SimpleResponse> createTravel(@RequestBody  TravelRequest travelRequest) {
-        SimpleResponse response = travelService.createTravel(travelRequest);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<TravelResponse> getTravelById(@PathVariable Long id) {
@@ -34,12 +30,6 @@ public class TravelController {
     @PutMapping("/update")
     public ResponseEntity<SimpleResponse> updateTravelById(@Valid  @RequestBody TravelRequest travelRequest) {
         SimpleResponse response = travelService.updateTravel(travelRequest);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<SimpleResponse> deleteTravelById(@PathVariable Long id) {
-        SimpleResponse response = travelService.deleteTravelById(id);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 }

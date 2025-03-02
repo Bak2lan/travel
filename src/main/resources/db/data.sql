@@ -1,9 +1,7 @@
 INSERT INTO travels (id, about_us, documentation, sustainability, address, phone_number, email, image)
 VALUES
     (1, 'Welcome to our travel agency!', 'All documents are verified.', 'We prioritize sustainability in tourism.',
-     '123 Main Street, Bishkek, Kyrgyzstan', '+996555123456', 'kyrgyzsourcetravel@gmail.com', 'https://example.com/image1.jpg'),
-    (2, 'Explore the world with us!', 'All documents are verified.', 'Eco-friendly tourism is our priority.',
-     '456 Elm Street, Almaty, Kazakhstan', '+77271234567', 'contact@travel.com', 'https://example.com/image2.jpg');
+     '123 Main Street, Bishkek, Kyrgyzstan', '+996555123456', 'kyrgyzsourcetravel@gmail.com', 'https://example.com/image1.jpg');
 
 --
 -- INSERT INTO sights (id, name_of_sight, description, title_from_video, coordinates_image)
@@ -53,7 +51,7 @@ VALUES
 --
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
 VALUES (1, 'kyrgyzsourcetravel@gmail.com', 'Kyrgyz Source', '$2y$10$kB2mfGlpySZyo.c/Vd.SB.zKxnJiAqfyS0hE6IYmHzrfCaRQ5SxAy', '+996555123456', 'ROLE_ADMIN', 1),
-       (2, 'bekbolot@gmail.com', 'Bekbolot', '$2y$10$4Y4xzBVSR5n3PcbCg9sjbur0eVXCC6U8ehHbhH.G/Yizg4oILmi0u', '+996554450820', 'ROLE_ADMIN', 2);
+       (2, 'bekbolot@gmail.com', 'Bekbolot', '$2y$10$4Y4xzBVSR5n3PcbCg9sjbur0eVXCC6U8ehHbhH.G/Yizg4oILmi0u', '+996554450820', 'ROLE_ADMIN', 1);
 
 -- passwordAdmin: kyrgyzsourCetravel090603
 -- INSERT INTO tours (id, travel_id, tour_name, about_tour, days_by_category, nights, price, pax, date_from, date_to, popular, coordinates_image)

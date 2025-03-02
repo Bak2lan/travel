@@ -6,14 +6,6 @@ import travel.travel.model.dto.response.SimpleResponse;
 import travel.travel.model.dto.response.TravelResponse;
 
 public interface TravelService {
-
-    SimpleResponse createTravel(TravelRequest travelRequest);
-
     TravelResponse getTravelById(Long id);
-
     SimpleResponse updateTravel(TravelRequest travelRequest);
-
-    SimpleResponse deleteTravelById(Long id);
-
-
 }
