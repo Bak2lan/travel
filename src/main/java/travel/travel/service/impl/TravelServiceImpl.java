@@ -53,10 +53,10 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
-    public SimpleResponse updateTravelById(Long id, TravelRequest travelRequest) {
-        log.info("Updating travel with id: {}, request: {}", id, travelRequest);
-        Travel travel = travelRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Travel with id " + id + " not found"));
+    public SimpleResponse updateTravel(TravelRequest travelRequest) {
+        log.info("Updating travel with id: {}, request: {}", travelRequest);
+        Travel travel = travelRepository.findById(1L)
+                .orElseThrow(() -> new NotFoundException("Travel with id not found"));
         travelMapper.updateTravelFromRequest(travelRequest, travel);
         travelRepository.save(travel);
         log.info("Travel successfully updated: {}", travel);

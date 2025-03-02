@@ -1,8 +1,10 @@
-insert into travels (id, about_us, contact, documentation, sustainability)
-values (1, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents are verified.',
-        'We prioritize sustainability in tourism.'),
-       (2, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents are verified.',
-        'We prioritize sustainability in tourism.');
+INSERT INTO travels (id, about_us, documentation, sustainability, address, phone_number, email, image)
+VALUES
+    (1, 'Welcome to our travel agency!', 'All documents are verified.', 'We prioritize sustainability in tourism.',
+     '123 Main Street, Bishkek, Kyrgyzstan', '+996555123456', 'kyrgyzsourcetravel@gmail.com', 'https://example.com/image1.jpg'),
+    (2, 'Explore the world with us!', 'All documents are verified.', 'Eco-friendly tourism is our priority.',
+     '456 Elm Street, Almaty, Kazakhstan', '+77271234567', 'contact@travel.com', 'https://example.com/image2.jpg');
+
 --
 -- INSERT INTO sights (id, name_of_sight, description, title_from_video, coordinates_image)
 -- VALUES (1, 'Алай өрөөнү', 'Алай өрөөнү – Кыргызстандын эң кооз жерлеринин бири. Бул өрөөн бийик тоолор менен курчалган жана таң калыштуу пейзаждары менен белгилүү.', 'Алай өрөөнүнүн кооздугу', '39.9245, 72.8663'),
@@ -50,9 +52,10 @@ values (1, 'Welcome to our travel agency!', 'contact@travel.com', 'All documents
 --      Кыргызстан – жаратылыш менен тарых бириккен керемет мекен!');
 --
 INSERT INTO users (id, email, name, password, phone_number, role, travel_id)
-VALUES (1, 'asan@gmail.com', 'Asan', '$2a$12$dyHbyL5DkJFtoGTgk0jaouZAhpmu6mfZOg7tgrXCae2VmHOIsVvqS', '+996555123456', 'ROLE_ADMIN', 1),
+VALUES (1, 'kyrgyzsourcetravel@gmail.com', 'Kyrgyz Source', '$2y$10$kB2mfGlpySZyo.c/Vd.SB.zKxnJiAqfyS0hE6IYmHzrfCaRQ5SxAy', '+996555123456', 'ROLE_ADMIN', 1),
        (2, 'bekbolot@gmail.com', 'Bekbolot', '$2y$10$4Y4xzBVSR5n3PcbCg9sjbur0eVXCC6U8ehHbhH.G/Yizg4oILmi0u', '+996554450820', 'ROLE_ADMIN', 2);
 
+-- passwordAdmin: kyrgyzsourCetravel090603
 -- INSERT INTO tours (id, travel_id, tour_name, about_tour, days_by_category, nights, price, pax, date_from, date_to, popular, coordinates_image)
 -- VALUES (1, 1, 'Тянь-Шань экспедициясы', 'Бул саякат Кыргызстандын эң кооз тоолорун кыдырууга арналган. Саякатчылар жаратылыштын сулуулугунан ырахат ала алышат.', 7, 6, 500, '5-10 адам', '2025-06-01', '2025-06-07',  true, '42.5000, 78.5000'),
 --        (2, 1, 'Ысык-Көлдүн жээги', 'Бул тур Ысык-Көлдүн кооз жээгинде эс алуу үчүн уюштурулган. Көлдүн жылуу суусунда сүзүп, жаратылыштан ырахат аласыз.', 5, 4, 300, '10-15 адам', '2025-07-10', '2025-07-15', false, '42.3400, 77.0800'),

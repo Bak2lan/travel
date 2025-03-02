@@ -31,9 +31,9 @@ public class TravelController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}/update")
-    public ResponseEntity<SimpleResponse> updateTravelById(@PathVariable @Valid Long id, @RequestBody TravelRequest travelRequest) {
-        SimpleResponse response = travelService.updateTravelById(id, travelRequest);
+    @PutMapping("/update")
+    public ResponseEntity<SimpleResponse> updateTravelById(@Valid  @RequestBody TravelRequest travelRequest) {
+        SimpleResponse response = travelService.updateTravel(travelRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

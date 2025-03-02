@@ -1,8 +1,10 @@
 package travel.travel.model.dto.request;
+
 import travel.travel.model.enums.Role;
 import travel.travel.validation.email.EmailValidation;
 import travel.travel.validation.password.PasswordValidation;
 import travel.travel.validation.phoneNumber.PhoneNumberValidation;
+
 public record UserRequest(
         String name,
         @EmailValidation

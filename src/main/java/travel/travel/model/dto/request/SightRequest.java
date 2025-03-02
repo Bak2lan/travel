@@ -1,9 +1,7 @@
 package travel.travel.model.dto.request;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

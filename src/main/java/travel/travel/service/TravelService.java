@@ -11,7 +11,7 @@ public interface TravelService {
 
     TravelResponse getTravelById(Long id);
 
-    SimpleResponse updateTravelById(Long id, TravelRequest travelRequest);
+    SimpleResponse updateTravel(TravelRequest travelRequest);
 
     SimpleResponse deleteTravelById(Long id);
 
