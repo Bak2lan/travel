@@ -114,7 +114,7 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public TourResponseGetByID updateTour(Long id, TourRequest tourRequest) {
+    public SimpleResponse updateTour(Long id, TourRequest tourRequest) {
         Tour tour = tourRepository.findById(id).orElseThrow(() -> {
             log.error("Tour with id {} not found", id);
             return new NotFoundException(String.format("Tour with id %s not found", id));
@@ -161,17 +161,11 @@ public class TourServiceImpl implements TourService {
                 ))
                 .toList();
 
-        return TourResponseGetByID.builder()
-                .id(tour.getId())
-                .tourName(tour.getTourName())
-                .aboutTour(tour.getAboutTour())
-                .daysByCategory(tour.getDaysByCategory())
-                .nights(tour.getNights())
-                .price(tour.getPrice())
-                .pax(tour.getPax())
-                .dateFrom(tour.getDateFrom())
-                .dateTo(tour.getDateTo())
-                .tourDetailsResponse((List<TourDetailsResponse>) tourDetailsResponses)
+        return SimpleResponse
+                .builder()
+                .message("Successfully updated tour with id: " + tour.getId())
+                .status(HttpStatus.OK)
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 
