@@ -9,6 +9,7 @@ public record TourRequest(
         int daysByCategory,
         int nights,
         int price,
+        int paxPrice,
         String pax,
         LocalDate dateFrom,
         LocalDate dateTo,
