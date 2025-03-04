@@ -16,6 +16,7 @@ public class Travel {
     private String aboutUs;
     private String documentation;
     private String sustainability;
+    private String certification;
     private String address;
     private String phoneNumber;
     private String email;

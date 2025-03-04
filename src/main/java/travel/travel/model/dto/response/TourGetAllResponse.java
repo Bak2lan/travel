@@ -11,6 +11,7 @@ public record TourGetAllResponse(
         int days,
         int nights,
         int price,
+        int paxPrice,
         String pax,
         LocalDate dateFrom,
         LocalDate dateTo,

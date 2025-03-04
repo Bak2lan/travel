@@ -18,7 +18,7 @@ public class TourJDBCTemplate {
     public TourResponseGetByID getTourById(Long id) {
         String tourSql = """
         
-                SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price, t.pax,
+                SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price,t.pax_price, t.pax,
                t.date_from, t.date_to, t.coordinates_image,
                STRING_AGG(ti.images, ', ') AS images
         FROM tours t
@@ -62,6 +62,7 @@ public class TourJDBCTemplate {
             int daysByCategory = rs.getInt("days_by_category");
             int nights = rs.getInt("nights");
             int price = rs.getInt("price");
+            int paxPrice = rs.getInt("pax_price");
             String pax = rs.getString("pax");
             LocalDate dateFrom = rs.getDate("date_from").toLocalDate();
             LocalDate dateTo = rs.getDate("date_to").toLocalDate();
@@ -92,7 +93,7 @@ public class TourJDBCTemplate {
             System.out.println("Fetched whatIsIncluded: " + whatIsIncludedList);
             System.out.println("Fetched whatIsExcluded: " + whatIsExcludedList);
 
-            return new TourResponseGetByID(tourId, tourName, aboutTour, daysByCategory, nights, price, pax, dateFrom, dateTo,
+            return new TourResponseGetByID(tourId, tourName, aboutTour, daysByCategory, nights, price, paxPrice, pax, dateFrom, dateTo,
                     tourDetailsResponse, coordinatesImage, imagesList, whatIsIncludedList, whatIsExcludedList);
         });
 
@@ -103,7 +104,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTour() {
         String sql = """
         SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, 
-               t.nights, t.price, t.pax, t.date_from, t.date_to,
+               t.nights, t.price, t.pax_price, t.pax, t.date_from, t.date_to,
                STRING_AGG(ti.images, ', ') AS images
         FROM tours t
         LEFT JOIN tour_images ti ON t.id = ti.tour_id
@@ -118,6 +119,7 @@ public class TourJDBCTemplate {
                 rs.getInt("days_by_category"),
                 rs.getInt("nights"),
                 rs.getInt("price"),
+                rs.getInt("pax_price"),
                 rs.getString("pax"),
                 rs.getObject("date_from", LocalDate.class),
                 rs.getObject("date_to", LocalDate.class),
@@ -127,7 +129,7 @@ public class TourJDBCTemplate {
 
     public List<TourGetAllResponse> getAllTourByPopular() {
         String sql = """
-        SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price, t.pax,
+        SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price, t.pax_price, t.pax,
                t.date_from, t.date_to, STRING_AGG(ti.images, ', ') AS images
         FROM tours t
         LEFT JOIN tour_images ti ON t.id = ti.tour_id
@@ -143,6 +145,7 @@ public class TourJDBCTemplate {
                 rs.getInt("days_by_category"),
                 rs.getInt("nights"),
                 rs.getInt("price"),
+                rs.getInt("pax_price"),
                 rs.getString("pax"),
                 rs.getObject("date_from", LocalDate.class),
                 rs.getObject("date_to", LocalDate.class),

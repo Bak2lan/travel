@@ -25,6 +25,7 @@ public class Tour {
     private int nights;
     private int price;
     private String pax;
+    private int paxPrice;
     private LocalDate dateFrom;
     private LocalDate dateTo;
     @ElementCollection(fetch = FetchType.LAZY)

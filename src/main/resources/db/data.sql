@@ -1,7 +1,7 @@
-INSERT INTO travels (id, about_us, documentation, sustainability, address, phone_number, email, image)
+INSERT INTO travels (id, about_us, documentation, sustainability, certification, address, phone_number, email, image)
 VALUES
     (1, 'Welcome to our travel agency!', 'All documents are verified.', 'We prioritize sustainability in tourism.',
-     '123 Main Street, Bishkek, Kyrgyzstan', '+996555123456', 'kyrgyzsourcetravel@gmail.com', 'https://example.com/image1.jpg');
+     'certificated from Kytgyz Republic','123 Main Street, Bishkek, Kyrgyzstan', '+996555123456', 'kyrgyzsourcetravel@gmail.com', 'https://example.com/image1.jpg');
 
 --
 -- INSERT INTO sights (id, name_of_sight, description, title_from_video, coordinates_image)
