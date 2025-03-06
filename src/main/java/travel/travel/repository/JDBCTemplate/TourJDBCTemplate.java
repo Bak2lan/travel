@@ -19,7 +19,7 @@ public class TourJDBCTemplate {
         String tourSql = """
         
                 SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price,t.pax_price, t.pax,
-               t.date_from, t.date_to, t.coordinates_image,
+               t.date_from, t.date_to, t.popular, t.coordinates_image,
                STRING_AGG(ti.images, ', ') AS images
         FROM tours t
         LEFT JOIN tour_images ti ON t.id = ti.tour_id
@@ -66,6 +66,7 @@ public class TourJDBCTemplate {
             String pax = rs.getString("pax");
             LocalDate dateFrom = rs.getDate("date_from").toLocalDate();
             LocalDate dateTo = rs.getDate("date_to").toLocalDate();
+            boolean isPopular = rs.getBoolean("popular");
             String coordinatesImage = rs.getString("coordinates_image");
             String imagesStr = rs.getString("images");
             List<String> imagesList = imagesStr != null ? Arrays.asList(imagesStr.split(", ")) : new ArrayList<>();
@@ -93,7 +94,7 @@ public class TourJDBCTemplate {
             System.out.println("Fetched whatIsIncluded: " + whatIsIncludedList);
             System.out.println("Fetched whatIsExcluded: " + whatIsExcludedList);
 
-            return new TourResponseGetByID(tourId, tourName, aboutTour, daysByCategory, nights, price, paxPrice, pax, dateFrom, dateTo,
+            return new TourResponseGetByID(tourId, tourName, aboutTour, daysByCategory, nights, price, paxPrice, pax, dateFrom, dateTo,isPopular,
                     tourDetailsResponse, coordinatesImage, imagesList, whatIsIncludedList, whatIsExcludedList);
         });
 

@@ -19,6 +19,7 @@ public class TourResponseGetByID {
     private String pax;
     private LocalDate dateFrom;
     private LocalDate dateTo;
+    private boolean isPopular;
     private List<TourDetailsResponse> tourDetailsResponse;
     private String coordinatesImage;
     private List<String> tourImages;
