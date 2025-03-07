@@ -106,12 +106,15 @@ public class TourJDBCTemplate {
         String sql = """
         SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, 
                t.nights, t.price, t.pax_price, t.pax, t.date_from, t.date_to,
-               STRING_AGG(ti.images, ', ') AS images
+               (
+                   SELECT ti.images
+                   FROM tour_images ti
+                   WHERE ti.tour_id = t.id
+                   LIMIT 1  
+               ) AS image  
         FROM tours t
-        LEFT JOIN tour_images ti ON t.id = ti.tour_id
-        GROUP BY t.id
         ORDER BY t.days_by_category ASC;
-    """;
+        """;
 
         return jdbcTemplate.query(sql, (rs, rowNum) -> new TourGetAllResponse(
                 rs.getLong("id"),
@@ -124,14 +127,20 @@ public class TourJDBCTemplate {
                 rs.getString("pax"),
                 rs.getObject("date_from", LocalDate.class),
                 rs.getObject("date_to", LocalDate.class),
-                rs.getString("images")
+                rs.getString("image")
         ));
     }
 
     public List<TourGetAllResponse> getAllTourByPopular() {
         String sql = """
-        SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price, t.pax_price, t.pax,
-               t.date_from, t.date_to, STRING_AGG(ti.images, ', ') AS images
+        SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, 
+               t.nights, t.price, t.pax_price, t.pax, t.date_from, t.date_to,
+               (
+                   SELECT ti.images
+                   FROM tour_images ti
+                   WHERE ti.tour_id = t.id
+                   LIMIT 1  
+               ) AS image  
         FROM tours t
         LEFT JOIN tour_images ti ON t.id = ti.tour_id
         WHERE t.popular = true
@@ -150,7 +159,7 @@ public class TourJDBCTemplate {
                 rs.getString("pax"),
                 rs.getObject("date_from", LocalDate.class),
                 rs.getObject("date_to", LocalDate.class),
-                rs.getString("images")
+                rs.getString("image")
 
         ));
     }
