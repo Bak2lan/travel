@@ -121,7 +121,7 @@ public class TourServiceImpl implements TourService {
             return new NotFoundException(String.format("Tour with id %s not found", id));
         });
 
-        tour.getTourDetails().clear();
+        tourDetailsRepository.deleteAll(tour.getTourDetails());
 
         List<TourDetails> updatedTourDetailsList = new ArrayList<>();
         for (TourDetailsRequest detailsRequest : tourRequest.tourDetailsRequest()) {
@@ -130,6 +130,7 @@ public class TourServiceImpl implements TourService {
             tourDetails.setToursDetailName(detailsRequest.getToursDetailName());
             tourDetails.setImageTourDetails(detailsRequest.getImageTourDetails());
             tourDetails.setDay(detailsRequest.getDay());
+            tourDetails.setTour(tour);
             tourDetailsRepository.save(tourDetails);
             updatedTourDetailsList.add(tourDetails);
         }
@@ -150,6 +151,7 @@ public class TourServiceImpl implements TourService {
         tour.setWhatIsIncluded(tourRequest.whatIsIncluded());
         tour.setWhatIsExcluded(tourRequest.whatIsExcluded());
 
+        tour.setTourDetails(updatedTourDetailsList);
         tourRepository.save(tour);
         log.info("Tour with id {} is successfully updated", id);
         return SimpleResponse
