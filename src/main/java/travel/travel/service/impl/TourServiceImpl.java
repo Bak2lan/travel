@@ -60,8 +60,7 @@ public class TourServiceImpl implements TourService {
             tour.setDaysByCategory(tourRequest.daysByCategory());
             tour.setNights(tourRequest.nights());
             tour.setPrice(tourRequest.price());
-            tour.setPax(tourRequest.pax());
-            tour.setPaxPrice(tourRequest.paxPrice());
+            tour.setPaxAndPrice(tourRequest.paxAndPrice());
             tour.setDateFrom(tourRequest.dateFrom());
             tour.setDateTo(tourRequest.dateTo());
             tour.setImages(tourRequest.images());
@@ -140,8 +139,7 @@ public class TourServiceImpl implements TourService {
         tour.setDaysByCategory(tourRequest.daysByCategory());
         tour.setNights(tourRequest.nights());
         tour.setPrice(tourRequest.price());
-        tour.setPaxPrice(tourRequest.paxPrice());
-        tour.setPax(tourRequest.pax());
+        tour.setPaxAndPrice(tourRequest.paxAndPrice());
         tour.setDateFrom(tourRequest.dateFrom());
         tour.setDateTo(tourRequest.dateTo());
         tour.setImages(tourRequest.images());

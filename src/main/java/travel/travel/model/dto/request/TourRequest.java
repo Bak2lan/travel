@@ -2,6 +2,7 @@ package travel.travel.model.dto.request;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public record TourRequest(
         String tourName,
@@ -9,8 +10,7 @@ public record TourRequest(
         int daysByCategory,
         int nights,
         int price,
-        int paxPrice,
-        String pax,
+        Map<String, Integer> paxAndPrice,
         LocalDate dateFrom,
         LocalDate dateTo,
         List<String> images,

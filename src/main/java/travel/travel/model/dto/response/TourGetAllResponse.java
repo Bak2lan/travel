@@ -3,6 +3,8 @@ package travel.travel.model.dto.response;
 import lombok.Builder;
 
 import java.time.LocalDate;
+import java.util.Map;
+
 @Builder
 public record TourGetAllResponse(
         Long id,
@@ -11,8 +13,7 @@ public record TourGetAllResponse(
         int days,
         int nights,
         int price,
-        int paxPrice,
-        String pax,
+        Map<String, Integer> paxAndPrice,
         LocalDate dateFrom,
         LocalDate dateTo,
         String image

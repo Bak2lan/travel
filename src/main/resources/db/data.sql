@@ -1,8 +1,21 @@
-INSERT INTO travels (id, about_us, documentation, sustainability, certification, address, phone_number, email, image)
-VALUES
-    (1, 'Welcome to our travel agency!', 'All documents are verified.', 'We prioritize sustainability in tourism.',
-     'certificated from Kytgyz Republic','123 Main Street, Bishkek, Kyrgyzstan', '+996555123456', 'kyrgyzsourcetravel@gmail.com', 'https://example.com/image1.jpg');
-
+INSERT INTO travels (id, about_us_name, about_us, documentation_name, documentation,
+    sustainability_name, sustainability, certification_name, certification,
+    address, phone_number, email, image
+) VALUES (
+    1, -- Укажите ID или уберите, если автоинкремент
+    'Welcome to Kyrgyzsource Travel',
+    'We offer unique experiences across Kyrgyzstan, blending culture, adventure, and nature.',
+    'Travel Documents & Guidelines',
+    'Ensure you have a valid passport and necessary visas for a hassle-free journey.',
+    'Sustainability Practices',
+    'We promote responsible travel by supporting local communities and protecting the environment.',
+    'Certified Travel Agency',
+    'Accredited by the International Tourism Organization.',
+    '123 Main Street, Bishkek, Kyrgyzstan',
+    '+996555123456',
+    'kyrgyzsourcetravel@gmail.com',
+    'https://example.com/image1.jpg'
+    );
 --
 -- INSERT INTO sights (id, name_of_sight, description, title_from_video, coordinates_image)
 -- VALUES (1, 'Алай өрөөнү', 'Алай өрөөнү – Кыргызстандын эң кооз жерлеринин бири. Бул өрөөн бийик тоолор менен курчалган жана таң калыштуу пейзаждары менен белгилүү.', 'Алай өрөөнүнүн кооздугу', '39.9245, 72.8663'),
