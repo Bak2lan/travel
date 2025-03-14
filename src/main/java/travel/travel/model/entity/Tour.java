@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Setter
@@ -24,8 +25,8 @@ public class Tour {
     private int daysByCategory;
     private int nights;
     private int price;
-    private String pax;
-    private int paxPrice;
+    @ElementCollection(fetch = FetchType.LAZY)
+    private Map<String, Integer> paxAndPrice;
     private LocalDate dateFrom;
     private LocalDate dateTo;
     @ElementCollection(fetch = FetchType.LAZY)
@@ -42,5 +43,4 @@ public class Tour {
     private List<String> whatIsExcluded;
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TourDetails> tourDetails;
-
 }

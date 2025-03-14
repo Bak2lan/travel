@@ -3,6 +3,7 @@ package travel.travel.model.dto.response;
 import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Builder
 @Getter
@@ -15,8 +16,7 @@ public class TourResponseGetByID {
     private int daysByCategory;
     private int nights;
     private int price;
-    private int paxPrice;
-    private String pax;
+    private Map<String, Integer> paxAndPrice;
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private boolean isPopular;
