@@ -57,6 +57,7 @@ public class TourServiceImpl implements TourService {
             tour.setDaysByCategory(tourRequest.daysByCategory());
             tour.setNights(tourRequest.nights());
             tour.setPrice(tourRequest.price());
+            tour.setPax(tourRequest.pax());
             tour.setPaxAndPrice(tourRequest.paxAndPrice());
             tour.setDateFrom(tourRequest.dateFrom());
             tour.setDateTo(tourRequest.dateTo());
@@ -140,6 +141,7 @@ public class TourServiceImpl implements TourService {
         tour.setDaysByCategory(tourRequest.daysByCategory());
         tour.setNights(tourRequest.nights());
         tour.setPrice(tourRequest.price());
+        tour.setPax(tourRequest.pax());
         tour.setPaxAndPrice(tourRequest.paxAndPrice());
         tour.setDateFrom(tourRequest.dateFrom());
         tour.setDateTo(tourRequest.dateTo());
@@ -217,6 +219,7 @@ public class TourServiceImpl implements TourService {
             tour.setDaysByCategoryRu(tourRequest.daysByCategory());
             tour.setNightsRu(tourRequest.nights());
             tour.setPriceRu(tourRequest.price());
+            tour.setPaxRu(tourRequest.pax());
             tour.setPaxAndPriceRu(tourRequest.paxAndPrice());
             tour.setDateFromRu(tourRequest.dateFrom());
             tour.setDateToRu(tourRequest.dateTo());
@@ -300,6 +303,7 @@ public class TourServiceImpl implements TourService {
         tour.setDaysByCategoryRu(tourRequest.daysByCategory());
         tour.setNightsRu(tourRequest.nights());
         tour.setPriceRu(tourRequest.price());
+        tour.setPaxRu(tourRequest.pax());
         tour.setPaxAndPriceRu(tourRequest.paxAndPrice());
         tour.setDateFromRu(tourRequest.dateFrom());
         tour.setDateToRu(tourRequest.dateTo());
@@ -347,6 +351,7 @@ public class TourServiceImpl implements TourService {
             tour.setDaysByCategoryDe(tourRequest.daysByCategory());
             tour.setNightsDe(tourRequest.nights());
             tour.setPriceDe(tourRequest.price());
+            tour.setPaxDe(tourRequest.pax());
             tour.setPaxAndPriceDe(tourRequest.paxAndPrice());
             tour.setDateFromDe(tourRequest.dateFrom());
             tour.setDateToDe(tourRequest.dateTo());
@@ -426,6 +431,7 @@ public class TourServiceImpl implements TourService {
         tour.setDaysByCategoryDe(tourRequest.daysByCategory());
         tour.setNightsDe(tourRequest.nights());
         tour.setPriceDe(tourRequest.price());
+        tour.setPaxDe(tourRequest.pax());
         tour.setPaxAndPriceDe(tourRequest.paxAndPrice());
         tour.setDateFromDe(tourRequest.dateFrom());
         tour.setDateToDe(tourRequest.dateTo());
@@ -476,6 +482,7 @@ public class TourServiceImpl implements TourService {
             tour.setDaysByCategoryFr(tourRequest.daysByCategory());
             tour.setNightsFr(tourRequest.nights());
             tour.setPriceFr(tourRequest.price());
+            tour.setPaxFr(tourRequest.pax());
             tour.setPaxAndPriceFr(tourRequest.paxAndPrice());
             tour.setDateFromFr(tourRequest.dateFrom());
             tour.setDateToFr(tourRequest.dateTo());
@@ -556,6 +563,7 @@ public class TourServiceImpl implements TourService {
         tour.setDaysByCategoryFr(tourRequest.daysByCategory());
         tour.setNightsFr(tourRequest.nights());
         tour.setPriceFr(tourRequest.price());
+        tour.setPaxFr(tourRequest.pax());
         tour.setPaxAndPriceFr(tourRequest.paxAndPrice());
         tour.setDateFromFr(tourRequest.dateFrom());
         tour.setDateToFr(tourRequest.dateTo());
@@ -602,6 +610,7 @@ public class TourServiceImpl implements TourService {
             tour.setDaysByCategoryEs(tourRequest.daysByCategory());
             tour.setNightsEs(tourRequest.nights());
             tour.setPriceEs(tourRequest.price());
+            tour.setPaxEs(tourRequest.pax());
             tour.setPaxAndPriceEs(tourRequest.paxAndPrice());
             tour.setDateFromEs(tourRequest.dateFrom());
             tour.setDateToEs(tourRequest.dateTo());
@@ -681,6 +690,7 @@ public class TourServiceImpl implements TourService {
         tour.setDaysByCategoryEs(tourRequest.daysByCategory());
         tour.setNightsEs(tourRequest.nights());
         tour.setPriceEs(tourRequest.price());
+        tour.setPaxEs(tourRequest.pax());
         tour.setPaxAndPriceEs(tourRequest.paxAndPrice());
         tour.setDateFromEs(tourRequest.dateFrom());
         tour.setDateToEs(tourRequest.dateTo());

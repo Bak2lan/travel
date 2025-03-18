@@ -18,7 +18,7 @@ public class TourJDBCTemplate {
 // ENGLISH
     public TourResponseGetByID getTourById(Long id) {
         String tourSql = """
-        SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price,
+        SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, t.nights, t.price,t.pax,
                t.date_from, t.date_to, t.popular, t.coordinates_image,
                STRING_AGG(ti.images, ', ') AS images
         FROM tours t
@@ -59,6 +59,7 @@ public class TourJDBCTemplate {
             int daysByCategory = rs.getInt("days_by_category");
             int nights = rs.getInt("nights");
             int price = rs.getInt("price");
+            String pax = rs.getString("pax");
             LocalDate dateFrom = rs.getDate("date_from") != null ? rs.getDate("date_from").toLocalDate() : null;
             LocalDate dateTo = rs.getDate("date_to") != null ? rs.getDate("date_to").toLocalDate() : null;
             boolean isPopular = rs.getBoolean("popular");
@@ -93,7 +94,7 @@ public class TourJDBCTemplate {
             System.out.println("Fetched whatIsExcluded: " + whatIsExcludedList);
 
             return new TourResponseGetByID(
-                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxAndPrice,
+                    tourId, tourName, aboutTour, daysByCategory, nights, price, pax, paxAndPrice,
                     dateFrom, dateTo, isPopular, tourDetailsResponse, coordinatesImage, imagesList,
                     whatIsIncludedList, whatIsExcludedList
             );
@@ -105,7 +106,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTour() {
         String sql = """
         SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, 
-               t.nights, t.price, t.date_from, t.date_to,
+               t.nights, t.price,t.pax, t.date_from, t.date_to,
                (
                    SELECT ti.images
                    FROM tour_images ti
@@ -136,6 +137,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category"),
                     rs.getInt("nights"),
                     rs.getInt("price"),
+                    rs.getString("pax"),
                     paxAndPrice,
                     rs.getObject("date_from", LocalDate.class),
                     rs.getObject("date_to", LocalDate.class),
@@ -147,7 +149,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourByPopular() {
         String sql = """
         SELECT t.id, t.tour_name, t.about_tour, t.days_by_category, 
-               t.nights, t.price, t.date_from, t.date_to,
+               t.nights, t.price, t.pax, t.date_from, t.date_to,
                (
                    SELECT ti.images
                    FROM tour_images ti
@@ -178,6 +180,7 @@ public class TourJDBCTemplate {
                 rs.getInt("days_by_category"),
                 rs.getInt("nights"),
                 rs.getInt("price"),
+                rs.getString("pax"),
                 paxAndPrice,
                 rs.getObject("date_from", LocalDate.class),
                 rs.getObject("date_to", LocalDate.class),
@@ -189,7 +192,7 @@ public class TourJDBCTemplate {
     // RUSSIAN
     public TourResponseGetByID getTourByIdRu(Long id) {
         String tourSql = """
-        SELECT t.id, t.tour_name_ru, t.about_tour_ru, t.days_by_category_ru, t.nights_ru, t.price_ru,
+        SELECT t.id, t.tour_name_ru, t.about_tour_ru, t.days_by_category_ru, t.nights_ru, t.price_ru, t.pax_ru,
                t.date_from_ru, t.date_to_ru, t.popular_ru, t.coordinates_image_ru,
                STRING_AGG(ti.images_ru, ', ') AS images
         FROM tours t
@@ -230,6 +233,7 @@ public class TourJDBCTemplate {
             int daysByCategory = rs.getInt("days_by_category_ru");
             int nights = rs.getInt("nights_ru");
             int price = rs.getInt("price_ru");
+            String paxRu = rs.getString("pax_ru");
             LocalDate dateFrom = rs.getDate("date_from_ru") != null ? rs.getDate("date_from_ru").toLocalDate() : null;
             LocalDate dateTo = rs.getDate("date_to_ru") != null ? rs.getDate("date_to_ru").toLocalDate() : null;
             boolean isPopular = rs.getBoolean("popular_ru");
@@ -264,7 +268,7 @@ public class TourJDBCTemplate {
             System.out.println("Fetched whatIsExcluded: " + whatIsExcludedList);
 
             return new TourResponseGetByID(
-                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxAndPrice,
+                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxRu, paxAndPrice,
                     dateFrom, dateTo, isPopular, tourDetailsResponse, coordinatesImage, imagesList,
                     whatIsIncludedList, whatIsExcludedList
             );
@@ -276,7 +280,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourRu() {
         String sql = """
         SELECT t.id, t.tour_name_ru, t.about_tour_ru, t.days_by_category_ru, 
-               t.nights_ru, t.price_ru, t.date_from_ru, t.date_to_ru,
+               t.nights_ru, t.price_ru, t.pax_ru, t.date_from_ru, t.date_to_ru,
                (
                    SELECT ti.images_ru
                    FROM tour_images_ru ti
@@ -307,6 +311,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_ru"),
                     rs.getInt("nights_ru"),
                     rs.getInt("price_ru"),
+                    rs.getString("pax_ru"),
                     paxAndPrice,
                     rs.getObject("date_from_ru", LocalDate.class),
                     rs.getObject("date_to_ru", LocalDate.class),
@@ -318,7 +323,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourByPopularRu() {
         String sql = """
         SELECT t.id, t.tour_name_ru, t.about_tour_ru, t.days_by_category_ru, 
-               t.nights_ru, t.price_ru, t.date_from_ru, t.date_to_ru,
+               t.nights_ru, t.price_ru, t.pax_ru, t.date_from_ru, t.date_to_ru,
                (
                    SELECT ti.images_ru
                    FROM tour_images_ru ti
@@ -349,6 +354,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_ru"),
                     rs.getInt("nights_ru"),
                     rs.getInt("price_ru"),
+                    rs.getString("pax_ru"),
                     paxAndPrice,
                     rs.getObject("date_from_ru", LocalDate.class),
                     rs.getObject("date_to_ru", LocalDate.class),
@@ -360,7 +366,7 @@ public class TourJDBCTemplate {
     // GERMAN
     public TourResponseGetByID getTourByIdDe(Long id) {
         String tourSql = """
-        SELECT t.id, t.tour_name_de, t.about_tour_de, t.days_by_category_de, t.nights_de, t.price_de,
+        SELECT t.id, t.tour_name_de, t.about_tour_de, t.days_by_category_de, t.nights_de, t.price_de, t.pax_de,
                t.date_from_de, t.date_to_de, t.popular_de, t.coordinates_image_de,
                STRING_AGG(ti.images_de, ', ') AS images
         FROM tours t
@@ -401,6 +407,7 @@ public class TourJDBCTemplate {
             int daysByCategory = rs.getInt("days_by_category_de");
             int nights = rs.getInt("nights_de");
             int price = rs.getInt("price_de");
+            String paxDE = rs.getString("pax_de");
             LocalDate dateFrom = rs.getDate("date_from_de") != null ? rs.getDate("date_from_de").toLocalDate() : null;
             LocalDate dateTo = rs.getDate("date_to_de") != null ? rs.getDate("date_to_de").toLocalDate() : null;
             boolean isPopular = rs.getBoolean("popular_de");
@@ -435,7 +442,7 @@ public class TourJDBCTemplate {
             System.out.println("Fetched whatIsExcluded: " + whatIsExcludedList);
 
             return new TourResponseGetByID(
-                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxAndPrice,
+                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxDE, paxAndPrice,
                     dateFrom, dateTo, isPopular, tourDetailsResponse, coordinatesImage, imagesList,
                     whatIsIncludedList, whatIsExcludedList
             );
@@ -447,7 +454,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourDe() {
         String sql = """
         SELECT t.id, t.tour_name_de, t.about_tour_de, t.days_by_category_de, 
-               t.nights_de, t.price_de, t.date_from_de, t.date_to_de,
+               t.nights_de, t.price_de, t.pax_de, t.date_from_de, t.date_to_de,
                (
                    SELECT ti.images_de
                    FROM tour_images_de ti
@@ -478,6 +485,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_de"),
                     rs.getInt("nights_de"),
                     rs.getInt("price_de"),
+                    rs.getString("pax_de"),
                     paxAndPrice,
                     rs.getObject("date_from_de", LocalDate.class),
                     rs.getObject("date_to_de", LocalDate.class),
@@ -489,7 +497,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourByPopularDe() {
         String sql = """
         SELECT t.id, t.tour_name_de, t.about_tour_de, t.days_by_category_de, 
-               t.nights_de, t.price_de, t.date_from_de, t.date_to_de,
+               t.nights_de, t.price_de, t.pax_de, t.date_from_de, t.date_to_de,
                (
                    SELECT ti.images_de
                    FROM tour_images_de ti
@@ -520,6 +528,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_de"),
                     rs.getInt("nights_de"),
                     rs.getInt("price_de"),
+                    rs.getString("pax_de"),
                     paxAndPrice,
                     rs.getObject("date_from_de", LocalDate.class),
                     rs.getObject("date_to_de", LocalDate.class),
@@ -531,7 +540,7 @@ public class TourJDBCTemplate {
     // FRENCH
     public TourResponseGetByID getTourByIdFr(Long id) {
         String tourSql = """
-        SELECT t.id, t.tour_name_fr, t.about_tour_fr, t.days_by_category_fr, t.nights_fr, t.price_fr,
+        SELECT t.id, t.tour_name_fr, t.about_tour_fr, t.days_by_category_fr, t.nights_fr, t.price_fr, t.pax_de,
                t.date_from_fr, t.date_to_fr, t.popular_fr, t.coordinates_image_fr,
                STRING_AGG(ti.images_fr, ', ') AS images
         FROM tours t
@@ -572,6 +581,7 @@ public class TourJDBCTemplate {
             int daysByCategory = rs.getInt("days_by_category_fr");
             int nights = rs.getInt("nights_fr");
             int price = rs.getInt("price_fr");
+            String paxFr = rs.getString("tour_name_fr");
             LocalDate dateFrom = rs.getDate("date_from_fr") != null ? rs.getDate("date_from_fr").toLocalDate() : null;
             LocalDate dateTo = rs.getDate("date_to_fr") != null ? rs.getDate("date_to_fr").toLocalDate() : null;
             boolean isPopular = rs.getBoolean("popular_fr");
@@ -606,7 +616,7 @@ public class TourJDBCTemplate {
             System.out.println("Fetched whatIsExcluded: " + whatIsExcludedList);
 
             return new TourResponseGetByID(
-                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxAndPrice,
+                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxFr, paxAndPrice,
                     dateFrom, dateTo, isPopular, tourDetailsResponse, coordinatesImage, imagesList,
                     whatIsIncludedList, whatIsExcludedList
             );
@@ -619,7 +629,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourFr() {
         String sql = """
         SELECT t.id, t.tour_name_fr, t.about_tour_fr, t.days_by_category_fr, 
-               t.nights_fr, t.price_fr, t.date_from_fr, t.date_to_fr,
+               t.nights_fr, t.price_fr, t.pax_fr, t.date_from_fr, t.date_to_fr,
                (
                    SELECT ti.images_fr
                    FROM tour_images_fr ti
@@ -649,6 +659,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_fr"),
                     rs.getInt("nights_fr"),
                     rs.getInt("price_fr"),
+                    rs.getString("pax_fr"),
                     paxAndPrice,
                     rs.getObject("date_from_fr", LocalDate.class),
                     rs.getObject("date_to_fr", LocalDate.class),
@@ -660,7 +671,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourByPopularFr() {
         String sql = """
     SELECT t.id, t.tour_name_fr, t.about_tour_fr, t.days_by_category_fr, 
-           t.nights_fr, t.price_fr, t.date_from_fr, t.date_to_fr,
+           t.nights_fr, t.price_fr, t.pax_fr, t.date_from_fr, t.date_to_fr,
            (
                SELECT ti.images_fr
                FROM tour_images_fr ti
@@ -692,6 +703,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_fr"),
                     rs.getInt("nights_fr"),
                     rs.getInt("price_fr"),
+                    rs.getString("pax_fr"),
                     paxAndPrice,
                     rs.getObject("date_from_fr", LocalDate.class),
                     rs.getObject("date_to_fr", LocalDate.class),
@@ -704,7 +716,7 @@ public class TourJDBCTemplate {
 
     public TourResponseGetByID getTourByIdEs(Long id) {
         String tourSql = """
-    SELECT t.id, t.tour_name_es, t.about_tour_es, t.days_by_category_es, t.nights_es, t.price_es,
+    SELECT t.id, t.tour_name_es, t.about_tour_es, t.days_by_category_es, t.nights_es, t.price_es, t.pax_es,
            t.date_from_es, t.date_to_es, t.popular_es, t.coordinates_image_es,
            STRING_AGG(ti.images_es, ', ') AS images
     FROM tours t
@@ -745,6 +757,7 @@ public class TourJDBCTemplate {
             int daysByCategory = rs.getInt("days_by_category_es");
             int nights = rs.getInt("nights_es");
             int price = rs.getInt("price_es");
+            String paxEs = rs.getString("pax_es");
             LocalDate dateFrom = rs.getDate("date_from_es") != null ? rs.getDate("date_from_es").toLocalDate() : null;
             LocalDate dateTo = rs.getDate("date_to_es") != null ? rs.getDate("date_to_es").toLocalDate() : null;
             boolean isPopular = rs.getBoolean("popular_es");
@@ -779,7 +792,7 @@ public class TourJDBCTemplate {
             System.out.println("Fetched whatIsExcluded: " + whatIsExcludedList);
 
             return new TourResponseGetByID(
-                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxAndPrice,
+                    tourId, tourName, aboutTour, daysByCategory, nights, price, paxEs, paxAndPrice,
                     dateFrom, dateTo, isPopular, tourDetailsResponse, coordinatesImage, imagesList,
                     whatIsIncludedList, whatIsExcludedList
             );
@@ -790,7 +803,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourEs() {
         String sql = """
     SELECT t.id, t.tour_name_es, t.about_tour_es, t.days_by_category_es, 
-           t.nights_es, t.price_es, t.date_from_es, t.date_to_es,
+           t.nights_es, t.price_es, t.pax_es, t.date_from_es, t.date_to_es,
            (
                SELECT ti.images_es
                FROM tour_images_es ti
@@ -821,6 +834,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_es"),
                     rs.getInt("nights_es"),
                     rs.getInt("price_es"),
+                    rs.getString("pax_es"),
                     paxAndPrice,
                     rs.getObject("date_from_es", LocalDate.class),
                     rs.getObject("date_to_es", LocalDate.class),
@@ -832,7 +846,7 @@ public class TourJDBCTemplate {
     public List<TourGetAllResponse> getAllTourByPopularEs() {
         String sql = """
     SELECT t.id, t.tour_name_es, t.about_tour_es, t.days_by_category_es, 
-           t.nights_es, t.price_es, t.date_from_es, t.date_to_es,
+           t.nights_es, t.price_es, t.pax_es, t.date_from_es, t.date_to_es,
            (
                SELECT ti.images_es
                FROM tour_images_es ti
@@ -864,6 +878,7 @@ public class TourJDBCTemplate {
                     rs.getInt("days_by_category_es"),
                     rs.getInt("nights_es"),
                     rs.getInt("price_es"),
+                    rs.getString("pax_es"),
                     paxAndPrice,
                     rs.getObject("date_from_es", LocalDate.class),
                     rs.getObject("date_to_es", LocalDate.class),
