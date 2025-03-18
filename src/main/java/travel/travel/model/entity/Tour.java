@@ -25,6 +25,7 @@ public class Tour {
     private int daysByCategory;
     private int nights;
     private int price;
+    private String pax;
     @ElementCollection(fetch = FetchType.LAZY)
     private Map<String, Integer> paxAndPrice;
     private LocalDate dateFrom;
@@ -44,13 +45,14 @@ public class Tour {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TourDetails> tourDetails;
 
-    public Tour(Long id, String tourName, String aboutTour, int daysByCategory, int nights, int price, Map<String, Integer> paxAndPrice, LocalDate dateFrom, LocalDate dateTo, List<String> images, Travel travel, Sight sight, boolean popular, String coordinatesImage, List<String> whatIsIncluded, List<String> whatIsExcluded, List<TourDetails> tourDetails) {
+    public Tour(Long id, String tourName, String aboutTour, int daysByCategory, int nights, int price, String pax, Map<String, Integer> paxAndPrice, LocalDate dateFrom, LocalDate dateTo, List<String> images, Travel travel, Sight sight, boolean popular, String coordinatesImage, List<String> whatIsIncluded, List<String> whatIsExcluded, List<TourDetails> tourDetails) {
         this.id = id;
         this.tourName = tourName;
         this.aboutTour = aboutTour;
         this.daysByCategory = daysByCategory;
         this.nights = nights;
         this.price = price;
+        this.pax = pax;
         this.paxAndPrice = paxAndPrice;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
@@ -70,6 +72,7 @@ public class Tour {
     private int daysByCategoryRu;
     private int nightsRu;
     private int priceRu;
+    private String paxRu;
     @ElementCollection(fetch = FetchType.LAZY)
     private Map<String, Integer> paxAndPriceRu;
     private LocalDate dateFromRu;
@@ -93,6 +96,7 @@ public class Tour {
     private int daysByCategoryFr;
     private int nightsFr;
     private int priceFr;
+    private String paxFr;
     @ElementCollection(fetch = FetchType.LAZY)
     private Map<String, Integer> paxAndPriceFr;
     private LocalDate dateFromFr;
@@ -116,6 +120,7 @@ public class Tour {
     private int daysByCategoryDe;
     private int nightsDe;
     private int priceDe;
+    private String paxDe;
     @ElementCollection(fetch = FetchType.LAZY)
     private Map<String, Integer> paxAndPriceDe;
     private LocalDate dateFromDe;
@@ -139,6 +144,7 @@ public class Tour {
     private int daysByCategoryEs;
     private int nightsEs;
     private int priceEs;
+    private String paxEs;
     @ElementCollection(fetch = FetchType.LAZY)
     private Map<String, Integer> paxAndPriceEs;
     private LocalDate dateFromEs;

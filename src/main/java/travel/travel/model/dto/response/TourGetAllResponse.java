@@ -13,6 +13,7 @@ public record TourGetAllResponse(
         int days,
         int nights,
         int price,
+        String pax,
         Map<String, Integer> paxAndPrice,
         LocalDate dateFrom,
         LocalDate dateTo,

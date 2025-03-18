@@ -16,6 +16,7 @@ public class TourResponseGetByID {
     private int daysByCategory;
     private int nights;
     private int price;
+    private String pax;
     private Map<String, Integer> paxAndPrice;
     private LocalDate dateFrom;
     private LocalDate dateTo;
