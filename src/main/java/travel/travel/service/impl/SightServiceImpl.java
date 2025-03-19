@@ -90,7 +90,7 @@ public class SightServiceImpl implements SightService {
                     .images(sight.getImages())
                     .nameOfSight(sight.getNameOfSight())
                     .description(sight.getDescription())
-                    .titleFromVideo(sight.getNameOfSight())
+                    .titleFromVideo(sight.getTitleFromVideo())
                     .coordinatesImage(sight.getCoordinatesImage())
                     .build();
         } catch (NotFoundException e) {
