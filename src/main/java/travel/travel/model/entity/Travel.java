@@ -13,13 +13,21 @@ import java.util.List;
 public class Travel {
     @Id
     private Long id;
+    @Column(length = 10000)
     private String aboutUsName;
+    @Column(length = 10000)
     private String aboutUs;
+    @Column(length = 10000)
     private String documentationName;
+    @Column(length = 10000)
     private String documentation;
+    @Column(length = 10000)
     private String sustainabilityName;
+    @Column(length = 10000)
     private String sustainability;
+    @Column(length = 10000)
     private String certificationName;
+    @Column(length = 10000)
     private String certification;
     private String address;
     private String phoneNumber;
