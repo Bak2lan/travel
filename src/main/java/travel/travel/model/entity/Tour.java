@@ -20,7 +20,7 @@ public class Tour {
     @SequenceGenerator(name = "tour_seq", sequenceName = "tour_sequence", initialValue = 13, allocationSize = 1)
     private Long id;
     private String tourName;
-    @Column(length = 8000)
+    @Column(length = 10000)
     private String aboutTour;
     private int daysByCategory;
     private int nights;
@@ -39,8 +39,10 @@ public class Tour {
     private boolean popular;
     private String coordinatesImage;
     @ElementCollection(fetch = FetchType.LAZY)
+    @Column(length = 10000)
     private List<String> whatIsIncluded;
     @ElementCollection(fetch = FetchType.LAZY)
+    @Column(length = 10000)
     private List<String> whatIsExcluded;
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TourDetails> tourDetails;
