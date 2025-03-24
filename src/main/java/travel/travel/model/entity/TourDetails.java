@@ -17,6 +17,7 @@ public class TourDetails {
     private Long id;
     private String toursDetailName;
     private String day;
+    @Column(length = 10000)
     private String aboutTourDetails;
     @ElementCollection(fetch = FetchType.LAZY)
     private List<String>imageTourDetails;
